@@ -3,7 +3,8 @@
 ## Per-actor naming method
 - `SetName`, `LNSetName`, `SetFullNameAlt`: change the **base form** → every instance renamed. Rejected.
 - `SetBaseForm` (CloneForm + base swap): does not work on NPCs/creatures. Rejected.
-- **JIP `SetRefName`**: name on the calling reference only. Session-only (not saved). Read back with `LNGetName`. **Chosen candidate**; confirm in spike test 2.
+- **JIP `SetRefName`**: name on the calling reference only. Session-only (not saved). Read back with `LNGetName`. **Chosen.** Confirmed in run 3: crosshair and console show the ref name, base name unchanged.
+- Gap: the dialogue menu header still shows the base name. Fix in the engine: on DialogMenu open, set the header tile to the speaker ref name (JIP UI functions).
 - Session-only is a benefit: names are re-applied on load from `hash(seed, refID)`, so nothing per-actor goes into the save.
 
 ## Script Runner constraints (research)
@@ -30,4 +31,11 @@ Run 2:
 - Short tests 0, 1b–1e ran and printed after load, so the delay fixes the lost output.
 - 1b: leveled actors get a runtime base (`67…` form, mod index of the save); placed refs keep the real base.
 - Fix: tests moved to UDF files in `user_defined_functions/NamesOfTheMojave/Spike/`. One `gl_` script compiles `RunAll.txt` and calls it with `CallAfter 3`.
-- Run 3: pending.
+
+Run 3: all 12 tests PASS. Checkpoint 1 complete.
+- Spike2/2b: per-ref names work, base names unchanged. Dialogue header shows the base name (see gap above).
+- Spike3: main-loop callback with a compiled UDF ticks in GameMode and unregisters itself.
+- Spike4: private and public seeds persist across save and reload.
+- Spike5: INI read works. `ReadStringFromFile` lines are 1-based with no trailing CR/LF. Past EOF returns an empty string.
+- Spike6: `CompileScript` + `Call` with an argument and a return value work.
+- `GetPluginVersion "ShowOffNVSE"` returns -1: wrong name. Not needed yet.
