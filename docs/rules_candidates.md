@@ -31,7 +31,7 @@ Gambler 120 · Gomorrah Prostitute 38 · White Glove 15 · Bartender 11 · Chair
 Fiend 123 · Powder Ganger 80 · Powder Ganger Bodyguard 3 · Viper Gunslinger 70 · Viper Leader 8 · Kings Gang Member 56 · Jackal Gang Member 55 · Jackal Gang Leader 17 · Great Khan 36 · Great Khan Warrior 20 · Omerta Thug 29 · Freeside Thug 17 · Westside Thug 3 · Scorpions Gang Member 7 · Van Graff Thug 9 · Mercenary 46 · NCR Mercenary 18 · Slaver 27 · Slave 16
 
 ### NCR → wasteland
-NCR Trooper 357 · NCR Ranger 124 · Engineer 46 · NCR Heavy Trooper 34 · NCR Veteran Ranger 33 · NCR Military Police 13 · NCR Trooper MP 9 · NCR MP 4 · NCR Ranger Veteran 3 · Injured Trooper 3 · NCR Recruit 2 · NCR Riot Control 2 · Irradiated Heavy Trooper 2 · NCR Sniper 1 · Ghoul Trooper 1
+NCR Trooper 357 · NCR Ranger 124 · Engineer 46 · NCR Heavy Trooper 34 · NCR Veteran Ranger 33 · NCR Military Police 13 · NCR Trooper MP 9 · NCR MP 4 · NCR Ranger Veteran 3 · Injured Trooper 3 · NCR Recruit 2 · NCR Riot Control 2 · Irradiated Heavy Trooper 2 · NCR Sniper 1
 
 ### Caesar's Legion → legion
 Recruit Legionary 57 · Prime Legionary 44 · Veteran Legionary 39 · Centurion 24 · Praetorian Guard 14 · Prime Decanus 9 · Recruit Decanus 8 · Legion Explorer 8 · Veteran Decanus 7 · Legion Vexillarius 5 · Legionary Assassin 5 · Legionary Blacksmith 2 · Irradiated Legion Explorer 2 · Legionary 1 · Legionary Recruit 1 · Legion Centurion 1 · Irradiated Legionary Prime 1 · Irradiated Legionary Veteran 1
@@ -58,7 +58,7 @@ Sorrows Tribal 25 · White Legs Pain-Maker 16 · White Legs Storm-Drummer 15 · 
 Chinese Soldier 11 · Chinese Sniper 7 · Chinese Inferno Unit 6 · Chinese Launcher 6 · Chinese Remnant Soldier 5 · Chinese Remnant Officer 5 · Chinese Remnant Sargeant 3 · Chinese Remnant Sergeant 2
 
 ### All ghouls → ghoul
-Underworld Resident 21 · Marked Men Scout 22 · Marked Men Hunter 18 · Marked Men Ravager 15 · Marked Men Marauder 10 · Bright Follower 10 · Ghoul Guard 3 · Irradiated Marked Men Hunter 1 · Irradiated Marked Men Scout 1
+Underworld Resident 21 · Marked Men Scout 22 · Marked Men Hunter 18 · Marked Men Ravager 15 · Marked Men Marauder 10 · Bright Follower 10 · Ghoul Guard 3 · Irradiated Marked Men Hunter 1 · Irradiated Marked Men Scout 1 · Ghoul Trooper 1
 
 ## Undecided (your call)
 - **Anchorage simulation soldiers** (wasteland): American Soldier 18 · Strike Team Grenadier / Infantryman / Missile Unit / Sniper 24 each · Power Armored Soldier 8 · American Sniper / Launcher / Inferno Unit / Grease-Monkey 6 each · Crimson Dragoon 4. They are simulation enemies.
