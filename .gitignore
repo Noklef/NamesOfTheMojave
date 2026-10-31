@@ -1,0 +1,12 @@
+# Release archives
+*.7z
+*.zip
+*.rar
+
+# Logs
+*.log
+
+# OS / editor
+Thumbs.db
+desktop.ini
+.vscode/
