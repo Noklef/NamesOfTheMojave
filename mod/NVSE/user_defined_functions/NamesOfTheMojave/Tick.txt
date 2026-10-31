@@ -10,7 +10,7 @@ float fInterval
 begin Function {}
 	let rPlayer := GetFormFromMod "FalloutNV.esm" "000014"
 	let fInterval := rPlayer.AuxVarGetFlt "*NotM:Interval"
-	let fTimer := rPlayer.AuxVarGetFlt "*NotM:Timer" + GetSecondsPassed * 30
+	let fTimer := (rPlayer.AuxVarGetFlt "*NotM:Timer") + (GetSecondsPassed * 30)
 	let rCell := rPlayer.GetParentCell
 	if eval rCell != rPlayer.AuxVarGetRef "*NotM:Cell"
 		rPlayer.AuxVarSetRef "*NotM:Cell" rCell

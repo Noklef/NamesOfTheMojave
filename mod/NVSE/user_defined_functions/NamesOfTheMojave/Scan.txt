@@ -10,7 +10,7 @@ ref rBase
 ref rPick
 array_var aUsed
 int iCount
-int iMod
+int iModIdx
 int iTry
 string_var sBase
 string_var sPool
@@ -36,8 +36,8 @@ begin Function {}
 			let sPool := rPlayer.AuxVarGetStr ("*NotM:R:" + sBase)
 			if eval sv_Length sPool > 0
 				let rBase := rActor.GetLeveledActorBase
-				let iMod := GetSourceModIndex rBase
-				if eval rPlayer.AuxVarGetFlt (sv_Construct "*NotM:M:%g" iMod) == 1
+				let iModIdx := GetSourceModIndex rBase
+				if eval rPlayer.AuxVarGetFlt (sv_Construct "*NotM:M:%g" iModIdx) == 1
 					let iTry := 0
 					while iTry < 8
 						let sName := Call rPick rActor (sPool) iTry

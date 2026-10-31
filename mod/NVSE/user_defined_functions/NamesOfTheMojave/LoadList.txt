@@ -16,7 +16,7 @@ begin Function {sPath, sVar}
 		if eval sv_Length sLine == 0
 			break
 		endif
-		if eval sv_Find "#" sLine != 0
+		if eval sLine[0:0] != "#"
 			rPlayer.AuxVarSetStr (sVar) (sLine) -1
 		endif
 		let iLine += 1

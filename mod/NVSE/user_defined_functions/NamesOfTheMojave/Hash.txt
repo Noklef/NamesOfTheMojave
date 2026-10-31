@@ -8,12 +8,12 @@ float fX
 int iOut
 
 begin Function {fIdx, fSeed, fSalt, fSize}
-	let fX := fIdx * 31 + fSeed + fSalt * 7919 + 1
-	let fX := fX - floor (fX / 2147483647) * 2147483647
+	let fX := (fIdx * 31) + fSeed + (fSalt * 7919) + 1
+	let fX := fX - ((floor (fX / 2147483647)) * 2147483647)
 	let fX := fX * 48271
-	let fX := fX - floor (fX / 2147483647) * 2147483647
+	let fX := fX - ((floor (fX / 2147483647)) * 2147483647)
 	let fX := fX * 48271
-	let fX := fX - floor (fX / 2147483647) * 2147483647
-	let iOut := fX - floor (fX / fSize) * fSize
+	let fX := fX - ((floor (fX / 2147483647)) * 2147483647)
+	let iOut := fX - ((floor (fX / fSize)) * fSize)
 	SetFunctionValue iOut
 end

@@ -14,6 +14,8 @@
 - `CompileScript` paths are relative to `Data\NVSE\user_defined_functions\` (same as HeatHaze-ESPLess and 3D Grenade Indicator).
 - `$` operator not supported → use `(sVar)` inline expression or `LNGetName`.
 - Editor IDs not resolved without JohnnyGuitar → use `GetFormFromMod`.
+- Reserved variable names fail to compile (e.g. `iMod`). `;` inside a string starts a comment.
+- Put a command call in parentheses when an operator follows it, e.g. `(floor (x / m)) * m`, so the command cannot take the rest as its argument.
 
 ## Data files
 - Name lists: plain text, one name per line, read with JIP `ReadStringFromFile` line by line (spike test 5).
@@ -50,7 +52,10 @@ Data: `tools/xedit/NotM_ExportNPCs.pas` over FalloutNV.esm, all DLCs, Fallout3.e
 Decision: the rules file maps **generic base name → pool** (`Powder Ganger|wasteland`).
 - A unique NPC never matches, because its name is not in the list.
 - One entry covers every gear and level variant, in every DLC.
-- Race overrides the pool for ghouls and super mutants.
+- Planned with the ghoul and super mutant pools: race overrides the pool.
 - Creatures are skipped (`GetIsCreature`).
 - Only bases from FalloutNV.esm, the DLCs, Fallout3.esm and TaleOfTwoWastelands.esm count (mod NPCs excluded).
 - Known limit: translated games need translated rule names.
+
+## Known limits
+- Duplicate re-roll depends on scan order and on which actors are loaded. An actor that needed a re-roll can get a different name after a reload. Actors without a collision keep their name.
