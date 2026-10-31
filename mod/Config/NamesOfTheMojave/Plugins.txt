@@ -1,0 +1,15 @@
+# Only actors whose base record comes from one of these plugins are named. Mod-added NPCs are skipped.
+# Plugins that are not loaded are ignored. Lines starting with # are comments. No empty lines.
+FalloutNV.esm
+DeadMoney.esm
+HonestHearts.esm
+OldWorldBlues.esm
+LonesomeRoad.esm
+GunRunnersArsenal.esm
+Fallout3.esm
+Anchorage.esm
+ThePitt.esm
+BrokenSteel.esm
+PointLookout.esm
+Zeta.esm
+TaleOfTwoWastelands.esm

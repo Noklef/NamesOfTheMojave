@@ -1,0 +1,50 @@
+; Loads Plugins.txt and Rules.txt, and the name pools that the rules use.
+; Results are temp aux vars on the player:
+;   *NotM:M:<mod index> = 1 for each allowed, loaded plugin
+;   *NotM:R:<base name> = pool name
+;   *NotM:<pool>:male / :surname = name arrays
+ref rPlayer
+ref rLoad
+array_var aParts
+string_var sDir
+string_var sLine
+string_var sPool
+int iCount
+int iLine
+int iMod
+
+begin Function {}
+	let rPlayer := GetFormFromMod "FalloutNV.esm" "000014"
+	let rLoad := CompileScript "NamesOfTheMojave/LoadList.txt"
+	let sDir := "Data/Config/NamesOfTheMojave/"
+
+	let iCount := Call rLoad (sDir + "Plugins.txt") "*NotM:Plugins"
+	let iLine := 0
+	while iLine < iCount
+		let sLine := rPlayer.AuxVarGetStr "*NotM:Plugins" iLine
+		let iMod := GetModIndex (sLine)
+		if iMod < 255
+			rPlayer.AuxVarSetFlt (sv_Construct "*NotM:M:%g" iMod) 1
+		endif
+		let iLine += 1
+	loop
+
+	let iCount := Call rLoad (sDir + "Rules.txt") "*NotM:Rules"
+	let iLine := 0
+	while iLine < iCount
+		let sLine := rPlayer.AuxVarGetStr "*NotM:Rules" iLine
+		let aParts := sv_Split (sLine) "|"
+		if eval ar_Size aParts == 2
+			let sPool := aParts[1]
+			rPlayer.AuxVarSetStr ("*NotM:R:" + aParts[0]) (sPool)
+			if eval rPlayer.AuxVarGetFlt ("*NotM:Loaded:" + sPool) == 0
+				Call rLoad (sDir + "Names/" + sPool + "/male.txt") ("*NotM:" + sPool + ":male")
+				Call rLoad (sDir + "Names/" + sPool + "/surname.txt") ("*NotM:" + sPool + ":surname")
+				rPlayer.AuxVarSetFlt ("*NotM:Loaded:" + sPool) 1
+			endif
+		else
+			PrintToConsole "[NotM] WARN bad rule line [%z]" sLine
+		endif
+		let iLine += 1
+	loop
+end

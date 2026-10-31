@@ -1,0 +1,4 @@
+# Generic base name|pool. Actors with this exact in-game name get a name from Names/<pool>/.
+# Names are case-sensitive and must match the game text. Lines starting with # are comments.
+# Do not leave empty lines: the first empty line ends the list.
+Powder Ganger|wasteland

@@ -1,11 +1,10 @@
-; Entry point. Creates the playthrough seed if missing, loads name pools, then names nearby actors.
+; Entry point. Creates the playthrough seed if missing, loads rules and pools, then names nearby actors.
 ; Seed: private permanent aux var on the player, saved in the JIP co-save.
-; Compiled UDFs and pools: temp aux vars on the player, rebuilt on every load.
+; Compiled UDFs, rules and pools: temp aux vars on the player, rebuilt on every load.
 ref rPlayer
-ref rLoad
+ref rRules
 ref rScan
 float fSeed
-string_var sDir
 
 begin Function {}
 	let rPlayer := GetFormFromMod "FalloutNV.esm" "000014"
@@ -16,10 +15,8 @@ begin Function {}
 	endif
 	rPlayer.AuxVarSetRef "*NotM:Hash" (CompileScript "NamesOfTheMojave/Hash.txt")
 	rPlayer.AuxVarSetRef "*NotM:Pick" (CompileScript "NamesOfTheMojave/PickName.txt")
-	let rLoad := CompileScript "NamesOfTheMojave/LoadList.txt"
-	let sDir := "Data/Config/NamesOfTheMojave/Names/wasteland/"
-	Call rLoad (sDir + "male.txt") "*NotM:wasteland:male"
-	Call rLoad (sDir + "surname.txt") "*NotM:wasteland:surname"
+	let rRules := CompileScript "NamesOfTheMojave/LoadRules.txt"
+	Call rRules
 	let rScan := CompileScript "NamesOfTheMojave/Scan.txt"
 	Call rScan
 end

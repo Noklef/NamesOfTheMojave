@@ -1,10 +1,13 @@
 ; Names generic actors near the player.
-; Vertical slice: Powder Gangers only, wasteland pool.
+; An actor is named if: not a creature, its base name has a rule, and its base record
+; (leveled base for leveled spawns) comes from an allowed plugin.
 ref rPlayer
 ref rActor
+ref rBase
 ref rPick
 int iCount
-string_var sBase
+int iMod
+string_var sPool
 string_var sName
 
 begin Function {}
@@ -12,13 +15,17 @@ begin Function {}
 	let rPick := rPlayer.AuxVarGetRef "*NotM:Pick"
 	let rActor := GetFirstRef 200 1
 	while rActor
-		if rActor != rPlayer
-			let sBase := rActor.GetName
-			if eval sBase == "Powder Ganger"
-				let sName := Call rPick rActor "wasteland" 0
-				if eval sv_Length sName > 0
-					rActor.SetRefName (sName)
-					let iCount += 1
+		if rActor != rPlayer && rActor.GetIsCreature == 0
+			let sPool := rPlayer.AuxVarGetStr ("*NotM:R:" + rActor.GetName)
+			if eval sv_Length sPool > 0
+				let rBase := rActor.GetLeveledActorBase
+				let iMod := GetSourceModIndex rBase
+				if eval rPlayer.AuxVarGetFlt (sv_Construct "*NotM:M:%g" iMod) == 1
+					let sName := Call rPick rActor (sPool) 0
+					if eval sv_Length sName > 0
+						rActor.SetRefName (sName)
+						let iCount += 1
+					endif
 				endif
 			endif
 		endif
