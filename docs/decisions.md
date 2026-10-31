@@ -77,5 +77,13 @@ Run 3 (205 rules, CRLF files): PASS.
 - Per pool: `male.txt`, `female.txt`, `surname.txt`, `male_full.txt`, `female_full.txt`. All optional.
 - Pick order (user choice "full names first"): attempts 0-3 pick an exact full name; attempts 4-7 mix first name + surname. A pool with only full names uses them on every attempt.
 - Effect: most actors get an exact lore name, so the same full name can appear in different areas. Duplicates are only avoided among loaded actors.
-- Legion, tribal, chinese and ghoul pools are empty until a lore pass fills them; their rules print a WARN and those actors keep their role name.
+- Legion, tribal and chinese: lore names plus drafted names (lore has too few). Chinese uses only full-name lists, because the surname comes first. Ghoul: pre-war lore names from FO3 and FNV.
 - Future option (user request): choose the pick order (full first / shared draw) in settings. MCM needs an ESP, so INI first.
+
+## Add-on format, Phase 1 (2026-10-31)
+- Rules and plugin lists are drop-in folders: `Config/NamesOfTheMojave/Rules/*.txt` and `Plugins/*.txt`. Every `.txt` file loads. Add-ons ship their own file, so no add-on edits ours.
+- Rule files are sorted by name before loading. MO2 merges folders from several mods, so the folder listing order is not guaranteed. Our file is `00_NOTM.txt`; add-ons use a higher prefix to load after it.
+- Rule forms: `Name|pool` sets or replaces, `Name|-` removes, `Name|A,B` uses several pools, `Name|+C` appends a pool to the rule left by earlier files.
+- Multi-pool pick: first choose one pool, weighted by its total names (`*NotM:W:<pool>`), then pick the name from that pool only. Reason: merging the lists would mix styles (a Chinese surname after a wasteland first name), and "full names first" would favour pools that have full-name lists.
+- `NotMSkip`: other mods set this public aux var to 1 on an actor, and Scan skips it. An actor that is already named keeps its name until the next load.
+- Every load prints one line: `[NotM] Names of the Mojave <version>: <n> rules, <n> pools, <n> plugins`. The version is set once in `Main.txt` (`*NotM:Version`).

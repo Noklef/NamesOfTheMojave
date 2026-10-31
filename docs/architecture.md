@@ -1,14 +1,14 @@
 # Architecture overview
 
-Status: sections 1–2 describe the current engine. Sections 3–5 are proposals, not implemented.
+Status: Phase 1 (section 5) is implemented, and section 1 shows the current engine. Section 2 lists the weaknesses found before Phase 1; Phase 1 fixes A and E. Phases 2–3 are proposals. Details: docs/decisions.md, "Add-on format".
 
 ## 1. How it works today
 
 ```
 ln_NamesOfTheMojave.txt        JIP Script Runner, every load / new game
   └─ Main.txt                  seed, INI, compile UDFs, register callbacks
-       ├─ LoadRules.txt        Plugins.txt → allowed mod indexes
-       │    └─ LoadList.txt    Rules.txt → "*NotM:R:<base name>" = pool
+       ├─ LoadRules.txt        Plugins/*.txt → allowed mod indexes
+       │    └─ LoadList.txt    Rules/*.txt → "*NotM:R:<base name>" = pool list
        │                       Names/<pool>/{male,female,surname,_full}.txt → arrays
        ├─ Scan.txt             walk loaded actors → filter → PickName → SetRefName
        │    └─ PickName.txt → Hash.txt   name = f(seed, ref index, attempt)
@@ -19,7 +19,7 @@ ln_NamesOfTheMojave.txt        JIP Script Runner, every load / new game
 | Layer | Contents | Persists? |
 |---|---|---|
 | Code | 9 UDF text files, compiled at load | n/a |
-| Data | `Plugins.txt`, `Rules.txt`, `Names/<pool>/*.txt` | files |
+| Data | `Plugins/*.txt`, `Rules/*.txt`, `Names/<pool>/*.txt` | files |
 | State | 1 value: `NotMSeed` on the player (JIP co-save) | save |
 | Runtime | rules, pools, settings in temp `*NotM:` aux vars | rebuilt each load |
 
