@@ -1,0 +1,16 @@
+; Menu-open handler for DialogMenu (1009). The game fills the speaker label from the base name,
+; so this replaces it with the ref name that Scan set. Tile path matches vanilla and Vanilla UI Plus.
+; A duplicate registration on reload is harmless: the label is set to the same text twice.
+int iMenu
+ref rSpeaker
+string_var sName
+
+begin Function {iMenu}
+	let rSpeaker := GetMenuTargetRef 1009
+	if eval rSpeaker
+		let sName := rSpeaker.LNGetName
+		if eval sName != rSpeaker.GetName
+			SetUIString "DialogMenu\NOGLOW_BRANCH\DM_SpeakerNameLabel\string" (sName)
+		endif
+	endif
+end

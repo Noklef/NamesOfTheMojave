@@ -1,5 +1,5 @@
 ; Entry point. Creates the playthrough seed if missing, loads rules and pools, names nearby actors,
-; then starts the periodic scan.
+; then starts the periodic scan and the dialogue name fix.
 ; Seed: private permanent aux var on the player, saved in the JIP co-save.
 ; Compiled UDFs, settings, rules, pools and timers: temp aux vars on the player, rebuilt on every load.
 ref rPlayer
@@ -33,6 +33,7 @@ begin Function {}
 	rPlayer.AuxVarSetFlt "*NotM:Timer" 0
 	Call rScan
 	; Flags 9 = gameplay only (1) + removed on load and main menu (8), so reloads never stack callbacks.
+	SetOnMenuOpenEventHandler (CompileScript "NamesOfTheMojave/DialogName.txt") 1 1009
 	let rTick := CompileScript "NamesOfTheMojave/Tick.txt"
 	SetGameMainLoopCallback rTick 1 30 9
 end
