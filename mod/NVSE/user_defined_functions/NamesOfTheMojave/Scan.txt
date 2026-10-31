@@ -32,30 +32,30 @@ begin Function {}
 	while rActor
 		let sBase := rActor.GetName
 		let sName := rActor.LNGetName
-		if eval rActor != rPlayer && sName == sBase && rActor.GetIsCreature == 0
+		if eval rActor != rPlayer && sName == sBase && (rActor.GetIsCreature) == 0
 			let sPool := rPlayer.AuxVarGetStr ("*NotM:R:" + sBase)
-			if eval sv_Length sPool > 0
+			if eval (sv_Length sPool) > 0
 				let rBase := rActor.GetLeveledActorBase
 				let iModIdx := GetSourceModIndex rBase
-				if eval rPlayer.AuxVarGetFlt (sv_Construct "*NotM:M:%g" iModIdx) == 1
+				if eval (rPlayer.AuxVarGetFlt (sv_Construct "*NotM:M:%g" iModIdx)) == 1
 					let iTry := 0
 					while iTry < 8
 						let sName := Call rPick rActor (sPool) iTry
-						if eval sv_Length sName == 0
+						if eval (sv_Length sName) == 0
 							break
 						endif
-						if eval rPlayer.AuxVarGetFlt "*NotM:ShowRole" == 1
+						if eval (rPlayer.AuxVarGetFlt "*NotM:ShowRole") == 1
 							let sName := sName + " (" + sBase + ")"
 						endif
-						if eval ar_HasKey aUsed sName == 0
+						if eval (ar_HasKey aUsed sName) == 0
 							break
 						endif
 						let iTry += 1
 					loop
-					if eval sv_Length sName > 0
+					if eval (sv_Length sName) > 0
 						rActor.SetRefName (sName)
 						let aUsed[sName] := 1
-						if eval rPlayer.AuxVarGetFlt "*NotM:Debug" == 1
+						if eval (rPlayer.AuxVarGetFlt "*NotM:Debug") == 1
 							PrintToConsole "[NotM] %i %z -> %z (try %g)" rActor sBase sName iTry
 						endif
 						let iCount += 1
@@ -65,7 +65,7 @@ begin Function {}
 		endif
 		let rActor := GetNextRef
 	loop
-	if eval iCount > 0 && rPlayer.AuxVarGetFlt "*NotM:Debug" == 1
+	if eval iCount > 0 && (rPlayer.AuxVarGetFlt "*NotM:Debug") == 1
 		PrintToConsole "[NotM] named %g actors" iCount
 	endif
 end

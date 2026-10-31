@@ -21,7 +21,7 @@ begin Function {rActor, sPool, iAttempt}
 	let iIdx := GetLocalRefIndex rActor
 	let sVar := "*NotM:" + sPool + ":male"
 	if eval rActor.GetIsSex Female
-		if eval rPlayer.AuxVarSize ("*NotM:" + sPool + ":female") > 0
+		if eval (rPlayer.AuxVarSize ("*NotM:" + sPool + ":female")) > 0
 			let sVar := "*NotM:" + sPool + ":female"
 		endif
 	endif

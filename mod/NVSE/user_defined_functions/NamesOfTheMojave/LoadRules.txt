@@ -42,10 +42,10 @@ begin Function {}
 	while iLine < iCount
 		let sLine := rPlayer.AuxVarGetStr "*NotM:Rules" iLine
 		let aParts := sv_Split (sLine) "|"
-		if eval ar_Size aParts == 2
+		if eval (ar_Size aParts) == 2
 			let sPool := aParts[1]
 			rPlayer.AuxVarSetStr ("*NotM:R:" + aParts[0]) (sPool)
-			if eval rPlayer.AuxVarGetFlt ("*NotM:Loaded:" + sPool) == 0
+			if eval (rPlayer.AuxVarGetFlt ("*NotM:Loaded:" + sPool)) == 0
 				let iSize := Call rLoad (sDir + "Names/" + sPool + "/male.txt") ("*NotM:" + sPool + ":male")
 				if iSize == 0
 					PrintToConsole "[NotM] WARN Names/%z/male.txt is missing or empty" sPool
