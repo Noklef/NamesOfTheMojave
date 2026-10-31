@@ -96,12 +96,37 @@ The add-on has two files and no conflicts with this mod or with other add-ons.
 
 ## 5. Recommended order
 
-1. **Before v1.0:**
-   - drop-in folders (`Plugins/`, `Rules/`)
-   - multi-pool, plus the `+` and `-` rule prefixes
-   - the version line
-   - the `NotMSkip` opt-out
-2. **v1.x:** FormID rules, race override, load-time measurement with a large list.
-3. **When needed:** custom event, pick-order setting (INI), MCM (needs an ESP).
+The order follows one rule: **do breaking changes before release, and additive changes after.** When v1.0 ships, the file layout becomes a public API, because add-on authors build against it. If we move `Rules.txt` into a `Rules/` folder after release, every add-on that shipped a `Rules.txt` breaks. A new rule type, such as FormID rules, adds to the format without breaking anything, so it can come later.
 
-The file layout becomes a public API when v1.0 ships. Add-on authors build against it, so changing it later breaks their mods. Engine internals can change at any time, but fix the data format before release.
+### Phase 1: fix the data format (before v1.0)
+
+Goal: every change after v1.0 is either internal or additive. An add-on built for v1.0 keeps working in every v1.x.
+
+Each step is one commit. The steps depend on each other in this order:
+
+| Step | Change | Why here |
+|---|---|---|
+| 1 | Drop-in folders. `Rules.txt` becomes `Rules/00_NOTM.txt` and `Plugins.txt` becomes `Plugins/NOTM.txt`. LoadRules reads every file in each folder, in name order. | The other steps need more than one rules file to exist. No players have the old layout yet, so no compatibility code is needed. |
+| 2 | Override and disable. A later rules file replaces an earlier rule with the same key. `Name\|-` removes it. | Needs step 1, because "later file" only has meaning with several files. |
+| 3 | Multi-pool and append. `Name\|A,B` draws from the merged lists. `Name\|+C` adds a pool to the rule that earlier files left. | Needs step 2, because append changes the result of the override pass. |
+| 4 | `NotMSkip` opt-out. Scan skips a ref with this public aux var. | It doesn't depend on steps 1–3, but it belongs to the public contract, so it must be in v1.0. |
+| 5 | Version line at load, with rule, pool and plugin counts. | Last, so the counts come from the new loader. |
+
+The phase is done when:
+- Checkpoint 3 passes with the new loader. The test adds a sample add-on folder with an override, an append and a disable.
+- The README documents the format for add-on authors (Step 14).
+- Then tag v1.0.0.
+
+### Phase 2: compatibility (v1.x, when players report a need)
+
+These changes only add to the format, so each can ship in any v1.x release.
+
+- **FormID rules** (`FalloutNV.esm:00123ABC|pool`). Do these when the first report comes in about a translated game or a mod that renames generic NPCs. Name rules stay as they are; FormID rules are a second key type next to them.
+- **Race override** (`race:Ghoul|NOTM_ghoul`). This fixes weakness D, so ghouls in mixed groups get ghoul names. It is small and can come early in v1.x.
+- **Load-time measurement.** Do this before any add-on with very large lists, or when someone reports a slow load. If 5,000 lines are slow, change LoadList to read the whole file at once. The data format stays the same.
+
+### Phase 3: optional features (only on request)
+
+- **Custom event** (`NotM:OnNamed`). Add it when another mod author asks for it. Until then, `NotMSkip` covers the known need.
+- **Pick-order setting.** You requested this for the future: full names first, or one draw from all lists. Make it an INI key first.
+- **MCM.** An MCM needs an ESP, and the mod is ESP-less. If we add one, ship it as a separate optional plugin, so the main mod stays ESP-less.
