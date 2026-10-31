@@ -1,5 +1,6 @@
 # Only actors whose base record comes from one of these plugins are named. Mod-added NPCs are skipped.
 # Plugins that are not loaded are ignored. Lines starting with # are comments. No empty lines.
+# Every .txt file in this folder is loaded. Add-ons: ship your own file listing your plugin, do not edit this one.
 FalloutNV.esm
 DeadMoney.esm
 HonestHearts.esm

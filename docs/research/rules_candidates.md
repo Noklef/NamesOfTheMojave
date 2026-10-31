@@ -14,7 +14,7 @@ Source: FNVEdit export (`tools/data/NotM_npcs.tsv`), NPC_ records in FalloutNV.e
 You can split a pool later (e.g. `NOTM_ncr`, `NOTM_bos`) by changing the right side of the rule and adding a `Names/<pool>/` folder.
 
 ## Included
-All included groups are in `src/Config/NamesOfTheMojave/Rules.txt`, grouped by `# --- Group ---` headers. Edit that file directly.
+All included groups are in `src/Config/NamesOfTheMojave/Rules/00_NOTM.txt`, grouped by `# --- Group ---` headers.
 
 ## Undecided (your call)
 Number = NPC_ records with that exact name.

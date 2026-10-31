@@ -2,6 +2,7 @@
 # Names are case-sensitive and must match the game text. Lines starting with # are comments.
 # Do not leave empty lines: the first empty line ends the list.
 # Pools shipped with this mod start with NOTM_. Give pools you add your own prefix.
+# Every .txt file in this folder is loaded, in name order. Add-ons: ship your own file (e.g. 50_MyMod.txt), do not edit this one.
 # --- FNV civilians ---
 Wastelander|NOTM_wasteland
 Traveler|NOTM_wasteland

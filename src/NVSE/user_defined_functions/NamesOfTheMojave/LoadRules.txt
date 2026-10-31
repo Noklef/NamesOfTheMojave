@@ -1,65 +1,90 @@
-; Loads Plugins.txt and Rules.txt, and the name pools that the rules use.
-; Prints a WARN line for a missing or empty Plugins.txt, Rules.txt, or a pool with no male or male_full names.
+; Loads every *.txt file in Plugins/ and Rules/, and the name pools that the rules use.
+; Add-ons ship their own files in these folders. Rule files load in name order, so a later file wins for the same name.
+; Prints a WARN line when a folder has no entries, or a pool has no male or male_full names.
 ; Results are temp aux vars on the player:
 ;   *NotM:M:<mod index> = 1 for each allowed, loaded plugin
 ;   *NotM:R:<base name> = pool name
 ;   *NotM:<pool>:male / :female / :surname / :male_full / :female_full = name arrays
 ref rPlayer
 ref rLoad
+array_var aFiles
 array_var aParts
 string_var sDir
+string_var sFile
 string_var sLine
 string_var sPool
 int iCount
 int iSize
 int iFull
+int iFile
 int iLine
 int iModIdx
+int iTotal
 
 begin Function {}
 	let rPlayer := GetFormFromMod "FalloutNV.esm" "000014"
 	let rLoad := CompileScript "NamesOfTheMojave/LoadList.txt"
 	let sDir := "Data/Config/NamesOfTheMojave/"
 
-	let iCount := Call rLoad (sDir + "Plugins.txt") "*NotM:Plugins"
-	if iCount == 0
-		PrintToConsole "[NotM] WARN Plugins.txt is missing or empty, no actor will be named"
-	endif
-	let iLine := 0
-	while iLine < iCount
-		let sLine := rPlayer.AuxVarGetStr "*NotM:Plugins" iLine
-		let iModIdx := GetModIndex (sLine)
-		if iModIdx < 255
-			rPlayer.AuxVarSetFlt (sv_Construct "*NotM:M:%g" iModIdx) 1
-		endif
-		let iLine += 1
-	loop
-
-	let iCount := Call rLoad (sDir + "Rules.txt") "*NotM:Rules"
-	if iCount == 0
-		PrintToConsole "[NotM] WARN Rules.txt is missing or empty, no actor will be named"
-	endif
-	let iLine := 0
-	while iLine < iCount
-		let sLine := rPlayer.AuxVarGetStr "*NotM:Rules" iLine
-		let aParts := sv_Split (sLine) "|"
-		if eval (ar_Size aParts) == 2
-			let sPool := aParts[1]
-			rPlayer.AuxVarSetStr ("*NotM:R:" + aParts[0]) (sPool)
-			if eval (rPlayer.AuxVarGetFlt ("*NotM:Loaded:" + sPool)) == 0
-				let iSize := Call rLoad (sDir + "Names/" + sPool + "/male.txt") ("*NotM:" + sPool + ":male")
-				let iFull := Call rLoad (sDir + "Names/" + sPool + "/male_full.txt") ("*NotM:" + sPool + ":male_full")
-				if eval (iSize + iFull) == 0
-					PrintToConsole "[NotM] WARN Names/%z has no male.txt or male_full.txt names" sPool
-				endif
-				Call rLoad (sDir + "Names/" + sPool + "/female.txt") ("*NotM:" + sPool + ":female")
-				Call rLoad (sDir + "Names/" + sPool + "/female_full.txt") ("*NotM:" + sPool + ":female_full")
-				Call rLoad (sDir + "Names/" + sPool + "/surname.txt") ("*NotM:" + sPool + ":surname")
-				rPlayer.AuxVarSetFlt ("*NotM:Loaded:" + sPool) 1
+	let aFiles := GetFilesInFolder "Config/NamesOfTheMojave/Plugins" "*.txt"
+	let iTotal := 0
+	let iFile := 0
+	while iFile < (ar_Size aFiles)
+		let sFile := aFiles[iFile]
+		let iCount := Call rLoad (sDir + "Plugins/" + sFile) "*NotM:Plugins"
+		let iLine := 0
+		while iLine < iCount
+			let sLine := rPlayer.AuxVarGetStr "*NotM:Plugins" iLine
+			let iModIdx := GetModIndex (sLine)
+			if iModIdx < 255
+				rPlayer.AuxVarSetFlt (sv_Construct "*NotM:M:%g" iModIdx) 1
 			endif
-		else
-			PrintToConsole "[NotM] WARN bad rule line [%z]" sLine
-		endif
-		let iLine += 1
+			let iLine += 1
+		loop
+		let iTotal += iCount
+		let iFile += 1
 	loop
+	if iTotal == 0
+		PrintToConsole "[NotM] WARN Plugins/ has no plugin names, no actor will be named"
+	endif
+
+	; Folder listing order is not guaranteed (MO2 merges folders), so sort for a fixed load order.
+	let aFiles := GetFilesInFolder "Config/NamesOfTheMojave/Rules" "*.txt"
+	if eval (ar_Size aFiles) > 1
+		let aFiles := ar_Sort aFiles
+	endif
+	let iTotal := 0
+	let iFile := 0
+	while iFile < (ar_Size aFiles)
+		let sFile := aFiles[iFile]
+		let iCount := Call rLoad (sDir + "Rules/" + sFile) "*NotM:Rules"
+		let iLine := 0
+		while iLine < iCount
+			let sLine := rPlayer.AuxVarGetStr "*NotM:Rules" iLine
+			let aParts := sv_Split (sLine) "|"
+			if eval (ar_Size aParts) == 2
+				let sPool := aParts[1]
+				rPlayer.AuxVarSetStr ("*NotM:R:" + aParts[0]) (sPool)
+				if eval (rPlayer.AuxVarGetFlt ("*NotM:Loaded:" + sPool)) == 0
+					let iSize := Call rLoad (sDir + "Names/" + sPool + "/male.txt") ("*NotM:" + sPool + ":male")
+					let iFull := Call rLoad (sDir + "Names/" + sPool + "/male_full.txt") ("*NotM:" + sPool + ":male_full")
+					if eval (iSize + iFull) == 0
+						PrintToConsole "[NotM] WARN Names/%z has no male.txt or male_full.txt names" sPool
+					endif
+					Call rLoad (sDir + "Names/" + sPool + "/female.txt") ("*NotM:" + sPool + ":female")
+					Call rLoad (sDir + "Names/" + sPool + "/female_full.txt") ("*NotM:" + sPool + ":female_full")
+					Call rLoad (sDir + "Names/" + sPool + "/surname.txt") ("*NotM:" + sPool + ":surname")
+					rPlayer.AuxVarSetFlt ("*NotM:Loaded:" + sPool) 1
+				endif
+			else
+				PrintToConsole "[NotM] WARN bad rule line [%z] in %z" sLine sFile
+			endif
+			let iLine += 1
+		loop
+		let iTotal += iCount
+		let iFile += 1
+	loop
+	if iTotal == 0
+		PrintToConsole "[NotM] WARN Rules/ has no rules, no actor will be named"
+	endif
 end
