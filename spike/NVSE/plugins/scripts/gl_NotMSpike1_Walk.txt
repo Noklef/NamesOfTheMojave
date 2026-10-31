@@ -1,29 +1,32 @@
 ; Spike 1: walk nearby actors; print ref, GetBaseObject, name, sex.
 ; FF-prefixed base = temporary leveled clone.
-ref rPlayer
-ref rActor
-ref rBase
-int iFem
-int iCount
+; Runs 3 s after load: console prints during the load screen are lost.
+CallAfter 3 (begin function {}
+	ref rPlayer
+	ref rActor
+	ref rBase
+	int iFem
+	int iCount
 
-PrintToConsole "NotM Spike1: START"
-let rPlayer := GetFormFromMod "FalloutNV.esm" "000014"
-let rActor := GetFirstRef 200 1
-while rActor
-	if rActor != rPlayer
-		let rBase := rActor.GetBaseObject
-		let iFem := rActor.GetIsSex Female
-		PrintToConsole "NotM Spike1: INFO ref %i gbo %i name %n female %g" rActor rBase rActor iFem
-		let iCount += 1
+	PrintToConsole "NotM Spike1: START"
+	let rPlayer := GetFormFromMod "FalloutNV.esm" "000014"
+	let rActor := GetFirstRef 200 1
+	while rActor
+		if rActor != rPlayer
+			let rBase := rActor.GetBaseObject
+			let iFem := rActor.GetIsSex Female
+			PrintToConsole "NotM Spike1: INFO ref %i gbo %i name %n female %g" rActor rBase rActor iFem
+			let iCount += 1
+		endif
+		if iCount >= 8
+			break
+		endif
+		let rActor := GetNextRef
+	loop
+	if iCount > 0
+		PrintToConsole "NotM Spike1: PASS %g actors found" iCount
+	else
+		PrintToConsole "NotM Spike1: FAIL no actors found (stand near NPCs)"
 	endif
-	if iCount >= 8
-		break
-	endif
-	let rActor := GetNextRef
-loop
-if iCount > 0
-	PrintToConsole "NotM Spike1: PASS %g actors found" iCount
-else
-	PrintToConsole "NotM Spike1: FAIL no actors found (stand near NPCs)"
-endif
-PrintToConsole "NotM Spike1: END"
+	PrintToConsole "NotM Spike1: END"
+end)

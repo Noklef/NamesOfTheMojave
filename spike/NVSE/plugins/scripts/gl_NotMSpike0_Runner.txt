@@ -1,4 +1,7 @@
 ; Spike 0: Script Runner executes text scripts on game load.
-PrintToConsole "NotM Spike0: START"
-PrintToConsole "NotM Spike0: PASS runner executed"
-PrintToConsole "NotM Spike0: END"
+; Runs 3 s after load: console prints during the load screen are lost.
+CallAfter 3 (begin function {}
+	PrintToConsole "NotM Spike0: START"
+	PrintToConsole "NotM Spike0: PASS runner executed"
+	PrintToConsole "NotM Spike0: END"
+end)

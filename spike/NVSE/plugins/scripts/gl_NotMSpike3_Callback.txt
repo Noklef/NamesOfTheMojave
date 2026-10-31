@@ -1,30 +1,33 @@
 ; Spike 3: lambda + SetGameMainLoopCallback.
 ; PASS prints at tick 3 (about 2 s apart, GameMode only), then the callback stops.
-; Unregisters the previous load's callback; prints stop after 3 even if unregister fails.
-ref rPlayer
-ref rCB
-ref rOld
-float fTick
+; Callback state lives in temp aux vars, not captured variables.
+; Runs 3 s after load: console prints during the load screen are lost.
+CallAfter 3 (begin function {}
+	ref rOld
+	ref rCB
 
-PrintToConsole "NotM Spike3: START"
-let rPlayer := GetFormFromMod "FalloutNV.esm" "000014"
-let rOld := rPlayer.AuxVarGetRef "*NotMCB"
-if rOld
-	SetGameMainLoopCallback rOld 0
-endif
-rPlayer.AuxVarSetFlt "*NotMTick" 0
-let rCB := (begin function {}
-	let fTick := rPlayer.AuxVarGetFlt "*NotMTick"
-	let fTick += 1
-	rPlayer.AuxVarSetFlt "*NotMTick" fTick
-	if fTick < 3
-		PrintToConsole "NotM Spike3: INFO tick %g" fTick
-	elseif fTick == 3
-		PrintToConsole "NotM Spike3: PASS tick 3 reached"
-		SetGameMainLoopCallback rCB 0
+	PrintToConsole "NotM Spike3: START"
+	let rOld := PLAYER.AuxVarGetRef "*NotMCB"
+	if rOld
+		SetGameMainLoopCallback rOld 0
 	endif
+	PLAYER.AuxVarSetFlt "*NotMTick" 0
+	let rCB := (begin function {}
+		float fT
+		ref rSelf
+		let fT := PLAYER.AuxVarGetFlt "*NotMTick"
+		let fT += 1
+		PLAYER.AuxVarSetFlt "*NotMTick" fT
+		if fT < 3
+			PrintToConsole "NotM Spike3: INFO tick %g" fT
+		elseif fT == 3
+			PrintToConsole "NotM Spike3: PASS tick 3 reached"
+			let rSelf := PLAYER.AuxVarGetRef "*NotMCB"
+			SetGameMainLoopCallback rSelf 0
+		endif
+	end)
+	PLAYER.AuxVarSetRef "*NotMCB" rCB
+	SetGameMainLoopCallback rCB 1 120 1
+	PrintToConsole "NotM Spike3: INFO callback registered, close console and wait"
+	PrintToConsole "NotM Spike3: END"
 end)
-rPlayer.AuxVarSetRef "*NotMCB" rCB
-SetGameMainLoopCallback rCB 1 120 1
-PrintToConsole "NotM Spike3: INFO callback registered; close console and wait"
-PrintToConsole "NotM Spike3: END"

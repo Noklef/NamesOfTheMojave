@@ -1,18 +1,21 @@
 ; Spike 00: log xNVSE and plugin versions. nvse.log is the authority if a line is 0.
-int iMaj
-int iRev
-int iBeta
-float fV
+; Runs 3 s after load: console prints during the load screen are lost.
+CallAfter 3 (begin function {}
+	int iMaj
+	int iRev
+	int iBeta
+	float fV
 
-PrintToConsole "NotM Spike00: START"
-let iMaj := GetNVSEVersion
-let iRev := GetNVSERevision
-let iBeta := GetNVSEBeta
-PrintToConsole "NotM Spike00: INFO xNVSE %g.%g.%g" iMaj iRev iBeta
-let fV := GetPluginVersion "JIP NVSE Plugin"
-PrintToConsole "NotM Spike00: INFO JIP LN %g" fV
-let fV := GetPluginVersion "JohnnyGuitarNVSE"
-PrintToConsole "NotM Spike00: INFO JohnnyGuitar %g" fV
-let fV := GetPluginVersion "ShowOffNVSE"
-PrintToConsole "NotM Spike00: INFO ShowOff %g (0 may mean wrong plugin name)" fV
-PrintToConsole "NotM Spike00: END"
+	PrintToConsole "NotM Spike00: START"
+	let iMaj := GetNVSEVersion
+	let iRev := GetNVSERevision
+	let iBeta := GetNVSEBeta
+	PrintToConsole "NotM Spike00: INFO xNVSE %g.%g.%g" iMaj iRev iBeta
+	let fV := GetPluginVersion "JIP NVSE Plugin"
+	PrintToConsole "NotM Spike00: INFO JIP LN %g" fV
+	let fV := GetPluginVersion "JohnnyGuitarNVSE"
+	PrintToConsole "NotM Spike00: INFO JohnnyGuitar %g" fV
+	let fV := GetPluginVersion "ShowOffNVSE"
+	PrintToConsole "NotM Spike00: INFO ShowOff %g (0 may mean wrong plugin name)" fV
+	PrintToConsole "NotM Spike00: END"
+end)

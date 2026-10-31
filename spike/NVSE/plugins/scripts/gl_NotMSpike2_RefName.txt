@@ -1,43 +1,46 @@
 ; Spike 2: SetRefName with literal names, alternating Alpha/Beta.
 ; Self-check per actor: ref name (LNGetName) changed, base name (GetName) did not.
 ; Visual check still needed: crosshair / VATS / dialogue show the new names.
-ref rPlayer
-ref rActor
-string_var sRef
-string_var sBase
-int iCount
-int iMod
-int iOK
-int iPass
+; Runs 3 s after load: console prints during the load screen are lost.
+CallAfter 3 (begin function {}
+	ref rPlayer
+	ref rActor
+	string_var sRef
+	string_var sBase
+	int iCount
+	int iParity
+	int iOK
+	int iPass
 
-PrintToConsole "NotM Spike2: START"
-let rPlayer := GetFormFromMod "FalloutNV.esm" "000014"
-let rActor := GetFirstRef 200 1
-while rActor
-	if rActor != rPlayer
-		let iMod := iCount % 2
-		if iMod == 0
-			rActor.SetRefName "NotM Alpha"
-		else
-			rActor.SetRefName "NotM Beta"
+	PrintToConsole "NotM Spike2: START"
+	let rPlayer := GetFormFromMod "FalloutNV.esm" "000014"
+	let rActor := GetFirstRef 200 1
+	while rActor
+		if rActor != rPlayer
+			let iParity := iCount % 2
+			if iParity == 0
+				rActor.SetRefName "NotM Alpha"
+			else
+				rActor.SetRefName "NotM Beta"
+			endif
+			let sRef := rActor.LNGetName
+			let sBase := rActor.GetName
+			let iOK := (sRef == "NotM Alpha" || sRef == "NotM Beta") && sBase != sRef
+			if iOK
+				let iPass += 1
+			else
+				PrintToConsole "NotM Spike2: INFO ref %i refname [%z] basename [%z]" rActor sRef sBase
+			endif
+			let iCount += 1
 		endif
-		let sRef := rActor.LNGetName
-		let sBase := rActor.GetName
-		let iOK := (sRef == "NotM Alpha" || sRef == "NotM Beta") && sBase != sRef
-		if iOK
-			let iPass += 1
-		else
-			PrintToConsole "NotM Spike2: INFO ref %i refname [%z] basename [%z]" rActor sRef sBase
-		endif
-		let iCount += 1
+		let rActor := GetNextRef
+	loop
+	if iCount == 0
+		PrintToConsole "NotM Spike2: FAIL no actors found"
+	elseif iPass == iCount
+		PrintToConsole "NotM Spike2: PASS %g of %g actors renamed per-ref, base names unchanged" iPass iCount
+	else
+		PrintToConsole "NotM Spike2: FAIL only %g of %g actors renamed per-ref" iPass iCount
 	endif
-	let rActor := GetNextRef
-loop
-if iCount == 0
-	PrintToConsole "NotM Spike2: FAIL no actors found"
-elseif iPass == iCount
-	PrintToConsole "NotM Spike2: PASS %g of %g actors renamed per-ref, base names unchanged" iPass iCount
-else
-	PrintToConsole "NotM Spike2: FAIL only %g of %g actors renamed per-ref" iPass iCount
-endif
-PrintToConsole "NotM Spike2: END"
+	PrintToConsole "NotM Spike2: END"
+end)

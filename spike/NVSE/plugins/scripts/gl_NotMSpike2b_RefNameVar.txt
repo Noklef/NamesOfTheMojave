@@ -1,31 +1,34 @@
 ; Spike 2b: SetRefName from a string variable; read back with LNGetName.
 ; Renames only the first actor to "NotM Dynamic 7".
-ref rPlayer
-ref rActor
-string_var sName
-string_var sRead
-int iOK
+; Runs 3 s after load: console prints during the load screen are lost.
+CallAfter 3 (begin function {}
+	ref rPlayer
+	ref rActor
+	string_var sName
+	string_var sRead
+	int iOK
 
-PrintToConsole "NotM Spike2b: START"
-let rPlayer := GetFormFromMod "FalloutNV.esm" "000014"
-let sName := sv_Construct "NotM Dynamic %g" 7
-let rActor := GetFirstRef 200 1
-while rActor
-	if rActor != rPlayer
-		break
-	endif
-	let rActor := GetNextRef
-loop
-if rActor
-	rActor.SetRefName (sName)
-	let sRead := rActor.LNGetName
-	let iOK := sRead == "NotM Dynamic 7"
-	if iOK
-		PrintToConsole "NotM Spike2b: PASS ref %i reads [%z]" rActor sRead
+	PrintToConsole "NotM Spike2b: START"
+	let rPlayer := GetFormFromMod "FalloutNV.esm" "000014"
+	let sName := sv_Construct "NotM Dynamic %g" 7
+	let rActor := GetFirstRef 200 1
+	while rActor
+		if rActor != rPlayer
+			break
+		endif
+		let rActor := GetNextRef
+	loop
+	if rActor
+		rActor.SetRefName (sName)
+		let sRead := rActor.LNGetName
+		let iOK := sRead == "NotM Dynamic 7"
+		if iOK
+			PrintToConsole "NotM Spike2b: PASS ref %i reads [%z]" rActor sRead
+		else
+			PrintToConsole "NotM Spike2b: FAIL ref %i reads [%z]" rActor sRead
+		endif
 	else
-		PrintToConsole "NotM Spike2b: FAIL ref %i reads [%z]" rActor sRead
+		PrintToConsole "NotM Spike2b: FAIL no actors found"
 	endif
-else
-	PrintToConsole "NotM Spike2b: FAIL no actors found"
-endif
-PrintToConsole "NotM Spike2b: END"
+	PrintToConsole "NotM Spike2b: END"
+end)

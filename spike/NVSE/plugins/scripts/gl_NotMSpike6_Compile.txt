@@ -1,32 +1,35 @@
 ; Spike 6: CompileScript loads a UDF from a file; call it.
 ; PASS if one path compiles and the call returns 42.
-ref rUDF
-int iOut
+; Runs 3 s after load: console prints during the load screen are lost.
+CallAfter 3 (begin function {}
+	ref rUDF
+	int iOut
 
-PrintToConsole "NotM Spike6: START"
-let rUDF := CompileScript "NamesOfTheMojave/spike_udf.txt"
-if rUDF
-	PrintToConsole "NotM Spike6: INFO compiled via path A (scripts-relative)"
-else
-	let rUDF := CompileScript "NVSE/plugins/scripts/NamesOfTheMojave/spike_udf.txt"
+	PrintToConsole "NotM Spike6: START"
+	let rUDF := CompileScript "NamesOfTheMojave/spike_udf.txt"
 	if rUDF
-		PrintToConsole "NotM Spike6: INFO compiled via path B (Data-relative)"
+		PrintToConsole "NotM Spike6: INFO compiled via path A (scripts-relative)"
 	else
-		let rUDF := CompileScript "Data/NVSE/plugins/scripts/NamesOfTheMojave/spike_udf.txt"
+		let rUDF := CompileScript "NVSE/plugins/scripts/NamesOfTheMojave/spike_udf.txt"
 		if rUDF
-			PrintToConsole "NotM Spike6: INFO compiled via path C (game-relative)"
+			PrintToConsole "NotM Spike6: INFO compiled via path B (Data-relative)"
+		else
+			let rUDF := CompileScript "Data/NVSE/plugins/scripts/NamesOfTheMojave/spike_udf.txt"
+			if rUDF
+				PrintToConsole "NotM Spike6: INFO compiled via path C (game-relative)"
+			endif
 		endif
 	endif
-endif
 
-if rUDF
-	let iOut := Call rUDF 21
-	if iOut == 42
-		PrintToConsole "NotM Spike6: PASS call returned 42"
+	if rUDF
+		let iOut := Call rUDF 21
+		if iOut == 42
+			PrintToConsole "NotM Spike6: PASS call returned 42"
+		else
+			PrintToConsole "NotM Spike6: FAIL call returned %g (expect 42)" iOut
+		endif
 	else
-		PrintToConsole "NotM Spike6: FAIL call returned %g (expect 42)" iOut
+		PrintToConsole "NotM Spike6: FAIL no path compiled"
 	endif
-else
-	PrintToConsole "NotM Spike6: FAIL no path compiled"
-endif
-PrintToConsole "NotM Spike6: END"
+	PrintToConsole "NotM Spike6: END"
+end)

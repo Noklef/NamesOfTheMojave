@@ -1,21 +1,24 @@
 ; Spike 1e: ref ID as hex string (GetFormIDString).
-ref rPlayer
-ref rActor
-string_var sID
-int iCount
+; Runs 3 s after load: console prints during the load screen are lost.
+CallAfter 3 (begin function {}
+	ref rPlayer
+	ref rActor
+	string_var sID
+	int iCount
 
-PrintToConsole "NotM Spike1e: START"
-let rPlayer := GetFormFromMod "FalloutNV.esm" "000014"
-let rActor := GetFirstRef 200 1
-while rActor
-	if rActor != rPlayer
-		let sID := GetFormIDString rActor
-		PrintToConsole "NotM Spike1e: INFO ref %i idstr %z" rActor sID
-		let iCount += 1
-	endif
-	if iCount >= 8
-		break
-	endif
-	let rActor := GetNextRef
-loop
-PrintToConsole "NotM Spike1e: END"
+	PrintToConsole "NotM Spike1e: START"
+	let rPlayer := GetFormFromMod "FalloutNV.esm" "000014"
+	let rActor := GetFirstRef 200 1
+	while rActor
+		if rActor != rPlayer
+			let sID := GetFormIDString rActor
+			PrintToConsole "NotM Spike1e: INFO ref %i idstr %z" rActor sID
+			let iCount += 1
+		endif
+		if iCount >= 8
+			break
+		endif
+		let rActor := GetNextRef
+	loop
+	PrintToConsole "NotM Spike1e: END"
+end)
