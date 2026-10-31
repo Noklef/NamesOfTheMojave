@@ -2,3 +2,8 @@
 # Names are case-sensitive and must match the game text. Lines starting with # are comments.
 # Do not leave empty lines: the first empty line ends the list.
 Powder Ganger|wasteland
+Prospector|wasteland
+Wastelander|wasteland
+Traveler|wasteland
+Squatter|wasteland
+Scavenger|wasteland
