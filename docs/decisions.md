@@ -16,6 +16,7 @@
 - Editor IDs not resolved without JohnnyGuitar → use `GetFormFromMod`.
 - Reserved variable names fail to compile (e.g. `iMod`). `;` inside a string starts a comment.
 - Put a command call in parentheses when an operator follows it, e.g. `(floor (x / m)) * m`, so the command cannot take the rest as its argument.
+- Command arguments are 32-bit floats: exact integers only up to 2^24 (16.7M). Do large-number math with operators (64-bit) only. Engine run 1: `floor (fX / fSize)` with fX near 2^31 gave negative picks for about 37% of actors, and a negative index returns the last list entry.
 
 ## Data files
 - Name lists: plain text, one name per line, read with JIP `ReadStringFromFile` line by line (spike test 5).
