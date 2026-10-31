@@ -61,3 +61,13 @@ Decision: the rules file maps **generic base name → pool** (`Powder Ganger|was
 ## Known limits
 - Duplicate re-roll depends on scan order and on which actors are loaded. An actor that needed a re-roll can get a different name after a reload. Actors without a collision keep their name.
 - `ReadStringFromFile` strips a trailing CR: CRLF data files work (engine run 2, 205 rules, 67 actors named).
+
+## Checkpoint 2 results (2026-10-31)
+Run 1: LoadRules.txt failed to compile (`ar_Size aParts == 2`), no names. Fixed with parentheses.
+Run 2: names given, but the float32 `floor` bug sent 35% of picks to the last list entry. Hash rewritten with operators.
+Run 3 (205 rules, CRLF files): PASS.
+- 67 actors named in 13 generic roles; no unique NPC renamed (Easy Pete checked in game).
+- Legion pool gives Latin names, female NPCs get female names, no surname over 3 in 67.
+- VATS and dialogue header show the name.
+- Full restart: 27 of 27 actors seen in both sessions kept the same name.
+- Not tested: ShowRole=1, new game.
