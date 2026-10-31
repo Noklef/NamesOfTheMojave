@@ -1,0 +1,63 @@
+{
+    "modName": "NamesOfTheMojave",
+    "displayName": "Names of the Mojave",
+    "saveFile": "NamesOfTheMojave.ini",
+    "minMCMVersion": 1.6,
+    "requirements": [
+        { "type": "file", "file": "NVSE/plugins/scripts/ln_NamesOfTheMojave.txt" }
+    ],
+    "submenus": {
+        "0": {
+            "columns": 1,
+            "listTitle": "Settings",
+            "pageTitle": "Names of the Mojave",
+            "options": {
+                "1": {
+                    "type": 0,
+                    "enable": 1,
+                    "title": "General"
+                },
+                "2": {
+                    "type": 4,
+                    "enable": 1,
+                    "title": "Show role after name",
+                    "mouse": "Shows the original role after the name, e.g. Mike Dawson (Powder Ganger). Actors already named keep their current name until you load a save.",
+                    "vars": [
+                        { "form": "PlayerRef", "auxVar": "*NotM:ShowRole", "key": 0, "configINI": "General:ShowRole", "default": 0 }
+                    ]
+                },
+                "3": {
+                    "type": 2,
+                    "enable": 1,
+                    "title": "Scan interval",
+                    "mouse": "Seconds between scans for newly spawned actors. Actors are also named shortly after you enter a new cell.",
+                    "suffix": " s",
+                    "scale": {
+                        "valueDecimal": 0,
+                        "valueIncrement": 1,
+                        "valueMin": 1,
+                        "valueMax": 60
+                    },
+                    "vars": [
+                        { "form": "PlayerRef", "auxVar": "*NotM:Interval", "key": 0, "configINI": "General:ScanInterval", "default": 10 }
+                    ]
+                },
+                "4": {
+                    "type": 4,
+                    "enable": 1,
+                    "title": "Debug log",
+                    "mouse": "Prints each name given to the console. Use it when you report a problem.",
+                    "vars": [
+                        { "form": "PlayerRef", "auxVar": "*NotM:Debug", "key": 0, "configINI": "General:Debug", "default": 0 }
+                    ]
+                },
+                "6": {
+                    "type": 7,
+                    "enable": 1,
+                    "title": "Version",
+                    "string": { "form": "PlayerRef", "auxVar": "*NotM:Version", "key": 0 }
+                }
+            }
+        }
+    }
+}

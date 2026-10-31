@@ -10,6 +10,8 @@ Status: in development.
 - JohnnyGuitar NVSE
 - ShowOff xNVSE
 
+Optional, for an in-game settings page: The Mod Configuration Menu, MCM Extender, User Interface Organizer. Without them, edit `Config/NamesOfTheMojave.ini`.
+
 ## Repository layout
 | Path | Content |
 |---|---|

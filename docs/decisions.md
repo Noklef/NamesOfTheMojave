@@ -87,3 +87,10 @@ Run 3 (205 rules, CRLF files): PASS.
 - Multi-pool pick: first choose one pool, weighted by its total names (`*NotM:W:<pool>`), then pick the name from that pool only. Reason: merging the lists would mix styles (a Chinese surname after a wasteland first name), and "full names first" would favour pools that have full-name lists.
 - `NotMSkip`: other mods set this public aux var to 1 on an actor, and Scan skips it. An actor that is already named keeps its name until the next load.
 - Every load prints one line: `[NotM] Names of the Mojave <version>: <n> rules, <n> pools, <n> plugins`. The version is set once in `Main.txt` (`*NotM:Version`).
+
+## MCM (2026-10-31)
+- Settings page via MCM Extender: one JSON file, `Data/MCM/NamesOfTheMojave.json`. No ESP, no new script. MCM, MCM Extender and UIO are optional; without them the INI works as before.
+- Each option writes its INI key (`saveFile` is `Config/NamesOfTheMojave.ini`) and the matching temp aux var on the player (`*NotM:ShowRole`, `*NotM:Interval`, `*NotM:Debug`). Scan and Tick read those aux vars on every run, so changes apply at once without the `MCMExtUpdate` event.
+- ShowRole changes only actors named after the change. Already-named actors update on the next load, because ref names are session-only.
+- The version line reads `*NotM:Version`.
+- Not included yet: the pick-order setting (full names first or one draw). It needs an engine change first.
