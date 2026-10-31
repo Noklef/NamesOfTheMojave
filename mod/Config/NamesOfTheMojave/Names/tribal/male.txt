@@ -36,7 +36,7 @@ Sharp-Eye
 Sings-Loud
 Sits-Still
 Sleeps-Light
-Snake-Eater
+Eats-Lizards
 Splits-Wood
 Stone-Hand
 Strong-Arm
@@ -46,7 +46,7 @@ Three-Fingers
 Thunder-Step
 Walks-Ahead
 Watches-Dawn
-White-Fang
+Pale-Fang
 Wind-Runner
 Wolf-Tooth
 Young-Elk
