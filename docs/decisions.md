@@ -39,3 +39,18 @@ Run 3: all 12 tests PASS. Checkpoint 1 complete.
 - Spike5: INI read works. `ReadStringFromFile` lines are 1-based with no trailing CR/LF. Past EOF returns an empty string.
 - Spike6: `CompileScript` + `Call` with an argument and a return value work.
 - `GetPluginVersion "ShowOffNVSE"` returns -1: wrong name. Not needed yet.
+
+## Classification: which actors are generic (FNVEdit export, 2026-10-31)
+Data: `tools/xedit/NotM_ExportNPCs.pas` over FalloutNV.esm, all DLCs, Fallout3.esm and TaleOfTwoWastelands.esm. 7102 NPC_ records.
+- No ACBS flag marks unique NPCs. Respawn and No Low Level Processing are more common on generics, but not reliable.
+- Generic names repeat across many records: NCR Trooper 357, Raider 285, Enclave Soldier 221, Fiend 123, Powder Ganger 80. 1038 names appear on one record only (unique NPCs).
+- Leveled lists: only 2608 of 7102 records are in a leveled list, and many generics are placed directly. Not usable as the generic test alone.
+- Faction: named NPCs share factions with generics. Not usable as the generic test.
+
+Decision: the rules file maps **generic base name → pool** (`Powder Ganger|wasteland`).
+- A unique NPC never matches, because its name is not in the list.
+- One entry covers every gear and level variant, in every DLC.
+- Race overrides the pool for ghouls and super mutants.
+- Creatures are skipped (`GetIsCreature`).
+- Only bases from FalloutNV.esm, the DLCs, Fallout3.esm and TaleOfTwoWastelands.esm count (mod NPCs excluded).
+- Known limit: translated games need translated rule names.

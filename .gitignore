@@ -10,3 +10,6 @@
 Thumbs.db
 desktop.ini
 .vscode/
+
+# Local game data exports (Bethesda data, not redistributed)
+tools/data/
