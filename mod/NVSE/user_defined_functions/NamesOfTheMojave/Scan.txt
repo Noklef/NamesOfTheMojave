@@ -2,7 +2,7 @@
 ; An actor is named if: not a creature, its base name has a rule, and its base record
 ; (leveled base for leveled spawns) comes from an allowed plugin.
 ; Pass 1 collects names already shown by loaded actors. Pass 2 names the rest and
-; re-rolls a name that is already in use (up to 8 attempts).
+; re-rolls a name that is already in use (up to 8 attempts). With ShowRole=1 the role is part of the name.
 ; Already-named actors (ref name differs from base name) are skipped.
 ref rPlayer
 ref rActor
@@ -41,6 +41,12 @@ begin Function {}
 					let iTry := 0
 					while iTry < 8
 						let sName := Call rPick rActor (sPool) iTry
+						if eval sv_Length sName == 0
+							break
+						endif
+						if eval rPlayer.AuxVarGetFlt "*NotM:ShowRole" == 1
+							let sName := sName + " (" + sBase + ")"
+						endif
 						if eval ar_HasKey aUsed sName == 0
 							break
 						endif
@@ -49,6 +55,9 @@ begin Function {}
 					if eval sv_Length sName > 0
 						rActor.SetRefName (sName)
 						let aUsed[sName] := 1
+						if eval rPlayer.AuxVarGetFlt "*NotM:Debug" == 1
+							PrintToConsole "[NotM] %i %z -> %z (try %g)" rActor sBase sName iTry
+						endif
 						let iCount += 1
 					endif
 				endif
@@ -56,7 +65,7 @@ begin Function {}
 		endif
 		let rActor := GetNextRef
 	loop
-	if iCount > 0
+	if eval iCount > 0 && rPlayer.AuxVarGetFlt "*NotM:Debug" == 1
 		PrintToConsole "[NotM] named %g actors" iCount
 	endif
 end

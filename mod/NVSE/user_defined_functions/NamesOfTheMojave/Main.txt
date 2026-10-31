@@ -1,12 +1,13 @@
 ; Entry point. Creates the playthrough seed if missing, loads rules and pools, names nearby actors,
 ; then starts the periodic scan.
 ; Seed: private permanent aux var on the player, saved in the JIP co-save.
-; Compiled UDFs, rules, pools and timers: temp aux vars on the player, rebuilt on every load.
+; Compiled UDFs, settings, rules, pools and timers: temp aux vars on the player, rebuilt on every load.
 ref rPlayer
 ref rRules
 ref rScan
 ref rTick
 float fSeed
+float fInterval
 
 begin Function {}
 	let rPlayer := GetFormFromMod "FalloutNV.esm" "000014"
@@ -15,7 +16,13 @@ begin Function {}
 		let fSeed := floor (Rand 1 1000000)
 		rPlayer.AuxVarSetFlt "NotMSeed" fSeed
 	endif
-	rPlayer.AuxVarSetFlt "*NotM:Interval" 10
+	let fInterval := GetINIFloat "General:ScanInterval" "NamesOfTheMojave.ini"
+	if fInterval < 1
+		let fInterval := 10
+	endif
+	rPlayer.AuxVarSetFlt "*NotM:Interval" fInterval
+	rPlayer.AuxVarSetFlt "*NotM:ShowRole" (GetINIFloat "General:ShowRole" "NamesOfTheMojave.ini")
+	rPlayer.AuxVarSetFlt "*NotM:Debug" (GetINIFloat "General:Debug" "NamesOfTheMojave.ini")
 	rPlayer.AuxVarSetRef "*NotM:Hash" (CompileScript "NamesOfTheMojave/Hash.txt")
 	rPlayer.AuxVarSetRef "*NotM:Pick" (CompileScript "NamesOfTheMojave/PickName.txt")
 	let rRules := CompileScript "NamesOfTheMojave/LoadRules.txt"
