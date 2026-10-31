@@ -210,3 +210,13 @@ Chinese Remnant Soldier|chinese
 Chinese Remnant Officer|chinese
 Chinese Remnant Sargeant|chinese
 Chinese Remnant Sergeant|chinese
+# --- All ghouls ---
+Underworld Resident|ghoul
+Marked Men Scout|ghoul
+Marked Men Hunter|ghoul
+Marked Men Ravager|ghoul
+Marked Men Marauder|ghoul
+Bright Follower|ghoul
+Ghoul Guard|ghoul
+Irradiated Marked Men Hunter|ghoul
+Irradiated Marked Men Scout|ghoul
