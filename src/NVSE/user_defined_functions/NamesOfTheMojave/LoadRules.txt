@@ -1,22 +1,29 @@
 ; Loads every *.txt file in Plugins/ and Rules/, and the name pools that the rules use.
 ; Add-ons ship their own files in these folders. Rule files load in name order, so a later file wins for the same name.
-; Rule forms: Name|pool sets or replaces a rule. Name|- removes it.
+; Rule forms: Name|pool sets or replaces a rule. Name|- removes it. Name|A,B uses several pools.
+; Name|+C adds pool C to the rule that earlier files left (or creates it).
 ; Prints a WARN line when a folder has no entries, or a pool has no male or male_full names.
 ; Results are temp aux vars on the player:
 ;   *NotM:M:<mod index> = 1 for each allowed, loaded plugin
-;   *NotM:R:<base name> = pool name
+;   *NotM:R:<base name> = pool list, comma-separated
+;   *NotM:W:<pool> = total names in the pool (weight for multi-pool rules)
 ;   *NotM:<pool>:male / :female / :surname / :male_full / :female_full = name arrays
 ref rPlayer
 ref rLoad
 array_var aFiles
 array_var aParts
+array_var aPools
 string_var sDir
 string_var sFile
 string_var sLine
 string_var sPool
+string_var sSpec
 int iCount
 int iSize
 int iFull
+int iFem
+int iFemFull
+int iPart
 int iFile
 int iLine
 int iModIdx
@@ -67,20 +74,39 @@ begin Function {}
 				PrintToConsole "[NotM] WARN bad rule line [%z] in %z" sLine sFile
 			elseif eval aParts[1] == "-"
 				rPlayer.AuxVarErase ("*NotM:R:" + aParts[0])
+			elseif eval aParts[1] == "+"
+				PrintToConsole "[NotM] WARN bad rule line [%z] in %z" sLine sFile
 			else
 				let sPool := aParts[1]
-				rPlayer.AuxVarSetStr ("*NotM:R:" + aParts[0]) (sPool)
-				if eval (rPlayer.AuxVarGetFlt ("*NotM:Loaded:" + sPool)) == 0
-					let iSize := Call rLoad (sDir + "Names/" + sPool + "/male.txt") ("*NotM:" + sPool + ":male")
-					let iFull := Call rLoad (sDir + "Names/" + sPool + "/male_full.txt") ("*NotM:" + sPool + ":male_full")
-					if eval (iSize + iFull) == 0
-						PrintToConsole "[NotM] WARN Names/%z has no male.txt or male_full.txt names" sPool
+				let sSpec := sPool
+				if eval sPool[0:0] == "+"
+					let sPool := sPool[1:-1]
+					let sSpec := rPlayer.AuxVarGetStr ("*NotM:R:" + aParts[0])
+					if eval (sv_Length sSpec) > 0
+						let sSpec := sSpec + "," + sPool
+					else
+						let sSpec := sPool
 					endif
-					Call rLoad (sDir + "Names/" + sPool + "/female.txt") ("*NotM:" + sPool + ":female")
-					Call rLoad (sDir + "Names/" + sPool + "/female_full.txt") ("*NotM:" + sPool + ":female_full")
-					Call rLoad (sDir + "Names/" + sPool + "/surname.txt") ("*NotM:" + sPool + ":surname")
-					rPlayer.AuxVarSetFlt ("*NotM:Loaded:" + sPool) 1
 				endif
+				rPlayer.AuxVarSetStr ("*NotM:R:" + aParts[0]) (sSpec)
+				let aPools := sv_Split (sPool) ","
+				let iPart := 0
+				while iPart < (ar_Size aPools)
+					let sPool := aPools[iPart]
+					if eval (rPlayer.AuxVarGetFlt ("*NotM:Loaded:" + sPool)) == 0
+						let iSize := Call rLoad (sDir + "Names/" + sPool + "/male.txt") ("*NotM:" + sPool + ":male")
+						let iFull := Call rLoad (sDir + "Names/" + sPool + "/male_full.txt") ("*NotM:" + sPool + ":male_full")
+						if eval (iSize + iFull) == 0
+							PrintToConsole "[NotM] WARN Names/%z has no male.txt or male_full.txt names" sPool
+						endif
+						let iFem := Call rLoad (sDir + "Names/" + sPool + "/female.txt") ("*NotM:" + sPool + ":female")
+						let iFemFull := Call rLoad (sDir + "Names/" + sPool + "/female_full.txt") ("*NotM:" + sPool + ":female_full")
+						Call rLoad (sDir + "Names/" + sPool + "/surname.txt") ("*NotM:" + sPool + ":surname")
+						rPlayer.AuxVarSetFlt ("*NotM:W:" + sPool) (iSize + iFull + iFem + iFemFull)
+						rPlayer.AuxVarSetFlt ("*NotM:Loaded:" + sPool) 1
+					endif
+					let iPart += 1
+				loop
 			endif
 			let iLine += 1
 		loop

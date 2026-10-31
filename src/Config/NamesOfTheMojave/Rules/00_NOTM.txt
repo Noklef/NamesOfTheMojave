@@ -4,6 +4,7 @@
 # Pools shipped with this mod start with NOTM_. Give pools you add your own prefix.
 # Every .txt file in this folder is loaded, in name order. Add-ons: ship your own file (e.g. 50_MyMod.txt), do not edit this one.
 # Rule forms: Name|pool sets or replaces a rule from an earlier file. Name|- removes it.
+# Name|A,B draws from several pools (chance by pool size). Name|+C adds pool C to an earlier rule. No spaces around commas.
 # --- FNV civilians ---
 Wastelander|NOTM_wasteland
 Traveler|NOTM_wasteland

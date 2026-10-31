@@ -3,11 +3,14 @@
 ; Attempts 0-3 pick an exact full name (<gender>_full). Later attempts, or a pool without full names,
 ; use a first name plus a surname if the pool has any. A pool without first names always uses full names.
 ; Same actor, seed and attempt always give the same name. A higher iAttempt re-rolls.
+; sPool can list several pools (A,B). Then one pool is chosen first, weighted by its total names
+; (*NotM:W:<pool>), and the name comes from that pool only, so styles never mix.
 ref rActor
 string_var sPool
 int iAttempt
 ref rPlayer
 ref rHash
+array_var aPools
 string_var sVar
 string_var sName
 string_var sLast
@@ -16,12 +19,40 @@ int iIdx
 int iFull
 int iSize
 int iPick
+int iPart
+int iTotal
+int iWeight
 
 begin Function {rActor, sPool, iAttempt}
 	let rPlayer := GetFormFromMod "FalloutNV.esm" "000014"
 	let fSeed := rPlayer.AuxVarGetFlt "NotMSeed"
 	let rHash := rPlayer.AuxVarGetRef "*NotM:Hash"
 	let iIdx := GetLocalRefIndex rActor
+	let aPools := sv_Split (sPool) ","
+	if eval (ar_Size aPools) > 1
+		let iTotal := 0
+		let iPart := 0
+		while iPart < (ar_Size aPools)
+			let iTotal += rPlayer.AuxVarGetFlt ("*NotM:W:" + aPools[iPart])
+			let iPart += 1
+		loop
+		if iTotal == 0
+			SetFunctionValue ""
+			return
+		endif
+		; Salts 50+ do not overlap the name salts (1-16).
+		let iPick := Call rHash iIdx fSeed (iAttempt + 50) iTotal
+		let iPart := 0
+		while iPart < (ar_Size aPools)
+			let sPool := aPools[iPart]
+			let iWeight := rPlayer.AuxVarGetFlt ("*NotM:W:" + sPool)
+			if iPick < iWeight
+				break
+			endif
+			let iPick -= iWeight
+			let iPart += 1
+		loop
+	endif
 	let sVar := "*NotM:" + sPool + ":male"
 	if eval rActor.GetIsSex Female
 		if eval ((rPlayer.AuxVarSize ("*NotM:" + sPool + ":female")) + (rPlayer.AuxVarSize ("*NotM:" + sPool + ":female_full"))) > 0
