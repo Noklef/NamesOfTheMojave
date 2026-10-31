@@ -1,0 +1,7 @@
+# Names of the Mojave rules: Enclave. Format and rule forms: README.md in this folder.
+# This file is replaced on update. Put your own rules in a new file (e.g. 50_MyRules.txt). No empty lines.
+Enclave Soldier|NOTM_wasteland
+Enclave Officer|NOTM_wasteland
+Enclave Scientist|NOTM_wasteland
+Enclave Hellfire Trooper|NOTM_wasteland
+Enclave Doctor|NOTM_wasteland

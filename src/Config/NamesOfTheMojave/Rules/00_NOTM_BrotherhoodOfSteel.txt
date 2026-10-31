@@ -1,0 +1,9 @@
+# Names of the Mojave rules: Brotherhood of Steel. Format and rule forms: README.md in this folder.
+# This file is replaced on update. Put your own rules in a new file (e.g. 50_MyRules.txt). No empty lines.
+Brotherhood of Steel Paladin|NOTM_wasteland
+Brotherhood Outcast|NOTM_wasteland
+Brotherhood of Steel Initiate|NOTM_wasteland
+Brotherhood of Steel Knight|NOTM_wasteland
+Brotherhood of Steel Scribe|NOTM_wasteland
+Brotherhood Scribe|NOTM_wasteland
+Brotherhood Scout|NOTM_wasteland

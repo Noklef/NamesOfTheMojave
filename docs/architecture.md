@@ -60,7 +60,7 @@ Everything becomes a drop-in folder, and rules can combine pools. No new depende
 ```
 Config/NamesOfTheMojave/
   Plugins/  NOTM.txt  XYZ.txt          all files merged
-  Rules/    00_NOTM.txt  50_XYZ.txt    loaded in name order; later file wins per key
+  Rules/    00_NOTM_*.txt  50_XYZ.txt  loaded in name order; later file wins per key
   Names/    NOTM_wasteland/ ...  XYZ_ncr/ ...
 ```
 

@@ -1,0 +1,11 @@
+# Names of the Mojave rules: All ghouls. Format and rule forms: README.md in this folder.
+# This file is replaced on update. Put your own rules in a new file (e.g. 50_MyRules.txt). No empty lines.
+Underworld Resident|NOTM_ghoul
+Marked Men Scout|NOTM_ghoul
+Marked Men Hunter|NOTM_ghoul
+Marked Men Ravager|NOTM_ghoul
+Marked Men Marauder|NOTM_ghoul
+Bright Follower|NOTM_ghoul
+Ghoul Guard|NOTM_ghoul
+Irradiated Marked Men Hunter|NOTM_ghoul
+Irradiated Marked Men Scout|NOTM_ghoul

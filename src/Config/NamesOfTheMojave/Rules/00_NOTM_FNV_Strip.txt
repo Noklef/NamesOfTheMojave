@@ -1,0 +1,23 @@
+# Names of the Mojave rules: The Strip and Freeside. Format and rule forms: README.md in this folder.
+# This file is replaced on update. Put your own rules in a new file (e.g. 50_MyRules.txt). No empty lines.
+Gambler|NOTM_wasteland
+Gomorrah Prostitute|NOTM_wasteland
+White Glove|NOTM_wasteland
+Bartender|NOTM_wasteland
+Chairman|NOTM_wasteland
+Tops Promoter|NOTM_wasteland
+Atomic Wrangler Guard|NOTM_wasteland
+Card Dealer|NOTM_wasteland
+Chairman Bodyguard|NOTM_wasteland
+Vikki And Vance Dealer|NOTM_wasteland
+Roulette Dealer|NOTM_wasteland
+Hooker|NOTM_wasteland
+Rad Pack Dancer|NOTM_wasteland
+Chairman Greeter|NOTM_wasteland
+Escort|NOTM_wasteland
+Gomorrah Dealer|NOTM_wasteland
+King Groupie|NOTM_wasteland
+Blackjack Dealer|NOTM_wasteland
+Casino Guard|NOTM_wasteland
+Security Officer|NOTM_wasteland
+White Glove Bouncer|NOTM_wasteland

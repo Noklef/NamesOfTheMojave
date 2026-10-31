@@ -1,0 +1,24 @@
+# Names of the Mojave rules: Capital Wasteland (FO3). Format and rule forms: README.md in this folder.
+# This file is replaced on update. Put your own rules in a new file (e.g. 50_MyRules.txt). No empty lines.
+Raider|NOTM_wasteland
+Talon Company Merc|NOTM_wasteland
+Megaton Settler|NOTM_wasteland
+Tenpenny Resident|NOTM_wasteland
+Regulator|NOTM_wasteland
+Rivet City Security|NOTM_wasteland
+Insane Survivor|NOTM_wasteland
+Security Guard|NOTM_wasteland
+Tenpenny Tower Resident|NOTM_wasteland
+Rock Crick Hunter|NOTM_wasteland
+Caravan Guard|NOTM_wasteland
+Child of Atom|NOTM_wasteland
+Project Purity Scientist|NOTM_wasteland
+Secretary|NOTM_wasteland
+Wasteland Settler|NOTM_wasteland
+Water Caravan Driver|NOTM_wasteland
+Caravan Trader|NOTM_wasteland
+Hitman|NOTM_wasteland
+Scientist|NOTM_wasteland
+Wasteland Junkie|NOTM_wasteland
+Wasteland Merchant|NOTM_wasteland
+Megaton Refugee|NOTM_wasteland

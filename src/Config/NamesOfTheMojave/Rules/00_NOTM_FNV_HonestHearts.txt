@@ -1,0 +1,13 @@
+# Names of the Mojave rules: Honest Hearts. Format and rule forms: README.md in this folder.
+# This file is replaced on update. Put your own rules in a new file (e.g. 50_MyRules.txt). No empty lines.
+Sorrows Tribal|NOTM_tribal
+White Legs Pain-Maker|NOTM_tribal
+White Legs Storm-Drummer|NOTM_tribal
+White Legs Bone-Breaker|NOTM_tribal
+Dead Horse Warrior|NOTM_tribal
+Dead Horse Disciple of Canaan|NOTM_tribal
+Dead Horse Stalker|NOTM_tribal
+Dead Horse Tribal|NOTM_tribal
+White Legs Light-Bringer|NOTM_tribal
+White Legs Tribal|NOTM_tribal
+Captive Sorrows Tribal|NOTM_tribal

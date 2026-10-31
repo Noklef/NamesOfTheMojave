@@ -1,0 +1,20 @@
+# Names of the Mojave rules: Caesar's Legion. Format and rule forms: README.md in this folder.
+# This file is replaced on update. Put your own rules in a new file (e.g. 50_MyRules.txt). No empty lines.
+Recruit Legionary|NOTM_legion
+Prime Legionary|NOTM_legion
+Veteran Legionary|NOTM_legion
+Centurion|NOTM_legion
+Praetorian Guard|NOTM_legion
+Prime Decanus|NOTM_legion
+Recruit Decanus|NOTM_legion
+Legion Explorer|NOTM_legion
+Veteran Decanus|NOTM_legion
+Legion Vexillarius|NOTM_legion
+Legionary Assassin|NOTM_legion
+Legionary Blacksmith|NOTM_legion
+Irradiated Legion Explorer|NOTM_legion
+Legionary|NOTM_legion
+Legionary Recruit|NOTM_legion
+Legion Centurion|NOTM_legion
+Irradiated Legionary Prime|NOTM_legion
+Irradiated Legionary Veteran|NOTM_legion

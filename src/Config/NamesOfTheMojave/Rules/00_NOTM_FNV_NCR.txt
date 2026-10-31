@@ -1,0 +1,17 @@
+# Names of the Mojave rules: NCR. Format and rule forms: README.md in this folder.
+# This file is replaced on update. Put your own rules in a new file (e.g. 50_MyRules.txt). No empty lines.
+NCR Trooper|NOTM_wasteland
+NCR Ranger|NOTM_wasteland
+Engineer|NOTM_wasteland
+NCR Heavy Trooper|NOTM_wasteland
+NCR Veteran Ranger|NOTM_wasteland
+NCR Military Police|NOTM_wasteland
+NCR Trooper MP|NOTM_wasteland
+NCR MP|NOTM_wasteland
+NCR Ranger Veteran|NOTM_wasteland
+Injured Trooper|NOTM_wasteland
+NCR Recruit|NOTM_wasteland
+NCR Riot Control|NOTM_wasteland
+Irradiated Heavy Trooper|NOTM_wasteland
+NCR Sniper|NOTM_wasteland
+Ghoul Trooper|NOTM_ghoul

@@ -82,7 +82,7 @@ Run 3 (205 rules, CRLF files): PASS.
 
 ## Add-on format, Phase 1 (2026-10-31)
 - Rules and plugin lists are drop-in folders: `Config/NamesOfTheMojave/Rules/*.txt` and `Plugins/*.txt`. Every `.txt` file loads. Add-ons ship their own file, so no add-on edits ours.
-- Rule files are sorted by name before loading. MO2 merges folders from several mods, so the folder listing order is not guaranteed. Our file is `00_NOTM.txt`; add-ons use a higher prefix to load after it.
+- Rule files are sorted by name before loading. MO2 merges folders from several mods, so the folder listing order is not guaranteed. Our files start with `00_NOTM_` (one file per group); add-ons use a higher prefix to load after them.
 - Rule forms: `Name|pool` sets or replaces, `Name|-` removes, `Name|A,B` uses several pools, `Name|+C` appends a pool to the rule left by earlier files.
 - Multi-pool pick: first choose one pool, weighted by its total names (`*NotM:W:<pool>`), then pick the name from that pool only. Reason: merging the lists would mix styles (a Chinese surname after a wasteland first name), and "full names first" would favour pools that have full-name lists.
 - `NotMSkip`: other mods set this public aux var to 1 on an actor, and Scan skips it. An actor that is already named keeps its name until the next load.
@@ -94,3 +94,7 @@ Run 3 (205 rules, CRLF files): PASS.
 - ShowRole changes only actors named after the change. Already-named actors update on the next load, because ref names are session-only.
 - The version line reads `*NotM:Version`.
 - Not included yet: the pick-order setting (full names first or one draw). It needs an engine change first.
+
+## Rules split per group (2026-10-31)
+- `Rules/00_NOTM.txt` is split into one file per group (e.g. `00_NOTM_FNV_Legion.txt`). A player turns off a whole group by deleting its file. The format notes moved to `Rules/README.md`, so each rules file has a 2-line header.
+- No rule name appears in two of our files, so the load order between them does not matter.

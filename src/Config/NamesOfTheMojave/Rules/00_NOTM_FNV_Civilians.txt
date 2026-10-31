@@ -1,0 +1,45 @@
+# Names of the Mojave rules: FNV civilians. Format and rule forms: README.md in this folder.
+# This file is replaced on update. Put your own rules in a new file (e.g. 50_MyRules.txt). No empty lines.
+Wastelander|NOTM_wasteland
+Traveler|NOTM_wasteland
+Squatter|NOTM_wasteland
+Local|NOTM_wasteland
+New Vegas Citizen|NOTM_wasteland
+Prospector|NOTM_wasteland
+North Vegas Resident|NOTM_wasteland
+Traveling Merchant|NOTM_wasteland
+Scavenger|NOTM_wasteland
+Westside Resident|NOTM_wasteland
+NCR Prospector|NOTM_wasteland
+Refugee|NOTM_wasteland
+Caravaneer|NOTM_wasteland
+Chem Addict|NOTM_wasteland
+Patient|NOTM_wasteland
+Primm Resident|NOTM_wasteland
+Escaped Convict|NOTM_wasteland
+Wasteland Captive|NOTM_wasteland
+Hunter|NOTM_wasteland
+Sharecropper|NOTM_wasteland
+Quarry Worker|NOTM_wasteland
+Westside Militia|NOTM_wasteland
+Novac Settler|NOTM_wasteland
+Mojave Inhabitant|NOTM_wasteland
+New Vegas Resident|NOTM_wasteland
+Underpass Citizen|NOTM_wasteland
+Westside Citizen|NOTM_wasteland
+Crazed Chem Addict|NOTM_wasteland
+Goodsprings Settler|NOTM_wasteland
+Boulder City Worker|NOTM_wasteland
+Convict|NOTM_wasteland
+Junkie|NOTM_wasteland
+Beggar|NOTM_wasteland
+Destitute Traveler|NOTM_wasteland
+Rancher|NOTM_wasteland
+Man|NOTM_wasteland
+Vault 34 Dweller|NOTM_wasteland
+Drunk|NOTM_wasteland
+Merchant|NOTM_wasteland
+Missionary|NOTM_wasteland
+Drifter|NOTM_wasteland
+Vagrant|NOTM_wasteland
+Water Beggar|NOTM_wasteland

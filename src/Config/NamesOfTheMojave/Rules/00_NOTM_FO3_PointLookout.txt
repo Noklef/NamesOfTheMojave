@@ -1,0 +1,5 @@
+# Names of the Mojave rules: Point Lookout. Format and rule forms: README.md in this folder.
+# This file is replaced on update. Put your own rules in a new file (e.g. 50_MyRules.txt). No empty lines.
+Tribal|NOTM_tribal
+Smuggler|NOTM_wasteland
+Bandit|NOTM_wasteland

@@ -1,0 +1,21 @@
+# Names of the Mojave rules: FNV gangs. Format and rule forms: README.md in this folder.
+# This file is replaced on update. Put your own rules in a new file (e.g. 50_MyRules.txt). No empty lines.
+Fiend|NOTM_wasteland
+Powder Ganger|NOTM_wasteland
+Powder Ganger Bodyguard|NOTM_wasteland
+Viper Gunslinger|NOTM_wasteland
+Viper Leader|NOTM_wasteland
+Kings Gang Member|NOTM_wasteland
+Jackal Gang Member|NOTM_wasteland
+Jackal Gang Leader|NOTM_wasteland
+Great Khan|NOTM_wasteland
+Great Khan Warrior|NOTM_wasteland
+Omerta Thug|NOTM_wasteland
+Freeside Thug|NOTM_wasteland
+Westside Thug|NOTM_wasteland
+Scorpions Gang Member|NOTM_wasteland
+Van Graff Thug|NOTM_wasteland
+Mercenary|NOTM_wasteland
+NCR Mercenary|NOTM_wasteland
+Slaver|NOTM_wasteland
+Slave|NOTM_wasteland

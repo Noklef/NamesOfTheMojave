@@ -1,0 +1,21 @@
+# Names of the Mojave rules: FNV groups and services. Format and rule forms: README.md in this folder.
+# This file is replaced on update. Put your own rules in a new file (e.g. 50_MyRules.txt). No empty lines.
+Followers Guard|NOTM_wasteland
+Followers Doctor|NOTM_wasteland
+Boomer|NOTM_wasteland
+Boomer Chef|NOTM_wasteland
+Injured Boomer|NOTM_wasteland
+Boomer Guard|NOTM_wasteland
+Crimson Caravan Guard|NOTM_wasteland
+Crimson Caravan Trader|NOTM_wasteland
+Gun Runner Guard|NOTM_wasteland
+Gun Runner Gunsmith|NOTM_wasteland
+Bodyguard For Hire|NOTM_wasteland
+Gunderson Hired Hand|NOTM_wasteland
+Happy Trails Caravan Guard|NOTM_wasteland
+Guard|NOTM_wasteland
+Thug|NOTM_wasteland
+Greaser|NOTM_wasteland
+Bodyguard|NOTM_wasteland
+Clinic Guard|NOTM_wasteland
+Outer Vegas Defender|NOTM_wasteland

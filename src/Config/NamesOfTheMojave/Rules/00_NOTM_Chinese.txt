@@ -1,0 +1,10 @@
+# Names of the Mojave rules: Chinese. Format and rule forms: README.md in this folder.
+# This file is replaced on update. Put your own rules in a new file (e.g. 50_MyRules.txt). No empty lines.
+Chinese Soldier|NOTM_chinese
+Chinese Sniper|NOTM_chinese
+Chinese Inferno Unit|NOTM_chinese
+Chinese Launcher|NOTM_chinese
+Chinese Remnant Soldier|NOTM_chinese
+Chinese Remnant Officer|NOTM_chinese
+Chinese Remnant Sargeant|NOTM_chinese
+Chinese Remnant Sergeant|NOTM_chinese

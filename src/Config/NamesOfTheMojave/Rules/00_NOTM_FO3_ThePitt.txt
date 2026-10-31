@@ -1,0 +1,7 @@
+# Names of the Mojave rules: The Pitt. Format and rule forms: README.md in this folder.
+# This file is replaced on update. Put your own rules in a new file (e.g. 50_MyRules.txt). No empty lines.
+Pitt Raider|NOTM_wasteland
+Pitt Slave|NOTM_wasteland
+Slave Fighter|NOTM_wasteland
+Raider Fighter|NOTM_wasteland
+Slave Guard|NOTM_wasteland
