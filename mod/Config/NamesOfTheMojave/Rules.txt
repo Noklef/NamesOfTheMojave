@@ -201,3 +201,12 @@ Dead Horse Tribal|tribal
 White Legs Light-Bringer|tribal
 White Legs Tribal|tribal
 Captive Sorrows Tribal|tribal
+# --- Chinese ---
+Chinese Soldier|chinese
+Chinese Sniper|chinese
+Chinese Inferno Unit|chinese
+Chinese Launcher|chinese
+Chinese Remnant Soldier|chinese
+Chinese Remnant Officer|chinese
+Chinese Remnant Sargeant|chinese
+Chinese Remnant Sergeant|chinese
