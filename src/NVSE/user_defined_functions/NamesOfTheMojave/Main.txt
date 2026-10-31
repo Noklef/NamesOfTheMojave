@@ -20,6 +20,7 @@ begin Function {}
 	if fInterval < 1
 		let fInterval := 10
 	endif
+	rPlayer.AuxVarSetStr "*NotM:Version" "1.0.0"
 	rPlayer.AuxVarSetFlt "*NotM:Interval" fInterval
 	rPlayer.AuxVarSetFlt "*NotM:ShowRole" (GetINIFloat "General:ShowRole" "NamesOfTheMojave.ini")
 	rPlayer.AuxVarSetFlt "*NotM:Debug" (GetINIFloat "General:Debug" "NamesOfTheMojave.ini")

@@ -28,11 +28,17 @@ int iFile
 int iLine
 int iModIdx
 int iTotal
+int iPlugins
+array_var aRules
+array_var aSeen
 
 begin Function {}
 	let rPlayer := GetFormFromMod "FalloutNV.esm" "000014"
 	let rLoad := CompileScript "NamesOfTheMojave/LoadList.txt"
 	let sDir := "Data/Config/NamesOfTheMojave/"
+	let aRules := ar_Construct "stringmap"
+	let aSeen := ar_Construct "stringmap"
+	let iPlugins := 0
 
 	let aFiles := GetFilesInFolder "Config/NamesOfTheMojave/Plugins" "*.txt"
 	let iTotal := 0
@@ -46,6 +52,7 @@ begin Function {}
 			let iModIdx := GetModIndex (sLine)
 			if iModIdx < 255
 				rPlayer.AuxVarSetFlt (sv_Construct "*NotM:M:%g" iModIdx) 1
+				let iPlugins += 1
 			endif
 			let iLine += 1
 		loop
@@ -74,6 +81,7 @@ begin Function {}
 				PrintToConsole "[NotM] WARN bad rule line [%z] in %z" sLine sFile
 			elseif eval aParts[1] == "-"
 				rPlayer.AuxVarErase ("*NotM:R:" + aParts[0])
+				ar_Erase aRules (aParts[0])
 			elseif eval aParts[1] == "+"
 				PrintToConsole "[NotM] WARN bad rule line [%z] in %z" sLine sFile
 			else
@@ -89,10 +97,12 @@ begin Function {}
 					endif
 				endif
 				rPlayer.AuxVarSetStr ("*NotM:R:" + aParts[0]) (sSpec)
+				let aRules[aParts[0]] := 1
 				let aPools := sv_Split (sPool) ","
 				let iPart := 0
 				while iPart < (ar_Size aPools)
 					let sPool := aPools[iPart]
+					let aSeen[sPool] := 1
 					if eval (rPlayer.AuxVarGetFlt ("*NotM:Loaded:" + sPool)) == 0
 						let iSize := Call rLoad (sDir + "Names/" + sPool + "/male.txt") ("*NotM:" + sPool + ":male")
 						let iFull := Call rLoad (sDir + "Names/" + sPool + "/male_full.txt") ("*NotM:" + sPool + ":male_full")
@@ -116,4 +126,8 @@ begin Function {}
 	if iTotal == 0
 		PrintToConsole "[NotM] WARN Rules/ has no rules, no actor will be named"
 	endif
+	let sLine := rPlayer.AuxVarGetStr "*NotM:Version"
+	let iCount := ar_Size aRules
+	let iTotal := ar_Size aSeen
+	PrintToConsole "[NotM] Names of the Mojave %z: %g rules, %g pools, %g plugins" sLine iCount iTotal iPlugins
 end
