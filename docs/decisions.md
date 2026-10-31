@@ -71,3 +71,11 @@ Run 3 (205 rules, CRLF files): PASS.
 - VATS and dialogue header show the name.
 - Full restart: 27 of 27 actors seen in both sessions kept the same name.
 - Not tested: ShowRole=1, new game.
+
+## Name pools: lore names and full names (2026-10-31)
+- Pools use lore names only (docs/lore_names.md). Drafted lists are kept by the user in `Names_backup/` (not shipped).
+- Per pool: `male.txt`, `female.txt`, `surname.txt`, `male_full.txt`, `female_full.txt`. All optional.
+- Pick order (user choice "full names first"): attempts 0-3 pick an exact full name; attempts 4-7 mix first name + surname. A pool with only full names uses them on every attempt.
+- Effect: most actors get an exact lore name, so the same full name can appear in different areas. Duplicates are only avoided among loaded actors.
+- Legion, tribal, chinese and ghoul pools are empty until a lore pass fills them; their rules print a WARN and those actors keep their role name.
+- Future option (user request): choose the pick order (full first / shared draw) in settings. MCM needs an ESP, so INI first.
