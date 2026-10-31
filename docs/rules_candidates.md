@@ -3,6 +3,7 @@
 Source: FNVEdit export (`tools/data/NotM_npcs.tsv`), NPC_ records in FalloutNV.esm, all DLCs, Fallout3.esm and TaleOfTwoWastelands.esm.
 Number = records with that exact name. Names in Rules.txt must match the in-game name exactly.
 Edit freely: delete a line to exclude it, change the pool to move it.
+Status: all names under Include are in `mod/Config/NamesOfTheMojave/Rules.txt` (205 rules). Undecided names are not added.
 
 ## Proposed pools (by naming style)
 | Pool | Style | Used for |
