@@ -16,6 +16,7 @@ Optional, for an in-game settings page: The Mod Configuration Menu, MCM Extender
 | Path | Content |
 |---|---|
 | `src/` | Shipped files. Contents go in the game `Data\` folder (MO2: the mod folder). |
+| `addons/` | Optional add-ons for other mods, each shipped separately (e.g. `addons/TLD_Travelers/`). Not part of the core mod. |
 | `tools/` | Development tools (FNVEdit export script). Not shipped. |
 | `docs/` | Design decisions and research. |
 

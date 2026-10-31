@@ -98,3 +98,8 @@ Run 3 (205 rules, CRLF files): PASS.
 ## Rules split per group (2026-10-31)
 - `Rules/00_NOTM.txt` is split into one file per group (e.g. `00_NOTM_FNV_Legion.txt`). A player turns off a whole group by deleting its file. The format notes moved to `Rules/README.md`, so each rules file has a 2-line header.
 - No rule name appears in two of our files, so the load order between them does not matter.
+
+## Add-ons for other mods (2026-11-01)
+- The core mod covers only Fallout 3, Fallout: New Vegas, their DLCs and TTW. Support for another mod's NPCs is a separate add-on in `addons/<Mod>/`, shipped on its own. Reason: the core rules and plugin list stay free of third-party content.
+- First add-on: TLD Travelers. A Plugins file allows `TLD_Travelers.esm` (its actors use its own NPC records, so the core list skips them). A rules file adds 66 TLD-only generic names to the NOTM pools.
+- Rules match by name in every allowed plugin. Two TLD names (Prospector Merchant, NCR Sergeant) also exist once in vanilla, so the add-on names those two vanilla NPCs as well.
