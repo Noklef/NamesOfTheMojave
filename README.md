@@ -13,10 +13,10 @@ Status: in development.
 ## Repository layout
 | Path | Content |
 |---|---|
-| `mod/` | Shipped files. Contents go in the game `Data\` folder (MO2: the mod folder). |
+| `src/` | Shipped files. Contents go in the game `Data\` folder (MO2: the mod folder). |
 | `spike/` | Development test scripts. Not shipped. |
 | `tools/` | Development tools (FNVEdit export script). Not shipped. |
 | `docs/` | Design decisions and research. |
 
 ## Deploy (development)
-`.\deploy.ps1` mirrors `mod/` into the MO2 mod folder (default: the BeginAgain-TTW instance; override with `-Target`). Add `-Spike` to include the spike test files. MO2's `meta.ini` is kept.
+`.\deploy.ps1` mirrors `src/` into the MO2 mod folder (default: the BeginAgain-TTW instance; override with `-Target`). Add `-Spike` to include the spike test files. MO2's `meta.ini` is kept.
