@@ -1,19 +1,28 @@
 ; Spike 3: lambda + SetGameMainLoopCallback.
 ; PASS if "tick 1..3" print about every 2 s in GameMode, then stop.
+; Unregisters the previous load's callback; prints stop after 3 even if unregister fails.
 ref rPlayer
 ref rCB
+ref rOld
 float fTick
 
 let rPlayer := GetFormFromMod "FalloutNV.esm" "000014"
+let rOld := rPlayer.AuxVarGetRef "*NotMCB"
+if rOld
+	SetGameMainLoopCallback rOld 0
+endif
 rPlayer.AuxVarSetFlt "*NotMTick" 0
 let rCB := (begin function {}
 	let fTick := rPlayer.AuxVarGetFlt "*NotMTick"
 	let fTick += 1
 	rPlayer.AuxVarSetFlt "*NotMTick" fTick
-	PrintToConsole "NotM Spike3: tick %g" fTick
+	if fTick <= 3
+		PrintToConsole "NotM Spike3: tick %g" fTick
+	endif
 	if fTick >= 3
 		SetGameMainLoopCallback rCB 0
 	endif
 end)
+rPlayer.AuxVarSetRef "*NotMCB" rCB
 SetGameMainLoopCallback rCB 1 120 1
 PrintToConsole "NotM Spike3: callback registered"

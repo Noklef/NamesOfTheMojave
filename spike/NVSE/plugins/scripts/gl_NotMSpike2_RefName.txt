@@ -3,12 +3,14 @@
 ref rPlayer
 ref rActor
 int iCount
+int iMod
 
 let rPlayer := GetFormFromMod "FalloutNV.esm" "000014"
 let rActor := GetFirstRef 200 1
 while rActor
 	if rActor != rPlayer
-		if iCount % 2 == 0
+		let iMod := iCount % 2
+		if iMod == 0
 			rActor.SetRefName "NotM Alpha"
 		else
 			rActor.SetRefName "NotM Beta"

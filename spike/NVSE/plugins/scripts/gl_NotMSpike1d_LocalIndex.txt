@@ -1,0 +1,19 @@
+; Spike 1d: numeric local ref index for the name hash (GetLocalRefIndex).
+ref rPlayer
+ref rActor
+int iLocal
+int iCount
+
+let rPlayer := GetFormFromMod "FalloutNV.esm" "000014"
+let rActor := GetFirstRef 200 1
+while rActor
+	if rActor != rPlayer
+		let iLocal := GetLocalRefIndex rActor
+		PrintToConsole "NotM Spike1d: ref %i local %g" rActor iLocal
+		let iCount += 1
+	endif
+	if iCount >= 8
+		break
+	endif
+	let rActor := GetNextRef
+loop

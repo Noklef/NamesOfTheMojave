@@ -1,7 +1,6 @@
-; Spike 1d: numeric ref ID for the name hash (GetLocalRefIndex, GetFormIDString).
+; Spike 1e: ref ID as hex string (GetFormIDString).
 ref rPlayer
 ref rActor
-int iLocal
 string_var sID
 int iCount
 
@@ -9,9 +8,8 @@ let rPlayer := GetFormFromMod "FalloutNV.esm" "000014"
 let rActor := GetFirstRef 200 1
 while rActor
 	if rActor != rPlayer
-		let iLocal := GetLocalRefIndex rActor
 		let sID := GetFormIDString rActor
-		PrintToConsole "NotM Spike1d: ref %i local %g idstr %z" rActor iLocal sID
+		PrintToConsole "NotM Spike1e: ref %i idstr %z" rActor sID
 		let iCount += 1
 	endif
 	if iCount >= 8

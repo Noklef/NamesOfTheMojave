@@ -17,7 +17,7 @@ One game session, about 10 minutes. Tests which engine functions work from ESP-l
 7. Quit the game.
 
 ## Send back
-- `NotM_spike.txt` — in the game folder or the MO2 `overwrite` folder.
+- `NotM_spike.txt` — in the game folder or the MO2 `overwrite` folder. If it is missing or empty: after step 3, open the console, scroll through the `NotM` lines and screenshot them.
 - `jip_ln_nvse.log` — in the game folder.
 - Short notes: names seen in crosshair, VATS, dialogue.
 
@@ -26,7 +26,7 @@ One game session, about 10 minutes. Tests which engine functions work from ESP-l
 |---|---|
 | 0 Runner | `NotM Spike0: PASS runner executed` |
 | 1 Walk | Lines with ref, base (gbo), name, female flag |
-| 1b/1c/1d | Base form lines, numeric ref index, ID string (informational) |
+| 1b–1e | Base form lines, numeric ref index, ID string (informational) |
 | 2 RefName | In-game: NPCs show **different** names (`NotM Alpha` / `NotM Beta`), not all the same |
 | 2b RefNameVar | One NPC shows `NotM Dynamic 7`; console prints names read back |
 | 3 Callback | `tick 1`, `tick 2`, `tick 3` about 2 s apart, then stops |
