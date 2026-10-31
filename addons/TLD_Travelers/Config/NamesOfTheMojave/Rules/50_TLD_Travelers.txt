@@ -15,7 +15,6 @@ Militiaman|NOTM_wasteland
 Hired Hand|NOTM_wasteland
 Hired Thug|NOTM_wasteland
 Contract Killer|NOTM_wasteland
-Counterfeiter|NOTM_wasteland
 Junk Merchant|NOTM_wasteland
 Gun Runner Merchant|NOTM_wasteland
 Happy Trails Merchant|NOTM_wasteland

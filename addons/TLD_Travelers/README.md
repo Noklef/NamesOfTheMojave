@@ -5,7 +5,7 @@ Names the generic NPCs that TLD Travelers (`TLD_Travelers.esm`) adds. Separate f
 Requires: Names of the Mojave, TLD Travelers. Install the `Config` folder as its own mod, after Names of the Mojave.
 
 - `Plugins/TLD_Travelers.txt` allows actors from `TLD_Travelers.esm`. With it alone, TLD actors with core names (NCR Trooper, Fiend, Powder Ganger, ...) get names.
-- `Rules/50_TLD_Travelers.txt` adds 66 generic names from TLD Travelers. Two of them, Prospector Merchant and NCR Sergeant, also exist once in vanilla, so those two vanilla actors get names too.
+- `Rules/50_TLD_Travelers.txt` adds 65 generic names from TLD Travelers. Two of them, Prospector Merchant and NCR Sergeant, also exist once in vanilla, so those two vanilla actors get names too.
 - Not named: characters with their own name (Elder Sato, Haggling Harry, ...), corpse labels (Dead Courier, ...), Child.
 
 Built from an FNVEdit export of `TLD_Travelers.esm` (`tools/xedit/NotM_ExportNPCs.pas`).
