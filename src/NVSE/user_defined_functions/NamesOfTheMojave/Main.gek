@@ -24,17 +24,17 @@ begin Function {}
 	rPlayer.AuxVarSetFlt "*NotM:Interval" fInterval
 	rPlayer.AuxVarSetFlt "*NotM:ShowRole" (GetINIFloat "General:ShowRole" "NamesOfTheMojave.ini")
 	rPlayer.AuxVarSetFlt "*NotM:Debug" (GetINIFloat "General:Debug" "NamesOfTheMojave.ini")
-	rPlayer.AuxVarSetRef "*NotM:Hash" (CompileScript "NamesOfTheMojave/Hash.txt")
-	rPlayer.AuxVarSetRef "*NotM:Pick" (CompileScript "NamesOfTheMojave/PickName.txt")
-	let rRules := CompileScript "NamesOfTheMojave/LoadRules.txt"
+	rPlayer.AuxVarSetRef "*NotM:Hash" (CompileScript "NamesOfTheMojave/Hash.gek")
+	rPlayer.AuxVarSetRef "*NotM:Pick" (CompileScript "NamesOfTheMojave/PickName.gek")
+	let rRules := CompileScript "NamesOfTheMojave/LoadRules.gek"
 	Call rRules
-	let rScan := CompileScript "NamesOfTheMojave/Scan.txt"
+	let rScan := CompileScript "NamesOfTheMojave/Scan.gek"
 	rPlayer.AuxVarSetRef "*NotM:Scan" rScan
 	rPlayer.AuxVarSetRef "*NotM:Cell" (rPlayer.GetParentCell)
 	rPlayer.AuxVarSetFlt "*NotM:Timer" 0
 	Call rScan
-	SetOnMenuOpenEventHandler (CompileScript "NamesOfTheMojave/DialogName.txt") 1 1009
+	SetOnMenuOpenEventHandler (CompileScript "NamesOfTheMojave/DialogName.gek") 1 1009
 	; Flags 9 = gameplay only (1) + removed on load and main menu (8), so reloads never stack callbacks.
-	let rTick := CompileScript "NamesOfTheMojave/Tick.txt"
+	let rTick := CompileScript "NamesOfTheMojave/Tick.gek"
 	SetGameMainLoopCallback rTick 1 30 9
 end

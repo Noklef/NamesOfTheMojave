@@ -6,19 +6,19 @@ Status: Phase 1 (section 5) is implemented, and section 1 shows the current engi
 
 ```
 ln_NamesOfTheMojave.txt        JIP Script Runner, every load / new game
-  └─ Main.txt                  seed, INI, compile UDFs, register callbacks
-       ├─ LoadRules.txt        Plugins/*.txt → allowed mod indexes
-       │    └─ LoadList.txt    Rules/*.txt → "*NotM:R:<base name>" = pool list
+  └─ Main.gek                  seed, INI, compile UDFs, register callbacks
+       ├─ LoadRules.gek        Plugins/*.txt → allowed mod indexes
+       │    └─ LoadList.gek    Rules/*.txt → "*NotM:R:<base name>" = pool list
        │                       Names/<pool>/{male,female,surname,_full}.txt → arrays
-       ├─ Scan.txt             walk loaded actors → filter → PickName → SetRefName
-       │    └─ PickName.txt → Hash.txt   name = f(seed, ref index, attempt)
-       ├─ Tick.txt             main-loop callback: Scan on cell change + every N s
-       └─ DialogName.txt       DialogMenu handler: speaker label = ref name
+       ├─ Scan.gek             walk loaded actors → filter → PickName → SetRefName
+       │    └─ PickName.gek → Hash.gek   name = f(seed, ref index, attempt)
+       ├─ Tick.gek             main-loop callback: Scan on cell change + every N s
+       └─ DialogName.gek       DialogMenu handler: speaker label = ref name
 ```
 
 | Layer | Contents | Persists? |
 |---|---|---|
-| Code | 9 UDF text files, compiled at load | n/a |
+| Code | 1 loader (`ln_*.txt`) and 8 UDF files (`*.gek`), compiled at load | n/a |
 | Data | `Plugins/*.txt`, `Rules/*.txt`, `Names/<pool>/*.txt` | files |
 | State | 1 value: `NotMSeed` on the player (JIP co-save) | save |
 | Runtime | rules, pools, settings in temp `*NotM:` aux vars | rebuilt each load |

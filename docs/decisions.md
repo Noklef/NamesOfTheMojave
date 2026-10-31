@@ -104,3 +104,7 @@ Run 3 (205 rules, CRLF files): PASS.
 - First add-on: TLD Travelers. A Plugins file allows `TLD_Travelers.esm` (its actors use its own NPC records, so the core list skips them). A rules file adds 66 TLD-only generic names to the NOTM pools.
 - Rules match by name in every allowed plugin. Two TLD names (Prospector Merchant, NCR Sergeant) also exist once in vanilla, so the add-on names those two vanilla NPCs as well.
 - More add-ons from a full load-order export (2026-11-01): Long 15 Reloaded, Dry Wells Reloaded, A World of Pain Revised. Chosen because each has many NPC records that already match core rules but stay unnamed until their plugin is listed. Rules skip personal names, corpse labels, names used only by corpses (editor IDs with DEAD), Lobotomites, and names whose vanilla records are dialogue or quest NPCs.
+
+## Script file extension (2026-11-01)
+- UDF scripts in `NVSE/user_defined_functions/NamesOfTheMojave/` use `.gek`. CompileScript takes the full file name, so any extension works; MCM Extender uses `.gek` the same way. Reason: scripts are clearly apart from the `.txt` data files, and editors with GECK script support highlight them.
+- The loader stays `ln_NamesOfTheMojave.txt`: JIP Script Runner loads only `.txt` files from `NVSE/plugins/scripts/`.

@@ -35,7 +35,7 @@ array_var aSeen
 
 begin Function {}
 	let rPlayer := GetFormFromMod "FalloutNV.esm" "000014"
-	let rLoad := CompileScript "NamesOfTheMojave/LoadList.txt"
+	let rLoad := CompileScript "NamesOfTheMojave/LoadList.gek"
 	let sDir := "Data/Config/NamesOfTheMojave/"
 	let aRules := ar_Construct "stringmap"
 	let aSeen := ar_Construct "stringmap"
