@@ -1,4 +1,4 @@
-# Names of the Mojave - TLD Travelers add-on: generic names that only TLD Travelers uses.
+# Names of the Mojave - TLD Travelers add-on: generic names from TLD Travelers that the core rules do not cover.
 # Names the core rules already cover (NCR Trooper, Fiend, ...) need only the Plugins file.
 # Prospector Merchant and NCR Sergeant also exist once each in vanilla; those two get names too.
 Prospector Merchant|NOTM_wasteland
