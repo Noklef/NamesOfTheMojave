@@ -123,3 +123,49 @@ NCR Riot Control|wasteland
 Irradiated Heavy Trooper|wasteland
 NCR Sniper|wasteland
 Ghoul Trooper|wasteland
+# --- Brotherhood of Steel ---
+Brotherhood of Steel Paladin|wasteland
+Brotherhood Outcast|wasteland
+Brotherhood of Steel Initiate|wasteland
+Brotherhood of Steel Knight|wasteland
+Brotherhood of Steel Scribe|wasteland
+Brotherhood Scribe|wasteland
+Brotherhood Scout|wasteland
+# --- Enclave ---
+Enclave Soldier|wasteland
+Enclave Officer|wasteland
+Enclave Scientist|wasteland
+Enclave Hellfire Trooper|wasteland
+Enclave Doctor|wasteland
+# --- Capital Wasteland (FO3) ---
+Raider|wasteland
+Talon Company Merc|wasteland
+Megaton Settler|wasteland
+Tenpenny Resident|wasteland
+Regulator|wasteland
+Rivet City Security|wasteland
+Insane Survivor|wasteland
+Security Guard|wasteland
+Tenpenny Tower Resident|wasteland
+Rock Crick Hunter|wasteland
+Caravan Guard|wasteland
+Child of Atom|wasteland
+Project Purity Scientist|wasteland
+Secretary|wasteland
+Wasteland Settler|wasteland
+Water Caravan Driver|wasteland
+Caravan Trader|wasteland
+Hitman|wasteland
+Scientist|wasteland
+Wasteland Junkie|wasteland
+Wasteland Merchant|wasteland
+Megaton Refugee|wasteland
+# --- The Pitt ---
+Pitt Raider|wasteland
+Pitt Slave|wasteland
+Slave Fighter|wasteland
+Raider Fighter|wasteland
+Slave Guard|wasteland
+# --- Point Lookout ---
+Smuggler|wasteland
+Bandit|wasteland
