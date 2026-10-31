@@ -186,5 +186,18 @@ Slave Fighter|wasteland
 Raider Fighter|wasteland
 Slave Guard|wasteland
 # --- Point Lookout ---
+Tribal|tribal
 Smuggler|wasteland
 Bandit|wasteland
+# --- Honest Hearts ---
+Sorrows Tribal|tribal
+White Legs Pain-Maker|tribal
+White Legs Storm-Drummer|tribal
+White Legs Bone-Breaker|tribal
+Dead Horse Warrior|tribal
+Dead Horse Disciple of Canaan|tribal
+Dead Horse Stalker|tribal
+Dead Horse Tribal|tribal
+White Legs Light-Bringer|tribal
+White Legs Tribal|tribal
+Captive Sorrows Tribal|tribal
