@@ -60,4 +60,4 @@ Decision: the rules file maps **generic base name → pool** (`Powder Ganger|was
 
 ## Known limits
 - Duplicate re-roll depends on scan order and on which actors are loaded. An actor that needed a re-roll can get a different name after a reload. Actors without a collision keep their name.
-- Not verified: whether `ReadStringFromFile` strips a trailing CR. Tested files were LF; CRLF files (Windows Notepad) would break pool names if CR is kept. Test with the next deploy.
+- `ReadStringFromFile` strips a trailing CR: CRLF data files work (engine run 2, 205 rules, 67 actors named).
