@@ -32,8 +32,8 @@ begin Function {}
 	rPlayer.AuxVarSetRef "*NotM:Cell" (rPlayer.GetParentCell)
 	rPlayer.AuxVarSetFlt "*NotM:Timer" 0
 	Call rScan
-	; Flags 9 = gameplay only (1) + removed on load and main menu (8), so reloads never stack callbacks.
 	SetOnMenuOpenEventHandler (CompileScript "NamesOfTheMojave/DialogName.txt") 1 1009
+	; Flags 9 = gameplay only (1) + removed on load and main menu (8), so reloads never stack callbacks.
 	let rTick := CompileScript "NamesOfTheMojave/Tick.txt"
 	SetGameMainLoopCallback rTick 1 30 9
 end
