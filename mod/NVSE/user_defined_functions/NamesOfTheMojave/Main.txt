@@ -1,0 +1,16 @@
+; Entry point. Creates the playthrough seed if missing, then names nearby actors.
+; Seed: private permanent aux var on the player, saved in the JIP co-save.
+ref rPlayer
+ref rScan
+float fSeed
+
+begin Function {}
+	let rPlayer := GetFormFromMod "FalloutNV.esm" "000014"
+	let fSeed := rPlayer.AuxVarGetFlt "NotMSeed"
+	if fSeed == 0
+		let fSeed := floor (Rand 1 1000000)
+		rPlayer.AuxVarSetFlt "NotMSeed" fSeed
+	endif
+	let rScan := CompileScript "NamesOfTheMojave/Scan.txt"
+	Call rScan
+end

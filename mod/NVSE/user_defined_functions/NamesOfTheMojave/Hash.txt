@@ -1,0 +1,19 @@
+; Deterministic pick: returns an index in [0, fSize) from ref index, seed and salt.
+; Two Park-Miller (minstd) steps. Products stay below 2^53, exact in double precision.
+float fIdx
+float fSeed
+float fSalt
+float fSize
+float fX
+int iOut
+
+begin Function {fIdx, fSeed, fSalt, fSize}
+	let fX := fIdx * 31 + fSeed + fSalt * 7919 + 1
+	let fX := fX - floor (fX / 2147483647) * 2147483647
+	let fX := fX * 48271
+	let fX := fX - floor (fX / 2147483647) * 2147483647
+	let fX := fX * 48271
+	let fX := fX - floor (fX / 2147483647) * 2147483647
+	let iOut := fX - floor (fX / fSize) * fSize
+	SetFunctionValue iOut
+end
