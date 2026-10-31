@@ -1,19 +1,16 @@
 ; Deterministic pick: returns an index in [0, fSize) from ref index, seed and salt.
-; Two Park-Miller (minstd) steps. Products stay below 2^53, exact in double precision.
+; Operators only, no commands: command arguments are 32-bit floats and lose precision above 2^24.
+; % converts to integer, so every value stays below 2^31 (max about 1.2e9).
+; Two residues of the ref index (65521, 9973) keep refs up to 6.5e8 apart. Then two LCG steps mod 65521.
 float fIdx
 float fSeed
 float fSalt
 float fSize
-float fX
-int iOut
+int iX
 
 begin Function {fIdx, fSeed, fSalt, fSize}
-	let fX := (fIdx * 31) + fSeed + (fSalt * 7919) + 1
-	let fX := fX - ((floor (fX / 2147483647)) * 2147483647)
-	let fX := fX * 48271
-	let fX := fX - ((floor (fX / 2147483647)) * 2147483647)
-	let fX := fX * 48271
-	let fX := fX - ((floor (fX / 2147483647)) * 2147483647)
-	let iOut := fX - ((floor (fX / fSize)) * fSize)
-	SetFunctionValue iOut
+	let iX := ((fIdx % 65521) * 251 + (fIdx % 9973) * 31 + fSeed + fSalt * 7919) % 65521
+	let iX := (iX * 17364 + 12345) % 65521
+	let iX := (iX * 17364 + 12345) % 65521
+	SetFunctionValue (iX % fSize)
 end
