@@ -96,7 +96,7 @@ begin Function {}
 					let aPools := sv_Split (sPool) ","
 					let iPart := 0
 					while iPart < (ar_Size aPools)
-						if eval (ar_Find aPools[iPart] aOld) == ar_BadNumericIndex
+						if eval (ar_Find (aPools[iPart]) aOld) == ar_BadNumericIndex
 							if eval (sv_Length sSpec) > 0
 								let sSpec := sSpec + "," + aPools[iPart]
 							else
