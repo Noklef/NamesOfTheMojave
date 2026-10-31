@@ -1,0 +1,37 @@
+; Returns a name for an actor from a loaded pool: first name, plus a surname if the pool has any.
+; Same actor, seed and attempt always give the same name. A higher iAttempt re-rolls.
+ref rActor
+string_var sPool
+int iAttempt
+ref rPlayer
+ref rHash
+string_var sVar
+string_var sName
+string_var sLast
+float fSeed
+int iIdx
+int iSize
+int iPick
+
+begin Function {rActor, sPool, iAttempt}
+	let rPlayer := GetFormFromMod "FalloutNV.esm" "000014"
+	let fSeed := rPlayer.AuxVarGetFlt "NotMSeed"
+	let rHash := rPlayer.AuxVarGetRef "*NotM:Hash"
+	let iIdx := GetLocalRefIndex rActor
+	let sVar := "*NotM:" + sPool + ":male"
+	let iSize := rPlayer.AuxVarSize (sVar)
+	if iSize == 0
+		SetFunctionValue ""
+		return
+	endif
+	let iPick := Call rHash iIdx fSeed (iAttempt * 2 + 1) iSize
+	let sName := rPlayer.AuxVarGetStr (sVar) iPick
+	let sVar := "*NotM:" + sPool + ":surname"
+	let iSize := rPlayer.AuxVarSize (sVar)
+	if iSize > 0
+		let iPick := Call rHash iIdx fSeed (iAttempt * 2 + 2) iSize
+		let sLast := rPlayer.AuxVarGetStr (sVar) iPick
+		let sName := sName + " " + sLast
+	endif
+	SetFunctionValue sName
+end

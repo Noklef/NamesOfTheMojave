@@ -1,0 +1,26 @@
+; Reads a name file into a temp aux var string array on the player. Returns the entry count.
+; sPath is relative to the game folder. Lines starting with # are skipped. The first empty line ends the list.
+string_var sPath
+string_var sVar
+ref rPlayer
+string_var sLine
+int iLine
+int iSize
+
+begin Function {sPath, sVar}
+	let rPlayer := GetFormFromMod "FalloutNV.esm" "000014"
+	rPlayer.AuxVarErase (sVar)
+	let iLine := 1
+	while 1
+		let sLine := ReadStringFromFile (sPath) iLine 1
+		if eval sv_Length sLine == 0
+			break
+		endif
+		if eval sv_Find "#" sLine != 0
+			rPlayer.AuxVarSetStr (sVar) (sLine) -1
+		endif
+		let iLine += 1
+	loop
+	let iSize := rPlayer.AuxVarSize (sVar)
+	SetFunctionValue iSize
+end

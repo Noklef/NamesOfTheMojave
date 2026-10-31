@@ -1,38 +1,28 @@
 ; Names generic actors near the player.
-; Vertical slice: Powder Gangers only, hardcoded pool.
+; Vertical slice: Powder Gangers only, wasteland pool.
 ref rPlayer
 ref rActor
-ref rHash
-array_var aFirst
-array_var aLast
-float fSeed
-int iIdx
-int iFirst
-int iLast
+ref rPick
 int iCount
 string_var sBase
 string_var sName
 
 begin Function {}
 	let rPlayer := GetFormFromMod "FalloutNV.esm" "000014"
-	let fSeed := rPlayer.AuxVarGetFlt "NotMSeed"
-	let rHash := CompileScript "NamesOfTheMojave/Hash.txt"
-	let aFirst := ar_List "Mike", "Joe", "Sam", "Hank", "Earl", "Cody", "Wade", "Clint"
-	let aLast := ar_List "Dawson", "Reyes", "Hollis", "Pratt", "Mercer", "Tate", "Garza", "Kowalski"
+	let rPick := rPlayer.AuxVarGetRef "*NotM:Pick"
 	let rActor := GetFirstRef 200 1
 	while rActor
 		if rActor != rPlayer
 			let sBase := rActor.GetName
 			if eval sBase == "Powder Ganger"
-				let iIdx := GetLocalRefIndex rActor
-				let iFirst := Call rHash iIdx fSeed 1 (ar_Size aFirst)
-				let iLast := Call rHash iIdx fSeed 2 (ar_Size aLast)
-				let sName := aFirst[iFirst] + " " + aLast[iLast]
-				rActor.SetRefName (sName)
-				let iCount += 1
+				let sName := Call rPick rActor "wasteland" 0
+				if eval sv_Length sName > 0
+					rActor.SetRefName (sName)
+					let iCount += 1
+				endif
 			endif
 		endif
 		let rActor := GetNextRef
 	loop
-	PrintToConsole "[NotM] named %g actors (seed %.0f)" iCount fSeed
+	PrintToConsole "[NotM] named %g actors" iCount
 end
