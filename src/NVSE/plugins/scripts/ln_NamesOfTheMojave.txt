@@ -1,9 +1,9 @@
 ; Names of the Mojave loader. Runs on game load and new game.
-; Compiles Main.txt and calls it 3 s later: actors are loaded and console output is not lost.
+; Compiles Main.gek and calls it 3 s later: actors are loaded and console output is not lost.
 ref rMain
 let rMain := CompileScript "NamesOfTheMojave/Main.gek"
 if rMain
 	CallAfter 3 rMain
 else
-	PrintToConsole "[NotM] ERROR Main.txt did not compile, see nvse.log"
+	PrintToConsole "[NotM] ERROR Main.gek did not compile, see nvse.log"
 endif
