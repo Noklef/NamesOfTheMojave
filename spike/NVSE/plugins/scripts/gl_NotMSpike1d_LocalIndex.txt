@@ -4,12 +4,13 @@ ref rActor
 int iLocal
 int iCount
 
+PrintToConsole "NotM Spike1d: START"
 let rPlayer := GetFormFromMod "FalloutNV.esm" "000014"
 let rActor := GetFirstRef 200 1
 while rActor
 	if rActor != rPlayer
 		let iLocal := GetLocalRefIndex rActor
-		PrintToConsole "NotM Spike1d: ref %i local %g" rActor iLocal
+		PrintToConsole "NotM Spike1d: INFO ref %i local %g" rActor iLocal
 		let iCount += 1
 	endif
 	if iCount >= 8
@@ -17,3 +18,4 @@ while rActor
 	endif
 	let rActor := GetNextRef
 loop
+PrintToConsole "NotM Spike1d: END"

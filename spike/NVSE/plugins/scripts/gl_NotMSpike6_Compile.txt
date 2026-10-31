@@ -3,24 +3,30 @@
 ref rUDF
 int iOut
 
+PrintToConsole "NotM Spike6: START"
 let rUDF := CompileScript "NamesOfTheMojave/spike_udf.txt"
 if rUDF
-	PrintToConsole "NotM Spike6: compiled via path A (scripts-relative)"
+	PrintToConsole "NotM Spike6: INFO compiled via path A (scripts-relative)"
 else
 	let rUDF := CompileScript "NVSE/plugins/scripts/NamesOfTheMojave/spike_udf.txt"
 	if rUDF
-		PrintToConsole "NotM Spike6: compiled via path B (Data-relative)"
+		PrintToConsole "NotM Spike6: INFO compiled via path B (Data-relative)"
 	else
 		let rUDF := CompileScript "Data/NVSE/plugins/scripts/NamesOfTheMojave/spike_udf.txt"
 		if rUDF
-			PrintToConsole "NotM Spike6: compiled via path C (game-relative)"
+			PrintToConsole "NotM Spike6: INFO compiled via path C (game-relative)"
 		endif
 	endif
 endif
 
 if rUDF
 	let iOut := Call rUDF 21
-	PrintToConsole "NotM Spike6: call returned %g (expect 42)" iOut
+	if iOut == 42
+		PrintToConsole "NotM Spike6: PASS call returned 42"
+	else
+		PrintToConsole "NotM Spike6: FAIL call returned %g (expect 42)" iOut
+	endif
 else
 	PrintToConsole "NotM Spike6: FAIL no path compiled"
 endif
+PrintToConsole "NotM Spike6: END"

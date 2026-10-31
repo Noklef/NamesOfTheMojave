@@ -1,10 +1,16 @@
 ; Spike 2: SetRefName with literal names, alternating Alpha/Beta.
-; PASS if actors in-game show different names (not all the same).
+; Self-check per actor: ref name (LNGetName) changed, base name (GetName) did not.
+; Visual check still needed: crosshair / VATS / dialogue show the new names.
 ref rPlayer
 ref rActor
+string_var sRef
+string_var sBase
 int iCount
 int iMod
+int iOK
+int iPass
 
+PrintToConsole "NotM Spike2: START"
 let rPlayer := GetFormFromMod "FalloutNV.esm" "000014"
 let rActor := GetFirstRef 200 1
 while rActor
@@ -15,8 +21,23 @@ while rActor
 		else
 			rActor.SetRefName "NotM Beta"
 		endif
+		let sRef := rActor.LNGetName
+		let sBase := rActor.GetName
+		let iOK := (sRef == "NotM Alpha" || sRef == "NotM Beta") && sBase != sRef
+		if iOK
+			let iPass += 1
+		else
+			PrintToConsole "NotM Spike2: INFO ref %i refname [%z] basename [%z]" rActor sRef sBase
+		endif
 		let iCount += 1
 	endif
 	let rActor := GetNextRef
 loop
-PrintToConsole "NotM Spike2: renamed %g actors Alpha/Beta" iCount
+if iCount == 0
+	PrintToConsole "NotM Spike2: FAIL no actors found"
+elseif iPass == iCount
+	PrintToConsole "NotM Spike2: PASS %g of %g actors renamed per-ref, base names unchanged" iPass iCount
+else
+	PrintToConsole "NotM Spike2: FAIL only %g of %g actors renamed per-ref" iPass iCount
+endif
+PrintToConsole "NotM Spike2: END"

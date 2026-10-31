@@ -1,15 +1,16 @@
-; Spike 1c: GetLeveledActorBase on nearby actors (real NPC base for leveled spawns?).
+; Spike 1c: GetLeveledActorBase on nearby actors (compare with Spike 1 gbo).
 ref rPlayer
 ref rActor
 ref rBase
 int iCount
 
+PrintToConsole "NotM Spike1c: START"
 let rPlayer := GetFormFromMod "FalloutNV.esm" "000014"
 let rActor := GetFirstRef 200 1
 while rActor
 	if rActor != rPlayer
 		let rBase := rActor.GetLeveledActorBase
-		PrintToConsole "NotM Spike1c: ref %i lab %i name %n" rActor rBase rBase
+		PrintToConsole "NotM Spike1c: INFO ref %i lab %i name %n" rActor rBase rBase
 		let iCount += 1
 	endif
 	if iCount >= 8
@@ -17,3 +18,4 @@ while rActor
 	endif
 	let rActor := GetNextRef
 loop
+PrintToConsole "NotM Spike1c: END"

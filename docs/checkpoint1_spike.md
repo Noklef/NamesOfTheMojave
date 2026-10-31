@@ -17,23 +17,33 @@ One game session, about 10 minutes. Tests which engine functions work from ESP-l
 
 ## Send back
 - `NotM_spike.txt` — in the game folder or the MO2 `overwrite` folder. If it is missing or empty: after step 3, open the console, scroll through the `NotM` lines and screenshot them.
-- `jip_ln_nvse.log` — in the game folder.
+- `jip_ln_nvse.log` and `nvse.log` — in the game folder (`nvse.log` lists loaded plugins and versions).
 - Short notes: names seen in crosshair, VATS, dialogue.
+
+## Reading the output
+Every test prints `NotM Spike<n>: START` and `END`, plus:
+- `PASS` / `FAIL` — the script checked its own result.
+- `INFO` — raw values for analysis.
+
+| Seen | Meaning |
+|---|---|
+| No lines for a test | Compile failure — `jip_ln_nvse.log` shows why |
+| `START` without `END` | Runtime abort partway through |
+| `START` … `END` with `PASS` | Works |
 
 ## Expected results
 | Test | PASS looks like |
 |---|---|
-| 0 Runner | `NotM Spike0: PASS runner executed` |
-| 1 Walk | Lines with ref, base (gbo), name, female flag |
-| 1b–1e | Base form lines, numeric ref index, ID string (informational) |
-| 2 RefName | In-game: NPCs show **different** names (`NotM Alpha` / `NotM Beta`), not all the same |
-| 2b RefNameVar | One NPC shows `NotM Dynamic 7`; console prints names read back |
-| 3 Callback | `tick 1`, `tick 2`, `tick 3` about 2 s apart, then stops |
-| 4 Seed | First load: `CREATED`. After save + reload: `FOUND` with the same number |
-| 5 Files | INI value 42; lines show Mike, Sarah, Joe |
-| 6 Compile | `compiled via path ...` and `call returned 42` |
-
-A missing line for a test means that file failed to compile. `jip_ln_nvse.log` shows why.
+| 00 Versions | `INFO` lines with xNVSE / JIP / JohnnyGuitar / ShowOff versions |
+| 0 Runner | `PASS runner executed` |
+| 1 Walk | `PASS n actors found` + `INFO` lines |
+| 1b–1e | `INFO` lines only (base forms, ref index, ID string) |
+| 2 RefName | `PASS n of n actors renamed per-ref` **and** in-game NPCs show `NotM Alpha` / `NotM Beta` |
+| 2b RefNameVar | `PASS ... reads [NotM Dynamic 7]` **and** one NPC shows that name in-game |
+| 3 Callback | `INFO tick 1`, `INFO tick 2`, `PASS tick 3 reached` about 2 s apart |
+| 4 Seed | First load: `INFO ... CREATED`. After save + reload: `PASS ... FOUND` |
+| 5 Files | `PASS INI value 42` and `PASS file read ...` |
+| 6 Compile | `PASS call returned 42` |
 
 ## Cleanup
 Run `.\deploy.ps1` (without `-Spike`) to remove the spike files. Renames are session-only. The spike seed values stay in the save co-save; they are tiny and harmless.

@@ -1,18 +1,37 @@
 ; Spike 5: read INI value and a plain-text name file line by line.
-; Expect INI value 42 and names Mike, Sarah, Joe. Shows trailing chars (len).
-; Line base: line 1 = Mike means 1-based; line 1 = Sarah means 0-based.
+; Expects INI value 42 and names Mike, Sarah, Joe. INFO lines show trailing chars (len).
 float fIni
 string_var sLine
 int iLine
 int iLen
+int iOK
 
+PrintToConsole "NotM Spike5: START"
 let fIni := GetINIFloat "Spike:Value" "NamesOfTheMojave_Spike.ini"
-PrintToConsole "NotM Spike5: INI value %g (expect 42)" fIni
+if fIni == 42
+	PrintToConsole "NotM Spike5: PASS INI value 42"
+else
+	PrintToConsole "NotM Spike5: FAIL INI value %g (expect 42)" fIni
+endif
 
 let iLine := 1
 while iLine <= 4
 	let sLine := ReadStringFromFile "Data/Config/NamesOfTheMojave/spike_names.txt" iLine 1
 	let iLen := sv_Length sLine
-	PrintToConsole "NotM Spike5: line %g = [%z] len %g" iLine sLine iLen
+	PrintToConsole "NotM Spike5: INFO line %g = [%z] len %g" iLine sLine iLen
 	let iLine += 1
 loop
+
+let sLine := ReadStringFromFile "Data/Config/NamesOfTheMojave/spike_names.txt" 1 1
+let iOK := sLine == "Mike"
+if iOK
+	PrintToConsole "NotM Spike5: PASS file read, 1-based lines, no trailing chars"
+else
+	let iOK := sLine == "Sarah"
+	if iOK
+		PrintToConsole "NotM Spike5: PASS file read, 0-based lines, no trailing chars"
+	else
+		PrintToConsole "NotM Spike5: FAIL line 1 is [%z] (see INFO len for trailing chars)" sLine
+	endif
+endif
+PrintToConsole "NotM Spike5: END"

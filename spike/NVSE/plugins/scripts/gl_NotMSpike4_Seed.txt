@@ -1,25 +1,27 @@
 ; Spike 4: persistent JIP aux var on player (playthrough seed).
-; PASS if after save + reload it prints FOUND with the same value.
+; First load: INFO CREATED. After save + reload: PASS FOUND.
 ; Tests a private name and a public ("_") name.
 ref rPlayer
 float fSeed
 
+PrintToConsole "NotM Spike4: START"
 let rPlayer := GetFormFromMod "FalloutNV.esm" "000014"
 
 let fSeed := rPlayer.AuxVarGetFlt "NotMSpikeSeed"
 if fSeed == 0
 	let fSeed := Rand 1 1000000
 	rPlayer.AuxVarSetFlt "NotMSpikeSeed" fSeed
-	PrintToConsole "NotM Spike4: private seed CREATED %.0f" fSeed
+	PrintToConsole "NotM Spike4: INFO private seed CREATED %.0f (save + reload to test)" fSeed
 else
-	PrintToConsole "NotM Spike4: private seed FOUND %.0f" fSeed
+	PrintToConsole "NotM Spike4: PASS private seed FOUND %.0f" fSeed
 endif
 
 let fSeed := rPlayer.AuxVarGetFlt "_NotMSpikeSeed"
 if fSeed == 0
 	let fSeed := Rand 1 1000000
 	rPlayer.AuxVarSetFlt "_NotMSpikeSeed" fSeed
-	PrintToConsole "NotM Spike4: public seed CREATED %.0f" fSeed
+	PrintToConsole "NotM Spike4: INFO public seed CREATED %.0f (save + reload to test)" fSeed
 else
-	PrintToConsole "NotM Spike4: public seed FOUND %.0f" fSeed
+	PrintToConsole "NotM Spike4: PASS public seed FOUND %.0f" fSeed
 endif
+PrintToConsole "NotM Spike4: END"
