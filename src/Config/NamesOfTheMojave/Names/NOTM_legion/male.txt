@@ -1,4 +1,4 @@
-# Legion names: Latin single names. Lore: Crassus, Drusus, Licinius, Scribonius (docs/lore_names.md); the rest are drafted Roman names.
+# Legion names: Latin single names. Lore: Crassus, Drusus, Licinius, Scribonius (fallout.wiki); the rest are drafted Roman names.
 # One name per line. Lines starting with # are comments. Do not leave empty lines: the first empty line ends the list. No female or surname list: the Legion uses single male names.
 Aemilius
 Agrippa

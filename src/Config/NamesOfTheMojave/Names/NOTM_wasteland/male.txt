@@ -1,4 +1,4 @@
-# Wasteland male first names. Lore names from docs/lore_names.md (FNV mentioned-only characters).
+# Wasteland male first names. Lore names (fallout.wiki: FNV mentioned-only characters).
 # One name per line. Lines starting with # are comments. Do not leave empty lines: the first empty line ends the list.
 Amin
 Ben

@@ -1,4 +1,4 @@
-# Wasteland male full names, exact lore names from docs/lore_names.md (FNV mentioned-only characters).
+# Wasteland male full names, exact lore names (fallout.wiki: FNV mentioned-only characters).
 # Tried before first name + surname. One name per line. Lines starting with # are comments. Do not leave empty lines: the first empty line ends the list.
 Amin Samaha
 Billy Montalvo
