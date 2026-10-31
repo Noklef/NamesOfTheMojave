@@ -1,5 +1,6 @@
 ; Loads every *.txt file in Plugins/ and Rules/, and the name pools that the rules use.
 ; Add-ons ship their own files in these folders. Rule files load in name order, so a later file wins for the same name.
+; Rule forms: Name|pool sets or replaces a rule. Name|- removes it.
 ; Prints a WARN line when a folder has no entries, or a pool has no male or male_full names.
 ; Results are temp aux vars on the player:
 ;   *NotM:M:<mod index> = 1 for each allowed, loaded plugin
@@ -62,7 +63,11 @@ begin Function {}
 		while iLine < iCount
 			let sLine := rPlayer.AuxVarGetStr "*NotM:Rules" iLine
 			let aParts := sv_Split (sLine) "|"
-			if eval (ar_Size aParts) == 2
+			if eval (ar_Size aParts) != 2
+				PrintToConsole "[NotM] WARN bad rule line [%z] in %z" sLine sFile
+			elseif eval aParts[1] == "-"
+				rPlayer.AuxVarErase ("*NotM:R:" + aParts[0])
+			else
 				let sPool := aParts[1]
 				rPlayer.AuxVarSetStr ("*NotM:R:" + aParts[0]) (sPool)
 				if eval (rPlayer.AuxVarGetFlt ("*NotM:Loaded:" + sPool)) == 0
@@ -76,8 +81,6 @@ begin Function {}
 					Call rLoad (sDir + "Names/" + sPool + "/surname.txt") ("*NotM:" + sPool + ":surname")
 					rPlayer.AuxVarSetFlt ("*NotM:Loaded:" + sPool) 1
 				endif
-			else
-				PrintToConsole "[NotM] WARN bad rule line [%z] in %z" sLine sFile
 			endif
 			let iLine += 1
 		loop
