@@ -1,5 +1,7 @@
-; Returns a name for an actor from a loaded pool: first name, plus a surname if the pool has any.
-; Female actors use the pool's female list; if it is empty, the male list.
+; Returns a name for an actor from a loaded pool.
+; Gender: female lists if the actor is female and the pool has female names (female or female_full), else male lists.
+; Attempts 0-3 pick an exact full name (<gender>_full). Later attempts, or a pool without full names,
+; use a first name plus a surname if the pool has any. A pool without first names always uses full names.
 ; Same actor, seed and attempt always give the same name. A higher iAttempt re-rolls.
 ref rActor
 string_var sPool
@@ -11,6 +13,7 @@ string_var sName
 string_var sLast
 float fSeed
 int iIdx
+int iFull
 int iSize
 int iPick
 
@@ -21,11 +24,18 @@ begin Function {rActor, sPool, iAttempt}
 	let iIdx := GetLocalRefIndex rActor
 	let sVar := "*NotM:" + sPool + ":male"
 	if eval rActor.GetIsSex Female
-		if eval (rPlayer.AuxVarSize ("*NotM:" + sPool + ":female")) > 0
+		if eval ((rPlayer.AuxVarSize ("*NotM:" + sPool + ":female")) + (rPlayer.AuxVarSize ("*NotM:" + sPool + ":female_full"))) > 0
 			let sVar := "*NotM:" + sPool + ":female"
 		endif
 	endif
+	let iFull := rPlayer.AuxVarSize (sVar + "_full")
 	let iSize := rPlayer.AuxVarSize (sVar)
+	if eval iFull > 0 && (iAttempt < 4 || iSize == 0)
+		let iPick := Call rHash iIdx fSeed (iAttempt * 2 + 1) iFull
+		let sName := rPlayer.AuxVarGetStr (sVar + "_full") iPick
+		SetFunctionValue sName
+		return
+	endif
 	if iSize == 0
 		SetFunctionValue ""
 		return
