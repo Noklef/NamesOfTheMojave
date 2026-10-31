@@ -1,0 +1,19 @@
+; Spike 1b: GetBaseForm on nearby actors (compare with Spike 1 gbo).
+ref rPlayer
+ref rActor
+ref rBase
+int iCount
+
+let rPlayer := GetFormFromMod "FalloutNV.esm" "000014"
+let rActor := GetFirstRef 200 1
+while rActor
+	if rActor != rPlayer
+		let rBase := rActor.GetBaseForm
+		PrintToConsole "NotM Spike1b: ref %i gbf %i" rActor rBase
+		let iCount += 1
+	endif
+	if iCount >= 8
+		break
+	endif
+	let rActor := GetNextRef
+loop

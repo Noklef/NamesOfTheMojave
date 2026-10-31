@@ -1,0 +1,25 @@
+; Spike 2b: SetRefName from a string variable; read back with LNGetName.
+; Renames only the first actor to "NotM Dynamic 7". Prints names of first 3 actors.
+ref rPlayer
+ref rActor
+string_var sName
+string_var sRead
+int iCount
+
+let rPlayer := GetFormFromMod "FalloutNV.esm" "000014"
+let sName := sv_Construct "NotM Dynamic %g" 7
+let rActor := GetFirstRef 200 1
+while rActor
+	if rActor != rPlayer
+		if iCount == 0
+			rActor.SetRefName (sName)
+		endif
+		let sRead := rActor.LNGetName
+		PrintToConsole "NotM Spike2b: ref %i LNGetName [%z]" rActor sRead
+		let iCount += 1
+	endif
+	if iCount >= 3
+		break
+	endif
+	let rActor := GetNextRef
+loop

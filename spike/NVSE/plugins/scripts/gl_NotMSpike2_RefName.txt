@@ -1,0 +1,20 @@
+; Spike 2: SetRefName with literal names, alternating Alpha/Beta.
+; PASS if actors in-game show different names (not all the same).
+ref rPlayer
+ref rActor
+int iCount
+
+let rPlayer := GetFormFromMod "FalloutNV.esm" "000014"
+let rActor := GetFirstRef 200 1
+while rActor
+	if rActor != rPlayer
+		if iCount % 2 == 0
+			rActor.SetRefName "NotM Alpha"
+		else
+			rActor.SetRefName "NotM Beta"
+		endif
+		let iCount += 1
+	endif
+	let rActor := GetNextRef
+loop
+PrintToConsole "NotM Spike2: renamed %g actors Alpha/Beta" iCount

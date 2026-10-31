@@ -1,0 +1,2 @@
+; Spike 0: Script Runner executes text scripts on game load.
+PrintToConsole "NotM Spike0: PASS runner executed"

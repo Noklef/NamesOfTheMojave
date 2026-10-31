@@ -1,0 +1,16 @@
+; Spike 5: read INI value and a plain-text name file line by line.
+; Expect INI value 42 and names Mike, Sarah, Joe. Shows line base (0 or 1) and trailing chars.
+float fIni
+string_var sLine
+int iLine
+int iLen
+
+let fIni := GetINIFloat "Spike:Value" "NamesOfTheMojave_Spike.ini"
+PrintToConsole "NotM Spike5: INI value %g (expect 42)" fIni
+
+while iLine <= 4
+	let sLine := ReadStringFromFile "Data/Config/NamesOfTheMojave/spike_names.txt" iLine 1
+	let iLen := sv_Length sLine
+	PrintToConsole "NotM Spike5: line %g = [%z] len %g" iLine sLine iLen
+	let iLine += 1
+loop

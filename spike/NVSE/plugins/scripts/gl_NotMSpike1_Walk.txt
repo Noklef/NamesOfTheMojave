@@ -1,0 +1,23 @@
+; Spike 1: walk nearby actors; print ref, GetBaseObject, name, sex.
+; FF-prefixed base = temporary leveled clone.
+ref rPlayer
+ref rActor
+ref rBase
+int iFem
+int iCount
+
+let rPlayer := GetFormFromMod "FalloutNV.esm" "000014"
+let rActor := GetFirstRef 200 1
+while rActor
+	if rActor != rPlayer
+		let rBase := rActor.GetBaseObject
+		let iFem := rActor.GetIsSex Female
+		PrintToConsole "NotM Spike1: ref %i gbo %i name %n female %g" rActor rBase rActor iFem
+		let iCount += 1
+	endif
+	if iCount >= 8
+		break
+	endif
+	let rActor := GetNextRef
+loop
+PrintToConsole "NotM Spike1: done, %g actors listed" iCount

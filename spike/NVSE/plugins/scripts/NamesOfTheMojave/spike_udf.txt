@@ -1,0 +1,9 @@
+scn NotMSpikeUDF
+
+int iIn
+int iOut
+
+Begin Function {iIn}
+	let iOut := iIn * 2
+	SetFunctionValue iOut
+End
