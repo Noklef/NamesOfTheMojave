@@ -1,0 +1,4 @@
+# Names of the Mojave - A World of Pain Revised add-on: generic names from A World of Pain Revised that the core rules do not cover.
+# Not named: characters with their own name (Craze, Frost, Ranger Guerra, ...), names used only by corpses.
+Powder Ganger Outcast|NOTM_wasteland
+Ghoul Raider|NOTM_ghoul
