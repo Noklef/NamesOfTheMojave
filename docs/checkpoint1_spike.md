@@ -9,7 +9,7 @@ One game session, about 10 minutes. Tests which engine functions work from ESP-l
 ## Run
 1. Start the game. At the main menu open the console (`~`) and type `scof "NotM_spike.txt"` (quotes required: without them the dot makes the console parse it as `reference.function`). Close the console.
 2. Load a save **outdoors, near 3 or more generic NPCs** (e.g. NCR troopers at Mojave Outpost or Camp McCarran, or a raider group).
-3. Close the console and wait about **10 seconds** in normal gameplay.
+3. Close the console and wait about **15 seconds** in normal gameplay.
 4. Point the crosshair at several nearby NPCs. Note the names shown.
 5. If possible: enter VATS on one, or talk to a friendly one. Note the name shown there.
 6. **Save** to a new slot, then **load that save**.

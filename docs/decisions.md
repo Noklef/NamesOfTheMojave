@@ -18,4 +18,9 @@
 - Settings: `Data\Config\NamesOfTheMojave.ini` via JIP `GetINIFloat` (spike test 5).
 
 ## Spike results
-Pending Checkpoint 1.
+Run 1 (2026-10-31): NVSE 6.49, JIP LN 57.30, JohnnyGuitar 5.28, ShowOff present.
+- gl_ scripts run: both seed aux vars (private and `_` public) are in the co-save.
+- No console output captured. Cause: gl_ scripts run during the load screen and prints there are lost. Fix: wrap each test in `CallAfter 3`.
+- Spike2 compile error: `iMod` is not a valid variable name (reserved). Renamed to `iParity`.
+- Spike3 compile error: `;` inside a string literal starts a comment. Do not put `;` in strings.
+- Run 2: pending.
