@@ -9,7 +9,8 @@
 ## Script Runner constraints (research)
 - Prefixes: `gr_` start, `gl_` load, `gn_` new game, `ln_` load + new game, `gs_` save, `gx_` exit, `xm_` exit to menu.
 - Max 16384 bytes per text script file.
-- Lambdas max 512 characters → main logic needs a real UDF (spike test 6: `CompileScript`).
+- Expressions in parentheses, including inline lambdas, are capped at 512 characters (confirmed in run 2). Main logic goes in UDF files.
+- `CompileScript` paths are relative to `Data\NVSE\user_defined_functions\` (same as HeatHaze-ESPLess and 3D Grenade Indicator).
 - `$` operator not supported → use `(sVar)` inline expression or `LNGetName`.
 - Editor IDs not resolved without JohnnyGuitar → use `GetFormFromMod`.
 
@@ -20,7 +21,13 @@
 ## Spike results
 Run 1 (2026-10-31): NVSE 6.49, JIP LN 57.30, JohnnyGuitar 5.28, ShowOff present.
 - gl_ scripts run: both seed aux vars (private and `_` public) are in the co-save.
-- No console output captured. Cause: gl_ scripts run during the load screen and prints there are lost. Fix: wrap each test in `CallAfter 3`.
+- No console output captured. Cause: gl_ scripts run during the load screen and prints there are lost. Fix: delay output with `CallAfter 3`.
 - Spike2 compile error: `iMod` is not a valid variable name (reserved). Renamed to `iParity`.
 - Spike3 compile error: `;` inside a string literal starts a comment. Do not put `;` in strings.
-- Run 2: pending.
+
+Run 2:
+- `CallAfter 3 (begin function {} ... end)` wrapper exceeded the 512-char expression cap in 8 of 12 tests. Those did not compile, Spike2 and 2b among them, so no NPC was renamed.
+- Short tests 0, 1b–1e ran and printed after load, so the delay fixes the lost output.
+- 1b: leveled actors get a runtime base (`67…` form, mod index of the save); placed refs keep the real base.
+- Fix: tests moved to UDF files in `user_defined_functions/NamesOfTheMojave/Spike/`. One `gl_` script compiles `RunAll.txt` and calls it with `CallAfter 3`.
+- Run 3: pending.
