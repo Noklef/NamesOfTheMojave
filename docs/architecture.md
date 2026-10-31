@@ -129,4 +129,4 @@ These changes only add to the format, so each can ship in any v1.x release.
 
 - **Custom event** (`NotM:OnNamed`). Add it when another mod author asks for it. Until then, `NotMSkip` covers the known need.
 - **Pick-order setting.** You requested this for the future: full names first, or one draw from all lists. Make it an INI key first.
-- **MCM.** An MCM needs an ESP, and the mod is ESP-less. If we add one, ship it as a separate optional plugin, so the main mod stays ESP-less.
+- **MCM.** Done before v1.0: MCM Extender reads a JSON page, so no ESP is needed. See docs/decisions.md, "MCM".
