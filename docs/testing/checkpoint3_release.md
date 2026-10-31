@@ -4,7 +4,7 @@ One game session, about 30 minutes. It tests the add-on format (Phase 1), the MC
 
 ## Install (MO2)
 1. Run `.\deploy.ps1` from the repo root.
-2. In MO2, create an empty mod named `NotM Test Addon`. Copy the `Config` folder from `docs/testing/test_addon/` into it, and enable the mod. It adds one rules file, `99_Test.txt`:
+2. In MO2, create a **separate** empty mod named `NotM Test Addon` (not inside the Names of the Mojave folder; it acts like a third-party add-on). Copy the `Config` folder from `docs/testing/test_addon/` into it, and enable the mod. It adds one rules file, `99_Test.txt`:
    - `Powder Ganger|NOTM_legion`: override. Powder Gangers get Latin names.
    - `Fiend|-`: disable. Fiends keep the name "Fiend".
    - `NCR Trooper|+NOTM_chinese`: append. Most troopers get wasteland names, and about 1 in 5 gets a Chinese name.
