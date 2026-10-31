@@ -4,7 +4,7 @@ One game session, about 20 minutes. Tests the naming engine with the wasteland p
 Powder Gangers, Prospectors, Wastelanders, Travelers, Squatters, Scavengers.
 
 ## Install (MO2)
-1. Run `.\deploy.ps1` from the repo root (no `-Spike`).
+1. Run `.\deploy.ps1` from the repo root.
 2. In the MO2 mod folder, open `Config\NamesOfTheMojave.ini` and set `Debug=1`.
 
 ## Run
