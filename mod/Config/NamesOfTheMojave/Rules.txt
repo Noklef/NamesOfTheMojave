@@ -1,9 +1,125 @@
 # Generic base name|pool. Actors with this exact in-game name get a name from Names/<pool>/.
 # Names are case-sensitive and must match the game text. Lines starting with # are comments.
 # Do not leave empty lines: the first empty line ends the list.
-Powder Ganger|wasteland
-Prospector|wasteland
+# --- FNV civilians ---
 Wastelander|wasteland
 Traveler|wasteland
 Squatter|wasteland
+Local|wasteland
+New Vegas Citizen|wasteland
+Prospector|wasteland
+North Vegas Resident|wasteland
+Traveling Merchant|wasteland
 Scavenger|wasteland
+Westside Resident|wasteland
+NCR Prospector|wasteland
+Refugee|wasteland
+Caravaneer|wasteland
+Chem Addict|wasteland
+Patient|wasteland
+Primm Resident|wasteland
+Escaped Convict|wasteland
+Wasteland Captive|wasteland
+Hunter|wasteland
+Sharecropper|wasteland
+Quarry Worker|wasteland
+Westside Militia|wasteland
+Novac Settler|wasteland
+Mojave Inhabitant|wasteland
+New Vegas Resident|wasteland
+Underpass Citizen|wasteland
+Westside Citizen|wasteland
+Crazed Chem Addict|wasteland
+Goodsprings Settler|wasteland
+Boulder City Worker|wasteland
+Convict|wasteland
+Junkie|wasteland
+Beggar|wasteland
+Destitute Traveler|wasteland
+Rancher|wasteland
+Man|wasteland
+Vault 34 Dweller|wasteland
+Drunk|wasteland
+Merchant|wasteland
+Missionary|wasteland
+Drifter|wasteland
+Vagrant|wasteland
+Water Beggar|wasteland
+# --- FNV groups and services ---
+Followers Guard|wasteland
+Followers Doctor|wasteland
+Boomer|wasteland
+Boomer Chef|wasteland
+Injured Boomer|wasteland
+Boomer Guard|wasteland
+Crimson Caravan Guard|wasteland
+Crimson Caravan Trader|wasteland
+Gun Runner Guard|wasteland
+Gun Runner Gunsmith|wasteland
+Bodyguard For Hire|wasteland
+Gunderson Hired Hand|wasteland
+Happy Trails Caravan Guard|wasteland
+Guard|wasteland
+Thug|wasteland
+Greaser|wasteland
+Bodyguard|wasteland
+Clinic Guard|wasteland
+Outer Vegas Defender|wasteland
+# --- The Strip and Freeside ---
+Gambler|wasteland
+Gomorrah Prostitute|wasteland
+White Glove|wasteland
+Bartender|wasteland
+Chairman|wasteland
+Tops Promoter|wasteland
+Atomic Wrangler Guard|wasteland
+Card Dealer|wasteland
+Chairman Bodyguard|wasteland
+Vikki And Vance Dealer|wasteland
+Roulette Dealer|wasteland
+Hooker|wasteland
+Rad Pack Dancer|wasteland
+Chairman Greeter|wasteland
+Escort|wasteland
+Gomorrah Dealer|wasteland
+King Groupie|wasteland
+Blackjack Dealer|wasteland
+Casino Guard|wasteland
+Security Officer|wasteland
+White Glove Bouncer|wasteland
+# --- FNV gangs ---
+Fiend|wasteland
+Powder Ganger|wasteland
+Powder Ganger Bodyguard|wasteland
+Viper Gunslinger|wasteland
+Viper Leader|wasteland
+Kings Gang Member|wasteland
+Jackal Gang Member|wasteland
+Jackal Gang Leader|wasteland
+Great Khan|wasteland
+Great Khan Warrior|wasteland
+Omerta Thug|wasteland
+Freeside Thug|wasteland
+Westside Thug|wasteland
+Scorpions Gang Member|wasteland
+Van Graff Thug|wasteland
+Mercenary|wasteland
+NCR Mercenary|wasteland
+Slaver|wasteland
+Slave|wasteland
+# --- NCR ---
+NCR Trooper|wasteland
+NCR Ranger|wasteland
+Engineer|wasteland
+NCR Heavy Trooper|wasteland
+NCR Veteran Ranger|wasteland
+NCR Military Police|wasteland
+NCR Trooper MP|wasteland
+NCR MP|wasteland
+NCR Ranger Veteran|wasteland
+Injured Trooper|wasteland
+NCR Recruit|wasteland
+NCR Riot Control|wasteland
+Irradiated Heavy Trooper|wasteland
+NCR Sniper|wasteland
+Ghoul Trooper|wasteland
