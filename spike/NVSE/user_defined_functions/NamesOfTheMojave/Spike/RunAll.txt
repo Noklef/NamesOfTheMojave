@@ -1,0 +1,78 @@
+; Runs every spike test in order. Called by gl_NotMSpike.txt 3 s after load.
+; Each test is compiled separately: one compile error does not stop the others.
+ref rTest
+
+begin Function {}
+	let rTest := CompileScript "NamesOfTheMojave/Spike/Spike00_Versions.txt"
+	if rTest
+		Call rTest
+	else
+		PrintToConsole "NotM Spike00: FAIL did not compile, see nvse.log"
+	endif
+	let rTest := CompileScript "NamesOfTheMojave/Spike/Spike1_Walk.txt"
+	if rTest
+		Call rTest
+	else
+		PrintToConsole "NotM Spike1: FAIL did not compile, see nvse.log"
+	endif
+	let rTest := CompileScript "NamesOfTheMojave/Spike/Spike1b_BaseForm.txt"
+	if rTest
+		Call rTest
+	else
+		PrintToConsole "NotM Spike1b: FAIL did not compile, see nvse.log"
+	endif
+	let rTest := CompileScript "NamesOfTheMojave/Spike/Spike1c_LeveledBase.txt"
+	if rTest
+		Call rTest
+	else
+		PrintToConsole "NotM Spike1c: FAIL did not compile, see nvse.log"
+	endif
+	let rTest := CompileScript "NamesOfTheMojave/Spike/Spike1d_LocalIndex.txt"
+	if rTest
+		Call rTest
+	else
+		PrintToConsole "NotM Spike1d: FAIL did not compile, see nvse.log"
+	endif
+	let rTest := CompileScript "NamesOfTheMojave/Spike/Spike1e_IDString.txt"
+	if rTest
+		Call rTest
+	else
+		PrintToConsole "NotM Spike1e: FAIL did not compile, see nvse.log"
+	endif
+	let rTest := CompileScript "NamesOfTheMojave/Spike/Spike2_RefName.txt"
+	if rTest
+		Call rTest
+	else
+		PrintToConsole "NotM Spike2: FAIL did not compile, see nvse.log"
+	endif
+	let rTest := CompileScript "NamesOfTheMojave/Spike/Spike2b_RefNameVar.txt"
+	if rTest
+		Call rTest
+	else
+		PrintToConsole "NotM Spike2b: FAIL did not compile, see nvse.log"
+	endif
+	let rTest := CompileScript "NamesOfTheMojave/Spike/Spike3_Callback.txt"
+	if rTest
+		Call rTest
+	else
+		PrintToConsole "NotM Spike3: FAIL did not compile, see nvse.log"
+	endif
+	let rTest := CompileScript "NamesOfTheMojave/Spike/Spike4_Seed.txt"
+	if rTest
+		Call rTest
+	else
+		PrintToConsole "NotM Spike4: FAIL did not compile, see nvse.log"
+	endif
+	let rTest := CompileScript "NamesOfTheMojave/Spike/Spike5_Files.txt"
+	if rTest
+		Call rTest
+	else
+		PrintToConsole "NotM Spike5: FAIL did not compile, see nvse.log"
+	endif
+	let rTest := CompileScript "NamesOfTheMojave/Spike/Spike6_Compile.txt"
+	if rTest
+		Call rTest
+	else
+		PrintToConsole "NotM Spike6: FAIL did not compile, see nvse.log"
+	endif
+end

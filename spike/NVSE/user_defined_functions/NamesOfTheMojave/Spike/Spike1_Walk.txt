@@ -1,13 +1,12 @@
 ; Spike 1: walk nearby actors; print ref, GetBaseObject, name, sex.
 ; FF-prefixed base = temporary leveled clone.
-; Runs 3 s after load: console prints during the load screen are lost.
-CallAfter 3 (begin function {}
-	ref rPlayer
-	ref rActor
-	ref rBase
-	int iFem
-	int iCount
+ref rPlayer
+ref rActor
+ref rBase
+int iFem
+int iCount
 
+begin Function {}
 	PrintToConsole "NotM Spike1: START"
 	let rPlayer := GetFormFromMod "FalloutNV.esm" "000014"
 	let rActor := GetFirstRef 200 1
@@ -29,4 +28,4 @@ CallAfter 3 (begin function {}
 		PrintToConsole "NotM Spike1: FAIL no actors found (stand near NPCs)"
 	endif
 	PrintToConsole "NotM Spike1: END"
-end)
+end

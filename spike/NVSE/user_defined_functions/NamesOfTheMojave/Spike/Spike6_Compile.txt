@@ -1,0 +1,20 @@
+; Spike 6: call a compiled UDF with an argument and read its return value.
+; PASS if Double.txt returns 42 for 21.
+ref rUDF
+int iOut
+
+begin Function {}
+	PrintToConsole "NotM Spike6: START"
+	let rUDF := CompileScript "NamesOfTheMojave/Spike/Double.txt"
+	if rUDF
+		let iOut := Call rUDF 21
+		if iOut == 42
+			PrintToConsole "NotM Spike6: PASS call returned 42"
+		else
+			PrintToConsole "NotM Spike6: FAIL call returned %g (expect 42)" iOut
+		endif
+	else
+		PrintToConsole "NotM Spike6: FAIL Double.txt did not compile"
+	endif
+	PrintToConsole "NotM Spike6: END"
+end

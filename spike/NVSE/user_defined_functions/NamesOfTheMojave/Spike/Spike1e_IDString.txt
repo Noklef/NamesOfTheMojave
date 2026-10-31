@@ -1,11 +1,10 @@
 ; Spike 1e: ref ID as hex string (GetFormIDString).
-; Runs 3 s after load: console prints during the load screen are lost.
-CallAfter 3 (begin function {}
-	ref rPlayer
-	ref rActor
-	string_var sID
-	int iCount
+ref rPlayer
+ref rActor
+string_var sID
+int iCount
 
+begin Function {}
 	PrintToConsole "NotM Spike1e: START"
 	let rPlayer := GetFormFromMod "FalloutNV.esm" "000014"
 	let rActor := GetFirstRef 200 1
@@ -21,4 +20,4 @@ CallAfter 3 (begin function {}
 		let rActor := GetNextRef
 	loop
 	PrintToConsole "NotM Spike1e: END"
-end)
+end

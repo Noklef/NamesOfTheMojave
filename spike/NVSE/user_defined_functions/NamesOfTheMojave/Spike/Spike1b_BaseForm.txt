@@ -1,11 +1,10 @@
 ; Spike 1b: GetBaseForm on nearby actors (compare with Spike 1 gbo).
-; Runs 3 s after load: console prints during the load screen are lost.
-CallAfter 3 (begin function {}
-	ref rPlayer
-	ref rActor
-	ref rBase
-	int iCount
+ref rPlayer
+ref rActor
+ref rBase
+int iCount
 
+begin Function {}
 	PrintToConsole "NotM Spike1b: START"
 	let rPlayer := GetFormFromMod "FalloutNV.esm" "000014"
 	let rActor := GetFirstRef 200 1
@@ -21,4 +20,4 @@ CallAfter 3 (begin function {}
 		let rActor := GetNextRef
 	loop
 	PrintToConsole "NotM Spike1b: END"
-end)
+end

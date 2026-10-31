@@ -1,0 +1,8 @@
+; Helper for Spike 6: returns the argument times 2.
+int iIn
+int iOut
+
+begin Function {iIn}
+	let iOut := iIn * 2
+	SetFunctionValue iOut
+end

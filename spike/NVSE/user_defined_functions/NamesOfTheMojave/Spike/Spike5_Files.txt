@@ -1,13 +1,12 @@
 ; Spike 5: read INI value and a plain-text name file line by line.
 ; Expects INI value 42 and names Mike, Sarah, Joe. INFO lines show trailing chars (len).
-; Runs 3 s after load: console prints during the load screen are lost.
-CallAfter 3 (begin function {}
-	float fIni
-	string_var sLine
-	int iLine
-	int iLen
-	int iOK
+float fIni
+string_var sLine
+int iLine
+int iLen
+int iOK
 
+begin Function {}
 	PrintToConsole "NotM Spike5: START"
 	let fIni := GetINIFloat "Spike:Value" "NamesOfTheMojave_Spike.ini"
 	if fIni == 42
@@ -37,4 +36,4 @@ CallAfter 3 (begin function {}
 		endif
 	endif
 	PrintToConsole "NotM Spike5: END"
-end)
+end

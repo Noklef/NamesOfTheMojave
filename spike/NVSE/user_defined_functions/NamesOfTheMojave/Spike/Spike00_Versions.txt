@@ -1,11 +1,10 @@
 ; Spike 00: log xNVSE and plugin versions. nvse.log is the authority if a line is 0.
-; Runs 3 s after load: console prints during the load screen are lost.
-CallAfter 3 (begin function {}
-	int iMaj
-	int iRev
-	int iBeta
-	float fV
+int iMaj
+int iRev
+int iBeta
+float fV
 
+begin Function {}
 	PrintToConsole "NotM Spike00: START"
 	let iMaj := GetNVSEVersion
 	let iRev := GetNVSERevision
@@ -18,4 +17,4 @@ CallAfter 3 (begin function {}
 	let fV := GetPluginVersion "ShowOffNVSE"
 	PrintToConsole "NotM Spike00: INFO ShowOff %g (0 may mean wrong plugin name)" fV
 	PrintToConsole "NotM Spike00: END"
-end)
+end

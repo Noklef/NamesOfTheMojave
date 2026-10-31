@@ -1,13 +1,12 @@
 ; Spike 2b: SetRefName from a string variable; read back with LNGetName.
 ; Renames only the first actor to "NotM Dynamic 7".
-; Runs 3 s after load: console prints during the load screen are lost.
-CallAfter 3 (begin function {}
-	ref rPlayer
-	ref rActor
-	string_var sName
-	string_var sRead
-	int iOK
+ref rPlayer
+ref rActor
+string_var sName
+string_var sRead
+int iOK
 
+begin Function {}
 	PrintToConsole "NotM Spike2b: START"
 	let rPlayer := GetFormFromMod "FalloutNV.esm" "000014"
 	let sName := sv_Construct "NotM Dynamic %g" 7
@@ -31,4 +30,4 @@ CallAfter 3 (begin function {}
 		PrintToConsole "NotM Spike2b: FAIL no actors found"
 	endif
 	PrintToConsole "NotM Spike2b: END"
-end)
+end
