@@ -50,7 +50,7 @@ Data: `tools/xedit/NotM_ExportNPCs.pas` over FalloutNV.esm, all DLCs, Fallout3.e
 - Leveled lists: only 2608 of 7102 records are in a leveled list, and many generics are placed directly. Not usable as the generic test alone.
 - Faction: named NPCs share factions with generics. Not usable as the generic test.
 
-Decision: the rules file maps **generic base name → pool** (`Powder Ganger|wasteland`).
+Decision: the rules file maps **generic base name → pool** (`Powder Ganger|NOTM_wasteland`).
 - A unique NPC never matches, because its name is not in the list.
 - One entry covers every gear and level variant, in every DLC.
 - Planned with the ghoul and super mutant pools: race overrides the pool.

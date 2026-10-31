@@ -1,222 +1,223 @@
 # Generic base name|pool. Actors with this exact in-game name get a name from Names/<pool>/.
 # Names are case-sensitive and must match the game text. Lines starting with # are comments.
 # Do not leave empty lines: the first empty line ends the list.
+# Pools shipped with this mod start with NOTM_. Give pools you add your own prefix.
 # --- FNV civilians ---
-Wastelander|wasteland
-Traveler|wasteland
-Squatter|wasteland
-Local|wasteland
-New Vegas Citizen|wasteland
-Prospector|wasteland
-North Vegas Resident|wasteland
-Traveling Merchant|wasteland
-Scavenger|wasteland
-Westside Resident|wasteland
-NCR Prospector|wasteland
-Refugee|wasteland
-Caravaneer|wasteland
-Chem Addict|wasteland
-Patient|wasteland
-Primm Resident|wasteland
-Escaped Convict|wasteland
-Wasteland Captive|wasteland
-Hunter|wasteland
-Sharecropper|wasteland
-Quarry Worker|wasteland
-Westside Militia|wasteland
-Novac Settler|wasteland
-Mojave Inhabitant|wasteland
-New Vegas Resident|wasteland
-Underpass Citizen|wasteland
-Westside Citizen|wasteland
-Crazed Chem Addict|wasteland
-Goodsprings Settler|wasteland
-Boulder City Worker|wasteland
-Convict|wasteland
-Junkie|wasteland
-Beggar|wasteland
-Destitute Traveler|wasteland
-Rancher|wasteland
-Man|wasteland
-Vault 34 Dweller|wasteland
-Drunk|wasteland
-Merchant|wasteland
-Missionary|wasteland
-Drifter|wasteland
-Vagrant|wasteland
-Water Beggar|wasteland
+Wastelander|NOTM_wasteland
+Traveler|NOTM_wasteland
+Squatter|NOTM_wasteland
+Local|NOTM_wasteland
+New Vegas Citizen|NOTM_wasteland
+Prospector|NOTM_wasteland
+North Vegas Resident|NOTM_wasteland
+Traveling Merchant|NOTM_wasteland
+Scavenger|NOTM_wasteland
+Westside Resident|NOTM_wasteland
+NCR Prospector|NOTM_wasteland
+Refugee|NOTM_wasteland
+Caravaneer|NOTM_wasteland
+Chem Addict|NOTM_wasteland
+Patient|NOTM_wasteland
+Primm Resident|NOTM_wasteland
+Escaped Convict|NOTM_wasteland
+Wasteland Captive|NOTM_wasteland
+Hunter|NOTM_wasteland
+Sharecropper|NOTM_wasteland
+Quarry Worker|NOTM_wasteland
+Westside Militia|NOTM_wasteland
+Novac Settler|NOTM_wasteland
+Mojave Inhabitant|NOTM_wasteland
+New Vegas Resident|NOTM_wasteland
+Underpass Citizen|NOTM_wasteland
+Westside Citizen|NOTM_wasteland
+Crazed Chem Addict|NOTM_wasteland
+Goodsprings Settler|NOTM_wasteland
+Boulder City Worker|NOTM_wasteland
+Convict|NOTM_wasteland
+Junkie|NOTM_wasteland
+Beggar|NOTM_wasteland
+Destitute Traveler|NOTM_wasteland
+Rancher|NOTM_wasteland
+Man|NOTM_wasteland
+Vault 34 Dweller|NOTM_wasteland
+Drunk|NOTM_wasteland
+Merchant|NOTM_wasteland
+Missionary|NOTM_wasteland
+Drifter|NOTM_wasteland
+Vagrant|NOTM_wasteland
+Water Beggar|NOTM_wasteland
 # --- FNV groups and services ---
-Followers Guard|wasteland
-Followers Doctor|wasteland
-Boomer|wasteland
-Boomer Chef|wasteland
-Injured Boomer|wasteland
-Boomer Guard|wasteland
-Crimson Caravan Guard|wasteland
-Crimson Caravan Trader|wasteland
-Gun Runner Guard|wasteland
-Gun Runner Gunsmith|wasteland
-Bodyguard For Hire|wasteland
-Gunderson Hired Hand|wasteland
-Happy Trails Caravan Guard|wasteland
-Guard|wasteland
-Thug|wasteland
-Greaser|wasteland
-Bodyguard|wasteland
-Clinic Guard|wasteland
-Outer Vegas Defender|wasteland
+Followers Guard|NOTM_wasteland
+Followers Doctor|NOTM_wasteland
+Boomer|NOTM_wasteland
+Boomer Chef|NOTM_wasteland
+Injured Boomer|NOTM_wasteland
+Boomer Guard|NOTM_wasteland
+Crimson Caravan Guard|NOTM_wasteland
+Crimson Caravan Trader|NOTM_wasteland
+Gun Runner Guard|NOTM_wasteland
+Gun Runner Gunsmith|NOTM_wasteland
+Bodyguard For Hire|NOTM_wasteland
+Gunderson Hired Hand|NOTM_wasteland
+Happy Trails Caravan Guard|NOTM_wasteland
+Guard|NOTM_wasteland
+Thug|NOTM_wasteland
+Greaser|NOTM_wasteland
+Bodyguard|NOTM_wasteland
+Clinic Guard|NOTM_wasteland
+Outer Vegas Defender|NOTM_wasteland
 # --- The Strip and Freeside ---
-Gambler|wasteland
-Gomorrah Prostitute|wasteland
-White Glove|wasteland
-Bartender|wasteland
-Chairman|wasteland
-Tops Promoter|wasteland
-Atomic Wrangler Guard|wasteland
-Card Dealer|wasteland
-Chairman Bodyguard|wasteland
-Vikki And Vance Dealer|wasteland
-Roulette Dealer|wasteland
-Hooker|wasteland
-Rad Pack Dancer|wasteland
-Chairman Greeter|wasteland
-Escort|wasteland
-Gomorrah Dealer|wasteland
-King Groupie|wasteland
-Blackjack Dealer|wasteland
-Casino Guard|wasteland
-Security Officer|wasteland
-White Glove Bouncer|wasteland
+Gambler|NOTM_wasteland
+Gomorrah Prostitute|NOTM_wasteland
+White Glove|NOTM_wasteland
+Bartender|NOTM_wasteland
+Chairman|NOTM_wasteland
+Tops Promoter|NOTM_wasteland
+Atomic Wrangler Guard|NOTM_wasteland
+Card Dealer|NOTM_wasteland
+Chairman Bodyguard|NOTM_wasteland
+Vikki And Vance Dealer|NOTM_wasteland
+Roulette Dealer|NOTM_wasteland
+Hooker|NOTM_wasteland
+Rad Pack Dancer|NOTM_wasteland
+Chairman Greeter|NOTM_wasteland
+Escort|NOTM_wasteland
+Gomorrah Dealer|NOTM_wasteland
+King Groupie|NOTM_wasteland
+Blackjack Dealer|NOTM_wasteland
+Casino Guard|NOTM_wasteland
+Security Officer|NOTM_wasteland
+White Glove Bouncer|NOTM_wasteland
 # --- FNV gangs ---
-Fiend|wasteland
-Powder Ganger|wasteland
-Powder Ganger Bodyguard|wasteland
-Viper Gunslinger|wasteland
-Viper Leader|wasteland
-Kings Gang Member|wasteland
-Jackal Gang Member|wasteland
-Jackal Gang Leader|wasteland
-Great Khan|wasteland
-Great Khan Warrior|wasteland
-Omerta Thug|wasteland
-Freeside Thug|wasteland
-Westside Thug|wasteland
-Scorpions Gang Member|wasteland
-Van Graff Thug|wasteland
-Mercenary|wasteland
-NCR Mercenary|wasteland
-Slaver|wasteland
-Slave|wasteland
+Fiend|NOTM_wasteland
+Powder Ganger|NOTM_wasteland
+Powder Ganger Bodyguard|NOTM_wasteland
+Viper Gunslinger|NOTM_wasteland
+Viper Leader|NOTM_wasteland
+Kings Gang Member|NOTM_wasteland
+Jackal Gang Member|NOTM_wasteland
+Jackal Gang Leader|NOTM_wasteland
+Great Khan|NOTM_wasteland
+Great Khan Warrior|NOTM_wasteland
+Omerta Thug|NOTM_wasteland
+Freeside Thug|NOTM_wasteland
+Westside Thug|NOTM_wasteland
+Scorpions Gang Member|NOTM_wasteland
+Van Graff Thug|NOTM_wasteland
+Mercenary|NOTM_wasteland
+NCR Mercenary|NOTM_wasteland
+Slaver|NOTM_wasteland
+Slave|NOTM_wasteland
 # --- NCR ---
-NCR Trooper|wasteland
-NCR Ranger|wasteland
-Engineer|wasteland
-NCR Heavy Trooper|wasteland
-NCR Veteran Ranger|wasteland
-NCR Military Police|wasteland
-NCR Trooper MP|wasteland
-NCR MP|wasteland
-NCR Ranger Veteran|wasteland
-Injured Trooper|wasteland
-NCR Recruit|wasteland
-NCR Riot Control|wasteland
-Irradiated Heavy Trooper|wasteland
-NCR Sniper|wasteland
-Ghoul Trooper|ghoul
+NCR Trooper|NOTM_wasteland
+NCR Ranger|NOTM_wasteland
+Engineer|NOTM_wasteland
+NCR Heavy Trooper|NOTM_wasteland
+NCR Veteran Ranger|NOTM_wasteland
+NCR Military Police|NOTM_wasteland
+NCR Trooper MP|NOTM_wasteland
+NCR MP|NOTM_wasteland
+NCR Ranger Veteran|NOTM_wasteland
+Injured Trooper|NOTM_wasteland
+NCR Recruit|NOTM_wasteland
+NCR Riot Control|NOTM_wasteland
+Irradiated Heavy Trooper|NOTM_wasteland
+NCR Sniper|NOTM_wasteland
+Ghoul Trooper|NOTM_ghoul
 # --- Caesar's Legion ---
-Recruit Legionary|legion
-Prime Legionary|legion
-Veteran Legionary|legion
-Centurion|legion
-Praetorian Guard|legion
-Prime Decanus|legion
-Recruit Decanus|legion
-Legion Explorer|legion
-Veteran Decanus|legion
-Legion Vexillarius|legion
-Legionary Assassin|legion
-Legionary Blacksmith|legion
-Irradiated Legion Explorer|legion
-Legionary|legion
-Legionary Recruit|legion
-Legion Centurion|legion
-Irradiated Legionary Prime|legion
-Irradiated Legionary Veteran|legion
+Recruit Legionary|NOTM_legion
+Prime Legionary|NOTM_legion
+Veteran Legionary|NOTM_legion
+Centurion|NOTM_legion
+Praetorian Guard|NOTM_legion
+Prime Decanus|NOTM_legion
+Recruit Decanus|NOTM_legion
+Legion Explorer|NOTM_legion
+Veteran Decanus|NOTM_legion
+Legion Vexillarius|NOTM_legion
+Legionary Assassin|NOTM_legion
+Legionary Blacksmith|NOTM_legion
+Irradiated Legion Explorer|NOTM_legion
+Legionary|NOTM_legion
+Legionary Recruit|NOTM_legion
+Legion Centurion|NOTM_legion
+Irradiated Legionary Prime|NOTM_legion
+Irradiated Legionary Veteran|NOTM_legion
 # --- Brotherhood of Steel ---
-Brotherhood of Steel Paladin|wasteland
-Brotherhood Outcast|wasteland
-Brotherhood of Steel Initiate|wasteland
-Brotherhood of Steel Knight|wasteland
-Brotherhood of Steel Scribe|wasteland
-Brotherhood Scribe|wasteland
-Brotherhood Scout|wasteland
+Brotherhood of Steel Paladin|NOTM_wasteland
+Brotherhood Outcast|NOTM_wasteland
+Brotherhood of Steel Initiate|NOTM_wasteland
+Brotherhood of Steel Knight|NOTM_wasteland
+Brotherhood of Steel Scribe|NOTM_wasteland
+Brotherhood Scribe|NOTM_wasteland
+Brotherhood Scout|NOTM_wasteland
 # --- Enclave ---
-Enclave Soldier|wasteland
-Enclave Officer|wasteland
-Enclave Scientist|wasteland
-Enclave Hellfire Trooper|wasteland
-Enclave Doctor|wasteland
+Enclave Soldier|NOTM_wasteland
+Enclave Officer|NOTM_wasteland
+Enclave Scientist|NOTM_wasteland
+Enclave Hellfire Trooper|NOTM_wasteland
+Enclave Doctor|NOTM_wasteland
 # --- Capital Wasteland (FO3) ---
-Raider|wasteland
-Talon Company Merc|wasteland
-Megaton Settler|wasteland
-Tenpenny Resident|wasteland
-Regulator|wasteland
-Rivet City Security|wasteland
-Insane Survivor|wasteland
-Security Guard|wasteland
-Tenpenny Tower Resident|wasteland
-Rock Crick Hunter|wasteland
-Caravan Guard|wasteland
-Child of Atom|wasteland
-Project Purity Scientist|wasteland
-Secretary|wasteland
-Wasteland Settler|wasteland
-Water Caravan Driver|wasteland
-Caravan Trader|wasteland
-Hitman|wasteland
-Scientist|wasteland
-Wasteland Junkie|wasteland
-Wasteland Merchant|wasteland
-Megaton Refugee|wasteland
+Raider|NOTM_wasteland
+Talon Company Merc|NOTM_wasteland
+Megaton Settler|NOTM_wasteland
+Tenpenny Resident|NOTM_wasteland
+Regulator|NOTM_wasteland
+Rivet City Security|NOTM_wasteland
+Insane Survivor|NOTM_wasteland
+Security Guard|NOTM_wasteland
+Tenpenny Tower Resident|NOTM_wasteland
+Rock Crick Hunter|NOTM_wasteland
+Caravan Guard|NOTM_wasteland
+Child of Atom|NOTM_wasteland
+Project Purity Scientist|NOTM_wasteland
+Secretary|NOTM_wasteland
+Wasteland Settler|NOTM_wasteland
+Water Caravan Driver|NOTM_wasteland
+Caravan Trader|NOTM_wasteland
+Hitman|NOTM_wasteland
+Scientist|NOTM_wasteland
+Wasteland Junkie|NOTM_wasteland
+Wasteland Merchant|NOTM_wasteland
+Megaton Refugee|NOTM_wasteland
 # --- The Pitt ---
-Pitt Raider|wasteland
-Pitt Slave|wasteland
-Slave Fighter|wasteland
-Raider Fighter|wasteland
-Slave Guard|wasteland
+Pitt Raider|NOTM_wasteland
+Pitt Slave|NOTM_wasteland
+Slave Fighter|NOTM_wasteland
+Raider Fighter|NOTM_wasteland
+Slave Guard|NOTM_wasteland
 # --- Point Lookout ---
-Tribal|tribal
-Smuggler|wasteland
-Bandit|wasteland
+Tribal|NOTM_tribal
+Smuggler|NOTM_wasteland
+Bandit|NOTM_wasteland
 # --- Honest Hearts ---
-Sorrows Tribal|tribal
-White Legs Pain-Maker|tribal
-White Legs Storm-Drummer|tribal
-White Legs Bone-Breaker|tribal
-Dead Horse Warrior|tribal
-Dead Horse Disciple of Canaan|tribal
-Dead Horse Stalker|tribal
-Dead Horse Tribal|tribal
-White Legs Light-Bringer|tribal
-White Legs Tribal|tribal
-Captive Sorrows Tribal|tribal
+Sorrows Tribal|NOTM_tribal
+White Legs Pain-Maker|NOTM_tribal
+White Legs Storm-Drummer|NOTM_tribal
+White Legs Bone-Breaker|NOTM_tribal
+Dead Horse Warrior|NOTM_tribal
+Dead Horse Disciple of Canaan|NOTM_tribal
+Dead Horse Stalker|NOTM_tribal
+Dead Horse Tribal|NOTM_tribal
+White Legs Light-Bringer|NOTM_tribal
+White Legs Tribal|NOTM_tribal
+Captive Sorrows Tribal|NOTM_tribal
 # --- Chinese ---
-Chinese Soldier|chinese
-Chinese Sniper|chinese
-Chinese Inferno Unit|chinese
-Chinese Launcher|chinese
-Chinese Remnant Soldier|chinese
-Chinese Remnant Officer|chinese
-Chinese Remnant Sargeant|chinese
-Chinese Remnant Sergeant|chinese
+Chinese Soldier|NOTM_chinese
+Chinese Sniper|NOTM_chinese
+Chinese Inferno Unit|NOTM_chinese
+Chinese Launcher|NOTM_chinese
+Chinese Remnant Soldier|NOTM_chinese
+Chinese Remnant Officer|NOTM_chinese
+Chinese Remnant Sargeant|NOTM_chinese
+Chinese Remnant Sergeant|NOTM_chinese
 # --- All ghouls ---
-Underworld Resident|ghoul
-Marked Men Scout|ghoul
-Marked Men Hunter|ghoul
-Marked Men Ravager|ghoul
-Marked Men Marauder|ghoul
-Bright Follower|ghoul
-Ghoul Guard|ghoul
-Irradiated Marked Men Hunter|ghoul
-Irradiated Marked Men Scout|ghoul
+Underworld Resident|NOTM_ghoul
+Marked Men Scout|NOTM_ghoul
+Marked Men Hunter|NOTM_ghoul
+Marked Men Ravager|NOTM_ghoul
+Marked Men Marauder|NOTM_ghoul
+Bright Follower|NOTM_ghoul
+Ghoul Guard|NOTM_ghoul
+Irradiated Marked Men Hunter|NOTM_ghoul
+Irradiated Marked Men Scout|NOTM_ghoul
