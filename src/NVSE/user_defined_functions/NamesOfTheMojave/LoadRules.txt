@@ -83,7 +83,7 @@ begin Function {}
 			elseif eval aParts[1] == "-"
 				rPlayer.AuxVarErase ("*NotM:R:" + aParts[0])
 				ar_Erase aRules (aParts[0])
-			elseif eval aParts[1] == "+" || (sv_Length aParts[0]) == 0 || (sv_Length aParts[1]) == 0
+			elseif eval aParts[1] == "+" || (sv_Length (aParts[0])) == 0 || (sv_Length (aParts[1])) == 0
 				PrintToConsole "[NotM] WARN bad rule line [%z] in %z" sLine sFile
 			else
 				let sPool := aParts[1]
