@@ -15,6 +15,7 @@ Status: in development.
 |---|---|
 | `mod/` | Shipped files. Contents go in the game `Data\` folder (MO2: the mod folder). |
 | `spike/` | Development test scripts. Not shipped. |
+| `tools/` | Development tools (FNVEdit export script). Not shipped. |
 | `docs/` | Design decisions and research. |
 
 ## Deploy (development)
