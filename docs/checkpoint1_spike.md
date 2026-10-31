@@ -3,9 +3,8 @@
 One game session, about 10 minutes. Tests which engine functions work from ESP-less text scripts.
 
 ## Install (MO2)
-1. Mod list → right-click → **Create empty mod** → name it `NotM Spike`.
-2. Open it in Explorer. Copy the **contents** of the repo `spike/` folder into it (`Config/` and `NVSE/`).
-3. Enable it. Load order does not matter (no ESP).
+1. Run `.\deploy.ps1 -Spike` from the repo root.
+2. In MO2, press F5 (refresh) and enable `Names of the Mojave`. Load order does not matter (no ESP).
 
 ## Run
 1. Start the game. At the main menu open the console (`~`) and type `scof NotM_spike.txt`. Close the console.
@@ -37,4 +36,4 @@ One game session, about 10 minutes. Tests which engine functions work from ESP-l
 A missing line for a test means that file failed to compile. `jip_ln_nvse.log` shows why.
 
 ## Cleanup
-Disable `NotM Spike` after the test. Renames are session-only. The spike seed values stay in the save co-save; they are tiny and harmless.
+Run `.\deploy.ps1` (without `-Spike`) to remove the spike files. Renames are session-only. The spike seed values stay in the save co-save; they are tiny and harmless.

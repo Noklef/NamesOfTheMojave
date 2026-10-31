@@ -16,3 +16,6 @@ Status: in development.
 | `mod/` | Shipped files. Contents go in the game `Data\` folder (MO2: the mod folder). |
 | `spike/` | Development test scripts. Not shipped. |
 | `docs/` | Design decisions and research. |
+
+## Deploy (development)
+`.\deploy.ps1` mirrors `mod/` into the MO2 mod folder (default: the BeginAgain-TTW instance; override with `-Target`). Add `-Spike` to include the spike test files. MO2's `meta.ini` is kept.
