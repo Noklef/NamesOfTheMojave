@@ -1,0 +1,4 @@
+# Checkpoint 3 test add-on. Not shipped. Loads after 00_NOTM.txt.
+Powder Ganger|NOTM_legion
+Fiend|-
+NCR Trooper|+NOTM_chinese
