@@ -1,9 +1,11 @@
-; Entry point. Creates the playthrough seed if missing, loads rules and pools, then names nearby actors.
+; Entry point. Creates the playthrough seed if missing, loads rules and pools, names nearby actors,
+; then starts the periodic scan.
 ; Seed: private permanent aux var on the player, saved in the JIP co-save.
-; Compiled UDFs, rules and pools: temp aux vars on the player, rebuilt on every load.
+; Compiled UDFs, rules, pools and timers: temp aux vars on the player, rebuilt on every load.
 ref rPlayer
 ref rRules
 ref rScan
+ref rTick
 float fSeed
 
 begin Function {}
@@ -13,10 +15,17 @@ begin Function {}
 		let fSeed := floor (Rand 1 1000000)
 		rPlayer.AuxVarSetFlt "NotMSeed" fSeed
 	endif
+	rPlayer.AuxVarSetFlt "*NotM:Interval" 10
 	rPlayer.AuxVarSetRef "*NotM:Hash" (CompileScript "NamesOfTheMojave/Hash.txt")
 	rPlayer.AuxVarSetRef "*NotM:Pick" (CompileScript "NamesOfTheMojave/PickName.txt")
 	let rRules := CompileScript "NamesOfTheMojave/LoadRules.txt"
 	Call rRules
 	let rScan := CompileScript "NamesOfTheMojave/Scan.txt"
+	rPlayer.AuxVarSetRef "*NotM:Scan" rScan
+	rPlayer.AuxVarSetRef "*NotM:Cell" (rPlayer.GetParentCell)
+	rPlayer.AuxVarSetFlt "*NotM:Timer" 0
 	Call rScan
+	; Flags 9 = gameplay only (1) + removed on load and main menu (8), so reloads never stack callbacks.
+	let rTick := CompileScript "NamesOfTheMojave/Tick.txt"
+	SetGameMainLoopCallback rTick 1 30 9
 end

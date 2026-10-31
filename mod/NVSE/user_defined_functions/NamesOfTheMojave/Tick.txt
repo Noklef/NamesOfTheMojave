@@ -1,0 +1,25 @@
+; Main-loop callback, every 30 frames in gameplay. Runs Scan every *NotM:Interval seconds,
+; and about 1 s after the player enters a new cell (actors need a moment to load).
+; Elapsed time: GetSecondsPassed is the last frame time, so it is scaled by the 30-frame step.
+ref rPlayer
+ref rCell
+ref rScan
+float fTimer
+float fInterval
+
+begin Function {}
+	let rPlayer := GetFormFromMod "FalloutNV.esm" "000014"
+	let fInterval := rPlayer.AuxVarGetFlt "*NotM:Interval"
+	let fTimer := rPlayer.AuxVarGetFlt "*NotM:Timer" + GetSecondsPassed * 30
+	let rCell := rPlayer.GetParentCell
+	if eval rCell != rPlayer.AuxVarGetRef "*NotM:Cell"
+		rPlayer.AuxVarSetRef "*NotM:Cell" rCell
+		let fTimer := GetMaxOf fTimer (fInterval - 1)
+	endif
+	if fTimer >= fInterval
+		let fTimer := 0
+		let rScan := rPlayer.AuxVarGetRef "*NotM:Scan"
+		Call rScan
+	endif
+	rPlayer.AuxVarSetFlt "*NotM:Timer" fTimer
+end
