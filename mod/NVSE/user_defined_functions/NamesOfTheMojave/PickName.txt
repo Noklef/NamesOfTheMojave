@@ -1,4 +1,5 @@
 ; Returns a name for an actor from a loaded pool: first name, plus a surname if the pool has any.
+; Female actors use the pool's female list; if it is empty, the male list.
 ; Same actor, seed and attempt always give the same name. A higher iAttempt re-rolls.
 ref rActor
 string_var sPool
@@ -19,6 +20,11 @@ begin Function {rActor, sPool, iAttempt}
 	let rHash := rPlayer.AuxVarGetRef "*NotM:Hash"
 	let iIdx := GetLocalRefIndex rActor
 	let sVar := "*NotM:" + sPool + ":male"
+	if eval rActor.GetIsSex Female
+		if eval rPlayer.AuxVarSize ("*NotM:" + sPool + ":female") > 0
+			let sVar := "*NotM:" + sPool + ":female"
+		endif
+	endif
 	let iSize := rPlayer.AuxVarSize (sVar)
 	if iSize == 0
 		SetFunctionValue ""

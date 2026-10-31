@@ -15,7 +15,7 @@ begin Function {}
 	let rPick := rPlayer.AuxVarGetRef "*NotM:Pick"
 	let rActor := GetFirstRef 200 1
 	while rActor
-		if rActor != rPlayer && rActor.GetIsCreature == 0
+		if eval rActor != rPlayer && rActor.GetIsCreature == 0
 			let sPool := rPlayer.AuxVarGetStr ("*NotM:R:" + rActor.GetName)
 			if eval sv_Length sPool > 0
 				let rBase := rActor.GetLeveledActorBase
