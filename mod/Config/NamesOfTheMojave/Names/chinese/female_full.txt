@@ -1,0 +1,32 @@
+# Chinese female full names, surname first. Lore surnames Chao, Tsen, Pang, Chong, Cheng, Ming (FO3 mentioned-only); given names drafted.
+# One name per line. Lines starting with # are comments. Do not leave empty lines: the first empty line ends the list.
+Bai Lan
+Chao Mei
+Chen Hua
+Cheng Li
+Chong Yan
+Deng Mei
+Gao Yan
+Guo Jing
+Han Xue
+He Li
+Hu Fang
+Huang Ying
+Li Na
+Lin Hong
+Liu Fang
+Ma Li
+Ming Xia
+Pang Hua
+Song Yu
+Sun Lan
+Tang Mei
+Tsen Lan
+Wang Fang
+Wu Xia
+Xu Lin
+Yang Hua
+Zhang Min
+Zhao Yan
+Zhou Ling
+Zhu Qing
