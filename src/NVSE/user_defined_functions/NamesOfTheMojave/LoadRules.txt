@@ -13,6 +13,7 @@ ref rLoad
 array_var aFiles
 array_var aParts
 array_var aPools
+array_var aOld
 string_var sDir
 string_var sFile
 string_var sLine
@@ -82,19 +83,28 @@ begin Function {}
 			elseif eval aParts[1] == "-"
 				rPlayer.AuxVarErase ("*NotM:R:" + aParts[0])
 				ar_Erase aRules (aParts[0])
-			elseif eval aParts[1] == "+"
+			elseif eval aParts[1] == "+" || (sv_Length aParts[0]) == 0 || (sv_Length aParts[1]) == 0
 				PrintToConsole "[NotM] WARN bad rule line [%z] in %z" sLine sFile
 			else
 				let sPool := aParts[1]
 				let sSpec := sPool
 				if eval sPool[0:0] == "+"
+					; Append only pools the rule does not have yet: a duplicate would double its weight.
 					let sPool := sPool[1:-1]
 					let sSpec := rPlayer.AuxVarGetStr ("*NotM:R:" + aParts[0])
-					if eval (sv_Length sSpec) > 0
-						let sSpec := sSpec + "," + sPool
-					else
-						let sSpec := sPool
-					endif
+					let aOld := sv_Split (sSpec) ","
+					let aPools := sv_Split (sPool) ","
+					let iPart := 0
+					while iPart < (ar_Size aPools)
+						if eval (ar_Find aPools[iPart] aOld) == ar_BadNumericIndex
+							if eval (sv_Length sSpec) > 0
+								let sSpec := sSpec + "," + aPools[iPart]
+							else
+								let sSpec := aPools[iPart]
+							endif
+						endif
+						let iPart += 1
+					loop
 				endif
 				rPlayer.AuxVarSetStr ("*NotM:R:" + aParts[0]) (sSpec)
 				let aRules[aParts[0]] := 1
@@ -102,18 +112,21 @@ begin Function {}
 				let iPart := 0
 				while iPart < (ar_Size aPools)
 					let sPool := aPools[iPart]
-					let aSeen[sPool] := 1
-					if eval (rPlayer.AuxVarGetFlt ("*NotM:Loaded:" + sPool)) == 0
-						let iSize := Call rLoad (sDir + "Names/" + sPool + "/male.txt") ("*NotM:" + sPool + ":male")
-						let iFull := Call rLoad (sDir + "Names/" + sPool + "/male_full.txt") ("*NotM:" + sPool + ":male_full")
-						if eval (iSize + iFull) == 0
-							PrintToConsole "[NotM] WARN Names/%z has no male.txt or male_full.txt names" sPool
+					; An empty item from a stray comma (A,,B) is skipped.
+					if eval (sv_Length sPool) > 0
+						let aSeen[sPool] := 1
+						if eval (rPlayer.AuxVarGetFlt ("*NotM:Loaded:" + sPool)) == 0
+							let iSize := Call rLoad (sDir + "Names/" + sPool + "/male.txt") ("*NotM:" + sPool + ":male")
+							let iFull := Call rLoad (sDir + "Names/" + sPool + "/male_full.txt") ("*NotM:" + sPool + ":male_full")
+							if eval (iSize + iFull) == 0
+								PrintToConsole "[NotM] WARN Names/%z has no male.txt or male_full.txt names" sPool
+							endif
+							let iFem := Call rLoad (sDir + "Names/" + sPool + "/female.txt") ("*NotM:" + sPool + ":female")
+							let iFemFull := Call rLoad (sDir + "Names/" + sPool + "/female_full.txt") ("*NotM:" + sPool + ":female_full")
+							Call rLoad (sDir + "Names/" + sPool + "/surname.txt") ("*NotM:" + sPool + ":surname")
+							rPlayer.AuxVarSetFlt ("*NotM:W:" + sPool) (iSize + iFull + iFem + iFemFull)
+							rPlayer.AuxVarSetFlt ("*NotM:Loaded:" + sPool) 1
 						endif
-						let iFem := Call rLoad (sDir + "Names/" + sPool + "/female.txt") ("*NotM:" + sPool + ":female")
-						let iFemFull := Call rLoad (sDir + "Names/" + sPool + "/female_full.txt") ("*NotM:" + sPool + ":female_full")
-						Call rLoad (sDir + "Names/" + sPool + "/surname.txt") ("*NotM:" + sPool + ":surname")
-						rPlayer.AuxVarSetFlt ("*NotM:W:" + sPool) (iSize + iFull + iFem + iFemFull)
-						rPlayer.AuxVarSetFlt ("*NotM:Loaded:" + sPool) 1
 					endif
 					let iPart += 1
 				loop
