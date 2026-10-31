@@ -123,6 +123,25 @@ NCR Riot Control|wasteland
 Irradiated Heavy Trooper|wasteland
 NCR Sniper|wasteland
 Ghoul Trooper|wasteland
+# --- Caesar's Legion ---
+Recruit Legionary|legion
+Prime Legionary|legion
+Veteran Legionary|legion
+Centurion|legion
+Praetorian Guard|legion
+Prime Decanus|legion
+Recruit Decanus|legion
+Legion Explorer|legion
+Veteran Decanus|legion
+Legion Vexillarius|legion
+Legionary Assassin|legion
+Legionary Blacksmith|legion
+Irradiated Legion Explorer|legion
+Legionary|legion
+Legionary Recruit|legion
+Legion Centurion|legion
+Irradiated Legionary Prime|legion
+Irradiated Legionary Veteran|legion
 # --- Brotherhood of Steel ---
 Brotherhood of Steel Paladin|wasteland
 Brotherhood Outcast|wasteland
