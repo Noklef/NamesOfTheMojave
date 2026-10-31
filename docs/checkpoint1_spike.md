@@ -1,5 +1,7 @@
 # Checkpoint 1 — Spike test
 
+> Historical. The spike files and `deploy.ps1 -Spike` were removed after Checkpoint 1. They are in git history up to tag `v0.1-engine`. Results: `docs/decisions.md`.
+
 One game session, about 10 minutes. Tests which engine functions work from ESP-less text scripts.
 
 ## Install (MO2)
