@@ -4,7 +4,7 @@
 ;   - https://geckwiki.com/index.php?title=GetIsSex
 ref rNPC                    ; The NPC to name
 string_var sPoolName        ; The pool to pick from (ChoosePool picked it), I.E. 'NOTM_wasteland'
-int iAttempt                ; Which try this is. 0 = first. NameNPC raises it when the name is taken
+int iAttempt                ; Which try this is. 0 = first. NameNPC raises it when the name is taken or empty
 ref rHashScript             ; The number picker (Hash.gek)
 string_var sNotePrefix      ; The start of the pool's note names, I.E. "*NotM:NOTM_ghoul:"
 string_var sNoteName        ; Which note to pick from, I.E. "*NotM:NOTM_ghoul:female" (+ "_full" for full names)

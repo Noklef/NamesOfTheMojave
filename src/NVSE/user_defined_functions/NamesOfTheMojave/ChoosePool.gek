@@ -2,7 +2,7 @@
 ;   - https://geckwiki.com/index.php?title=GetLocalRefIndex
 ref rNPC                    ; The NPC to name
 string_var sRulePools       ; The rule's pools, I.E. 'NOTM_wasteland' or 'A,B'
-int iAttempt                ; Which try this is. 0 = first. NameNPC raises it when the name is taken
+int iAttempt                ; Which try this is. 0 = first. NameNPC raises it when the name is taken or empty
 ref rHashScript             ; The number picker (Hash.gek)
 array_var aPoolNames        ; The rule's pools, split at ","
 string_var sChosenPool      ; The pool we picked (the answer we give back)

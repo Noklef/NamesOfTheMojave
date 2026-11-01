@@ -9,7 +9,7 @@ ref rChoosePoolScript       ; The pool picker (ChoosePool.gek)
 ref rPickNameScript         ; The name picker (PickName.gek)
 ref rLogScript              ; The logger (Log.gek)
 string_var sChosenPool     ; The pool this try's name comes from
-int iAttempt                ; Which try this is (0 to 7). Goes up when the name is taken. Ends at 8 if all 8 were taken
+int iAttempt                ; Which try this is (0 to 7). Goes up when the name is taken or empty. Ends at 8 if all 8 failed
 string_var sNewName         ; The name we picked for the NPC
 
 ; Gives one NPC a name that nobody nearby has.
@@ -20,34 +20,34 @@ begin Function {rNPC, sOriginalName, sRulePools, aNamesInUse}
     let rPickNameScript := player.AuxVarGetRef "*NotM:PickName"
     let rLogScript := player.AuxVarGetRef "*NotM:Log"
 
-    ; Pick a pool, then a name from it. Taken by someone nearby? Try again
+    ; Pick a pool, then a name from it. Taken by someone nearby, or no name? Try again
     let iAttempt := 0
     while iAttempt < 8
         let sChosenPool := Call rChoosePoolScript rNPC (sRulePools) iAttempt
         let sNewName := Call rPickNameScript rNPC (sChosenPool) iAttempt
-        if eval (sv_Length sNewName) == 0 ; No names in the pool for this NPC
-            break
-        endif
-        ; Add the role now (ShowRole), so the repeat check uses the full name
-        if eval (player.AuxVarGetFlt "*NotM:ShowRole") == 1
-            let sNewName := sNewName + " (" + sOriginalName + ")"
-        endif
-        if eval (ar_HasKey aNamesInUse sNewName) == 0
-            break
+        ; No name: this pool has none for this NPC (I.E. no male names). The next try can
+        ; pick another pool of a multi-pool rule
+        if eval (sv_Length sNewName) > 0
+            ; Add the role now (ShowRole), so the repeat check uses the full name
+            if eval (player.AuxVarGetFlt "*NotM:ShowRole") == 1
+                let sNewName := sNewName + " (" + sOriginalName + ")"
+            endif
+            if eval (ar_HasKey aNamesInUse sNewName) == 0
+                break
+            endif
         endif
         let iAttempt += 1
     loop
 
-    ; No name: leave the NPC alone. (Not a return inside the loop: xNVSE only
-    ; cleans up a loop that ends by its condition or by break)
-    ; I.E. a multi-pool rule picked a pool with no names for this NPC's gender
+    ; Still no name after 8 tries: leave the NPC alone. (Not a return inside the loop:
+    ; xNVSE only cleans up a loop that ends by its condition or by break)
     if eval (sv_Length sNewName) == 0
-        Call rLogScript "DEBUG" (sv_Construct "%i %z: no names for this NPC in pool [%z], left unnamed" rNPC sOriginalName sChosenPool)
+        Call rLogScript "DEBUG" (sv_Construct "%i %z: no usable name after 8 tries (last pool [%z]), left unnamed" rNPC sOriginalName sChosenPool)
         return
     endif
     ; Still taken after 8 tries? Use it anyway: a repeat is better than no name
     rNPC.SetRefName (sNewName)
     let aNamesInUse[sNewName] := 1
-    ; Try 8 = all 8 tries were taken, so the name is a repeat (the pool is small for this many NPCs in one area)
+    ; Try 8 = the loop ran out and try 7 was taken, so the name is a repeat (the pool is small for this many NPCs in one area)
     Call rLogScript "DEBUG" (sv_Construct "%i %z -> %z (%z, try %g)" rNPC sOriginalName sNewName sChosenPool iAttempt)
 end
