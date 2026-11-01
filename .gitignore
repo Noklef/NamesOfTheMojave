@@ -14,3 +14,9 @@ desktop.ini
 # Local game data exports (Bethesda data, not redistributed)
 tools/data/
 temp
+docs
+
+# Build output
+dist
+scripts/__pycache__
+docs
