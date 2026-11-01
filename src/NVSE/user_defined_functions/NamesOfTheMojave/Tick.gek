@@ -4,7 +4,7 @@
 ;   - https://geckwiki.com/index.php?title=GetParentCell
 
 ref rCurrentCell        ; The area you are in now
-ref rScanScript         ; The NPC namer (Scan.gek)
+ref rScanScript         ; The NPC scanner (Scan.gek)
 float fSecondsSinceScan ; Seconds since the last scan
 float fScanInterval     ; Seconds between scans (INI or MCM)
 

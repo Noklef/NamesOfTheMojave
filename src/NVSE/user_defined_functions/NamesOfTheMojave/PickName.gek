@@ -1,84 +1,109 @@
-; Returns a name for an actor from a loaded pool.
-; Gender: female lists if the actor is female and the pool has female names (female or female_full), else male lists.
-; Attempts 0-3 pick an exact full name (<gender>_full). Later attempts, or a pool without full names,
-; use a first name plus a surname if the pool has any. A pool without first names always uses full names.
-; Same actor, seed and attempt always give the same name. A higher iAttempt re-rolls.
-; sPool can list several pools (A,B). Then one pool is chosen first, weighted by its total names
-; (*NotM:W:<pool>), and the name comes from that pool only, so styles never mix.
-ref rActor
-string_var sPool
-int iAttempt
-ref rPlayer
-ref rHash
-array_var aPools
-string_var sVar
-string_var sName
-string_var sLast
-float fSeed
-int iIdx
-int iFull
-int iSize
-int iPick
-int iPart
-int iTotal
-int iWeight
+; GECK wiki stuff:
+;   - https://geckwiki.com/index.php?title=GetLocalRefIndex
+;   - https://geckwiki.com/index.php?title=AuxiliaryVariableGetSize
+;   - https://geckwiki.com/index.php?title=GetIsSex
+ref rNPC                    ; The NPC to name
+string_var sRulePools       ; The rule's pools, I.E. 'NOTM_wasteland' or 'A,B'
+int iAttempt                ; Which try this is. 0 = first. NameNPC raises it when the name is taken
+ref rHashScript             ; The number picker (Hash.gek)
+array_var aPoolNames        ; The rule's pools, split at ","
+string_var sChosenPool      ; The one pool we pick from
+string_var sNotePrefix      ; The start of the chosen pool's note names, I.E. "*NotM:NOTM_ghoul:"
+string_var sNoteName        ; Which note to pick from, I.E. "*NotM:NOTM_ghoul:female" (+ "_full" for full names)
+string_var sPickedName      ; The name we are building (the answer we give back)
+string_var sSurname         ; The surname we picked
+float fPlaythroughSeed      ; The playthrough number
+int iNPCID                  ; The NPC's ID number (the same on every load)
+int iFullNameCount          ; How many full names the pool has
+int iFirstNameCount         ; How many first names the pool has
+int iSurnameCount           ; How many surnames the pool has
+int iPickedIndex            ; The number Hash picked
+int iPoolIndex              ; Which pool we are on (counter)
+int iTotalNames             ; All the pools' names added up
+int iPoolNameCount          ; One pool's number of names
 
-begin Function {rActor, sPool, iAttempt}
-	let rPlayer := GetFormFromMod "FalloutNV.esm" "000014"
-	let fSeed := rPlayer.AuxVarGetFlt "NotMSeed"
-	let rHash := rPlayer.AuxVarGetRef "*NotM:Hash"
-	let iIdx := GetLocalRefIndex rActor
-	let aPools := sv_Split (sPool) ","
-	if eval (ar_Size aPools) > 1
-		let iTotal := 0
-		let iPart := 0
-		while iPart < (ar_Size aPools)
-			let iTotal += rPlayer.AuxVarGetFlt ("*NotM:W:" + aPools[iPart])
-			let iPart += 1
-		loop
-		if iTotal == 0
-			SetFunctionValue ""
-			return
-		endif
-		; Salts 50+ do not overlap the name salts (1-16).
-		let iPick := Call rHash iIdx fSeed (iAttempt + 50) iTotal
-		let iPart := 0
-		while iPart < (ar_Size aPools)
-			let sPool := aPools[iPart]
-			let iWeight := rPlayer.AuxVarGetFlt ("*NotM:W:" + sPool)
-			if iPick < iWeight
-				break
-			endif
-			let iPick -= iWeight
-			let iPart += 1
-		loop
-	endif
-	let sVar := "*NotM:" + sPool + ":male"
-	if eval rActor.GetIsSex Female
-		if eval ((rPlayer.AuxVarSize ("*NotM:" + sPool + ":female")) + (rPlayer.AuxVarSize ("*NotM:" + sPool + ":female_full"))) > 0
-			let sVar := "*NotM:" + sPool + ":female"
-		endif
-	endif
-	let iFull := rPlayer.AuxVarSize (sVar + "_full")
-	let iSize := rPlayer.AuxVarSize (sVar)
-	if eval iFull > 0 && (iAttempt < 4 || iSize == 0)
-		let iPick := Call rHash iIdx fSeed (iAttempt * 2 + 1) iFull
-		let sName := rPlayer.AuxVarGetStr (sVar + "_full") iPick
-		SetFunctionValue sName
-		return
-	endif
-	if iSize == 0
-		SetFunctionValue ""
-		return
-	endif
-	let iPick := Call rHash iIdx fSeed (iAttempt * 2 + 1) iSize
-	let sName := rPlayer.AuxVarGetStr (sVar) iPick
-	let sVar := "*NotM:" + sPool + ":surname"
-	let iSize := rPlayer.AuxVarSize (sVar)
-	if iSize > 0
-		let iPick := Call rHash iIdx fSeed (iAttempt * 2 + 2) iSize
-		let sLast := rPlayer.AuxVarGetStr (sVar) iPick
-		let sName := sName + " " + sLast
-	endif
-	SetFunctionValue sName
+; This is the picking name script
+begin Function {rNPC, sRulePools, iAttempt}
+
+    let fPlaythroughSeed := player.AuxVarGetFlt "NotMSeed"
+    let rHashScript := player.AuxVarGetRef "*NotM:Hash"
+    ; The NPC's ID number never changes, so the same NPC always gets the same name
+    let iNPCID := GetLocalRefIndex rNPC
+
+    ; ==============================================
+    ; Several pools: pick one first
+    ; ==============================================
+
+    ; Start with the rule's pools. With one pool, that is the pool we use
+    let sChosenPool := sRulePools
+    let aPoolNames := sv_Split (sRulePools) ","
+    if eval (ar_Size aPoolNames) > 1
+        let iTotalNames := 0
+        let iPoolIndex := 0
+        while iPoolIndex < (ar_Size aPoolNames)
+            let iTotalNames += player.AuxVarGetFlt ("*NotM:NameCount:" + aPoolNames[iPoolIndex])
+            let iPoolIndex += 1
+        loop
+        if iTotalNames == 0 ; None of the pools has names
+            SetFunctionValue ""
+            return
+        endif
+        ; Pick numbers 50-57 here and 1-16 for names, so the two picks are not linked
+        let iPickedIndex := Call rHashScript iNPCID fPlaythroughSeed (iAttempt + 50) iTotalNames
+        ; Walk through the pools until the number lands in one. I.E. pools with 300 and 100 names:
+        ; 0-299 picks the first pool, 300-399 the second
+        let iPoolIndex := 0
+        while iPoolIndex < (ar_Size aPoolNames)
+            let sChosenPool := aPoolNames[iPoolIndex]
+            let iPoolNameCount := player.AuxVarGetFlt ("*NotM:NameCount:" + sChosenPool)
+            if iPickedIndex < iPoolNameCount
+                break
+            endif
+            let iPickedIndex -= iPoolNameCount
+            let iPoolIndex += 1
+        loop
+    endif
+
+    ; ==============================================
+    ; Male or female names
+    ; ==============================================
+
+    ; Female names only if the pool has some. I.E. NOTM_legion has male names only,
+    ; so a woman still gets a name from it
+    let sNotePrefix := "*NotM:" + sChosenPool + ":"
+    let sNoteName := sNotePrefix + "male"
+    if eval rNPC.GetIsSex Female
+        if eval ((player.AuxVarSize (sNotePrefix + "female")) + (player.AuxVarSize (sNotePrefix + "female_full"))) > 0
+            let sNoteName := sNotePrefix + "female"
+        endif
+    endif
+
+    ; ==============================================
+    ; Pick the name
+    ; ==============================================
+
+    ; Full names first (real names from the game, I.E. 'Mike Dawson'). From try 4, use first name + surname
+    ; instead (if the pool has first names): that gives far more choices when full names keep clashing
+    let iFullNameCount := player.AuxVarSize (sNoteName + "_full")
+    let iFirstNameCount := player.AuxVarSize (sNoteName)
+
+    if eval iFullNameCount > 0 && (iAttempt < 4 || iFirstNameCount == 0)
+        ; Full name
+        let iPickedIndex := Call rHashScript iNPCID fPlaythroughSeed (iAttempt * 2 + 1) iFullNameCount
+        let sPickedName := player.AuxVarGetStr (sNoteName + "_full") iPickedIndex
+    elseif iFirstNameCount == 0
+        ; No full names and no first names
+        let sPickedName := ""
+    else
+        ; First name + surname. They use different pick numbers (odd and even), so they are picked separately
+        let iPickedIndex := Call rHashScript iNPCID fPlaythroughSeed (iAttempt * 2 + 1) iFirstNameCount
+        let sPickedName := player.AuxVarGetStr (sNoteName) iPickedIndex
+        let iSurnameCount := player.AuxVarSize (sNotePrefix + "surname")
+        if iSurnameCount > 0 ; Pools without surnames (I.E. Legion) give a single name
+            let iPickedIndex := Call rHashScript iNPCID fPlaythroughSeed (iAttempt * 2 + 2) iSurnameCount
+            let sSurname := player.AuxVarGetStr (sNotePrefix + "surname") iPickedIndex
+            let sPickedName := sPickedName + " " + sSurname
+        endif
+    endif
+    SetFunctionValue sPickedName
 end
