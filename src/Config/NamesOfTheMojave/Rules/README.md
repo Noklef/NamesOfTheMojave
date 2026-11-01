@@ -14,6 +14,7 @@ A rule gives actors with one generic name a name from a pool: `Generic name|pool
 | `Name\|pool` | Sets the rule, or replaces it if an earlier file has one. |
 | `Name\|-` | Removes the rule from an earlier file. |
 | `Name\|A,B` | Uses several pools. A pool is chosen first (chance by pool size), then a name from it. No spaces around commas. |
+| `Name\|pool\|Title` | Title + one name, like the game's ranks (e.g. `NCR Ranger\|NOTM_wasteland\|Ranger` → `Ranger Barker`). The name is a surname if the pool has surnames, else a first name. A pool with full names only gives full names, without the title. A later rule without a title clears it. |
 
 ## Changing the rules
 

@@ -3,18 +3,20 @@
 Recruit Legionary|NOTM_legion
 Prime Legionary|NOTM_legion
 Veteran Legionary|NOTM_legion
-Centurion|NOTM_legion
+Centurion|NOTM_legion|Centurion
 Praetorian Guard|NOTM_legion
-Prime Decanus|NOTM_legion
-Recruit Decanus|NOTM_legion
+Prime Decanus|NOTM_legion|Decanus
+Recruit Decanus|NOTM_legion|Decanus
 Legion Explorer|NOTM_legion
-Veteran Decanus|NOTM_legion
+Veteran Decanus|NOTM_legion|Decanus
 Legion Vexillarius|NOTM_legion
 Legionary Assassin|NOTM_legion
 Legionary Blacksmith|NOTM_legion
 Irradiated Legion Explorer|NOTM_legion
 Legionary|NOTM_legion
 Legionary Recruit|NOTM_legion
-Legion Centurion|NOTM_legion
+Legion Centurion|NOTM_legion|Centurion
+Legionary Main Gate Guard|NOTM_legion
+Weather Station Guard|NOTM_legion
 Irradiated Legionary Prime|NOTM_legion
 Irradiated Legionary Veteran|NOTM_legion

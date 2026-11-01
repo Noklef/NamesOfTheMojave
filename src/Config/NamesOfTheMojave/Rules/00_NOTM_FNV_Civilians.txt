@@ -16,6 +16,7 @@ Caravaneer|NOTM_wasteland
 Chem Addict|NOTM_wasteland
 Patient|NOTM_wasteland
 Primm Resident|NOTM_wasteland
+NCR Deputy|NOTM_wasteland|Deputy
 Escaped Convict|NOTM_wasteland
 Wasteland Captive|NOTM_wasteland
 Hunter|NOTM_wasteland
@@ -39,6 +40,9 @@ Man|NOTM_wasteland
 Vault 34 Dweller|NOTM_wasteland
 Drunk|NOTM_wasteland
 Merchant|NOTM_wasteland
+Street Vendor|NOTM_wasteland
+Arms Merchant|NOTM_wasteland
+Child|NOTM_kids
 Missionary|NOTM_wasteland
 Drifter|NOTM_wasteland
 Vagrant|NOTM_wasteland

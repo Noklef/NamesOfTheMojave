@@ -1,0 +1,13 @@
+# Kid names: Little Lamplight style nicknames (lore: Princess, Penny, Eclair, Knick Knack). All drafted, none are lore names.
+# One name per line. Lines starting with # are comments. Do not leave empty lines: the first empty line ends the list.
+Buttons
+Pebbles
+Twinkle
+Dimples
+Cupcake
+Jellybean
+Firefly
+Ladybug
+Pigtails
+Marbles
+Hiccup

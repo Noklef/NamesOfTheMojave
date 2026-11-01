@@ -1,4 +1,4 @@
-# Chinese female full names, surname first. Lore surnames Chao, Tsen, Pang, Chong, Cheng, Ming (FO3 mentioned-only); given names drafted.
+# Chinese female full names, surname first. Lore surname: Cheng (Chairman Cheng, FO3); other names drafted.
 # One name per line. Lines starting with # are comments. Do not leave empty lines: the first empty line ends the list.
 Bai Lan
 Chao Mei

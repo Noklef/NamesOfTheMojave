@@ -4,7 +4,9 @@ Chinese Soldier|NOTM_chinese
 Chinese Sniper|NOTM_chinese
 Chinese Inferno Unit|NOTM_chinese
 Chinese Launcher|NOTM_chinese
+Crimson Dragoon|NOTM_chinese
+Chinese Technician|NOTM_chinese
 Chinese Remnant Soldier|NOTM_chinese
-Chinese Remnant Officer|NOTM_chinese
-Chinese Remnant Sargeant|NOTM_chinese
-Chinese Remnant Sergeant|NOTM_chinese
+Chinese Remnant Officer|NOTM_chinese|Lieutenant
+Chinese Remnant Sargeant|NOTM_chinese|Sergeant
+Chinese Remnant Sergeant|NOTM_chinese|Sergeant

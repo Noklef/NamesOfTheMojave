@@ -77,10 +77,8 @@ Houser
 Houtchens
 Howell
 Humphreys
-Jackson
 Jacobs
 James
-Jameson
 Jenkins
 Johnson
 Jones
@@ -108,7 +106,6 @@ Miles
 Mitchell
 Montalvo
 Montero
-Morgan
 Morningstar
 Nassar
 Ngo
@@ -129,7 +126,6 @@ Raati
 Rado
 Raleigh
 Raynor
-Renolds
 Reyes
 Reynolds
 Ritter
@@ -143,7 +139,6 @@ Seamer
 Smith
 St. James
 Stault
-Stone
 Storey
 Tagg
 Talwin

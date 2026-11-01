@@ -10,4 +10,5 @@ Dead Horse Stalker|NOTM_tribal
 Dead Horse Tribal|NOTM_tribal
 White Legs Light-Bringer|NOTM_tribal
 White Legs Tribal|NOTM_tribal
+White Legs Sapper|NOTM_tribal
 Captive Sorrows Tribal|NOTM_tribal

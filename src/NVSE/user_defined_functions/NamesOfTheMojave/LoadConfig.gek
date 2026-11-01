@@ -8,8 +8,9 @@ ref rReadLinesScript        ; The file reader (ReadLines.gek)
 ref rLoadPoolScript         ; The pool loader (LoadPool.gek)
 ref rLogScript              ; The logger (Log.gek)
 array_var aFileNames       ; The files found in a folder
-array_var aRuleParts        ; One rule split at "|": [name, pools]
+array_var aRuleParts        ; One rule split at "|": [name, pools] or [name, pools, title]
 array_var aRules            ; The rules in use: NPC name -> pools. A later file replaces an earlier rule
+array_var aRuleTitles       ; The rules in use: NPC name -> title ("" = no title)
 array_var aRuleNames        ; The NPC names in aRules, to go through them one by one
 array_var aPoolNames        ; A rule's pools, split at ","
 array_var aUsedPools        ; Every pool loaded so far, so each is loaded once
@@ -18,6 +19,7 @@ string_var sFileName        ; The file we are reading
 string_var sLine            ; The line we are reading
 string_var sRuleName        ; The NPC name a rule is for, I.E. 'Raider'
 string_var sRulePools       ; The pools that rule uses, I.E. 'NOTM_wasteland' or 'A,B'
+string_var sRuleTitle       ; The title that rule puts before the name, I.E. 'Knight' ("" = no title)
 string_var sPoolName        ; One pool, I.E. 'NOTM_wasteland'
 string_var sVersion         ; The mod version, for the startup line
 int iEntryCount             ; Lines read from one file, not counting # comments
@@ -40,6 +42,7 @@ begin Function {}
 
     ; Empty lists to fill as we read (names as keys, so each rule and pool is in there once)
     let aRules := ar_Construct "stringmap"
+    let aRuleTitles := ar_Construct "stringmap"
     let aUsedPools := ar_Construct "stringmap"
     let iPluginCount := 0
 
@@ -94,31 +97,38 @@ begin Function {}
         let iEntryIndex := 0
 
         while iEntryIndex < iEntryCount
-            ; Split 'Name|pools' at the |, I.E. 'Raider|NOTM_wasteland' -> [Raider, NOTM_wasteland]
+            ; Split 'Name|pools' or 'Name|pools|title' at the |, I.E. 'NCR Ranger|NOTM_wasteland|Ranger' -> [NCR Ranger, NOTM_wasteland, Ranger]
             let sLine := player.AuxVarGetStr "*NotM:RuleLines" iEntryIndex
             let aRuleParts := sv_Split (sLine) "|"
 
-            ; No | or more than one is a typo: the line is skipped
-            if eval (ar_Size aRuleParts) != 2
+            ; No | or more than two is a typo: the line is skipped
+            if eval (ar_Size aRuleParts) < 2 || (ar_Size aRuleParts) > 3
                 Call rLogScript "WARN" (sv_Construct "bad rule line [%z] in Rules/%z" sLine sFileName)
             else
                 let sRuleName := aRuleParts[0]
                 let sRulePools := aRuleParts[1]
+                let sRuleTitle := ""
+                if eval (ar_Size aRuleParts) == 3
+                    let sRuleTitle := aRuleParts[2]
+                endif
                 ; Name|- : remove the rule an earlier file made (and any copy stored on an earlier load)
                 if eval sRulePools == "-"
                     Call rLogScript "DEBUG" (sv_Construct "Rules/%z removes the rule for %z" sFileName sRuleName)
                     ar_Erase aRules sRuleName
+                    ar_Erase aRuleTitles sRuleName
                     player.AuxVarErase ("*NotM:Rule:" + sRuleName)
+                    player.AuxVarErase ("*NotM:Title:" + sRuleName)
                 ; Nothing before or after the | is a typo: the line is skipped
                 elseif eval (sv_Length sRuleName) == 0 || (sv_Length sRulePools) == 0
                     Call rLogScript "WARN" (sv_Construct "bad rule line [%z] in Rules/%z" sLine sFileName)
-                ; Name|pool or Name|A,B: these pools replace any earlier rule
+                ; Name|pool or Name|A,B (with or without |title): replaces any earlier rule, title too
                 else
                     ; Shows add-on authors which file won
                     if eval (ar_HasKey aRules sRuleName) == 1
                         Call rLogScript "DEBUG" (sv_Construct "Rules/%z replaces the rule for %z" sFileName sRuleName)
                     endif
                     let aRules[sRuleName] := sRulePools
+                    let aRuleTitles[sRuleName] := sRuleTitle
                 endif
             endif
 
@@ -145,6 +155,7 @@ begin Function {}
         let sRuleName := aRuleNames[iRuleIndex]
         let sRulePools := aRules[sRuleName]
         player.AuxVarSetStr ("*NotM:Rule:" + sRuleName) (sRulePools)
+        player.AuxVarSetStr ("*NotM:Title:" + sRuleName) (aRuleTitles[sRuleName])
 
         ; Load each pool this rule uses, once per game load
         let aPoolNames := sv_Split (sRulePools) ","

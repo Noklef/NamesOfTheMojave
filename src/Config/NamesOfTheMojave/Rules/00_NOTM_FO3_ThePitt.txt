@@ -5,3 +5,4 @@ Pitt Slave|NOTM_wasteland
 Slave Fighter|NOTM_wasteland
 Raider Fighter|NOTM_wasteland
 Slave Guard|NOTM_wasteland
+Slave Master|NOTM_wasteland|Slave Master

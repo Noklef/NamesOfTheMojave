@@ -5,11 +5,13 @@ Talon Company Merc|NOTM_wasteland
 Megaton Settler|NOTM_wasteland
 Tenpenny Resident|NOTM_wasteland
 Regulator|NOTM_wasteland
-Rivet City Security|NOTM_wasteland
+Rivet City Security|NOTM_wasteland|Officer
 Insane Survivor|NOTM_wasteland
 Security Guard|NOTM_wasteland
 Tenpenny Tower Resident|NOTM_wasteland
 Rock Crick Hunter|NOTM_wasteland
+Child Slaver|NOTM_wasteland
+Little Lamplighter|NOTM_kids
 Caravan Guard|NOTM_wasteland
 Child of Atom|NOTM_wasteland
 Project Purity Scientist|NOTM_wasteland

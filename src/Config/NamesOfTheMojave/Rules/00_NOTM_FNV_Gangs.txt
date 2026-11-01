@@ -3,6 +3,7 @@
 Fiend|NOTM_wasteland
 Powder Ganger|NOTM_wasteland
 Powder Ganger Bodyguard|NOTM_wasteland
+Water Pump Guard|NOTM_wasteland
 Viper Gunslinger|NOTM_wasteland
 Viper Leader|NOTM_wasteland
 Kings Gang Member|NOTM_wasteland

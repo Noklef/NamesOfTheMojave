@@ -1,11 +1,12 @@
 # Names of the Mojave rules: FNV groups and services. Format and rule forms: README.md in this folder.
 # This file is replaced on update. Put your own rules in a new file (e.g. 50_MyRules.txt). No empty lines.
 Followers Guard|NOTM_wasteland
-Followers Doctor|NOTM_wasteland
+Followers Doctor|NOTM_wasteland|Doctor
 Boomer|NOTM_wasteland
 Boomer Chef|NOTM_wasteland
 Injured Boomer|NOTM_wasteland
 Boomer Guard|NOTM_wasteland
+Mini Boomer|NOTM_kids
 Crimson Caravan Guard|NOTM_wasteland
 Crimson Caravan Trader|NOTM_wasteland
 Gun Runner Guard|NOTM_wasteland

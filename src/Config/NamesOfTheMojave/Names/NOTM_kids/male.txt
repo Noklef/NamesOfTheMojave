@@ -1,0 +1,13 @@
+# Kid names: Little Lamplight style nicknames (lore: Bumble, Zip, Biwwy, Squirrel, Knock Knock). All drafted, none are lore names.
+# One name per line. Lines starting with # are comments. Do not leave empty lines: the first empty line ends the list. No surname list: kids use one name.
+Gizmo
+Pockets
+Rascal
+Mudpie
+Tumbleweed
+Sprocket
+Pipsqueak
+Doodle
+Scamp
+Wiggles
+Buckles

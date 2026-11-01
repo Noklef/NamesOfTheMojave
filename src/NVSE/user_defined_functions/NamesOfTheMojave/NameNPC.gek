@@ -7,6 +7,7 @@ ref rPickNameScript         ; The name picker (PickName.gek)
 ref rShowNameScript         ; Shows the name on the NPC (ShowName.gek)
 ref rLogScript              ; The logger (Log.gek)
 string_var sChosenPool     ; The pool this try's name comes from
+string_var sTitle           ; The rule's title, I.E. 'Knight' ("" = no title)
 int iAttempt                ; Which try this is (0 to 7). Goes up when the name is taken or empty. Ends at 8 if all 8 failed
 string_var sNewName         ; The name we picked for the NPC
 
@@ -18,12 +19,13 @@ begin Function {rNPC, sOriginalName, sRulePools, aNamesInUse}
     let rPickNameScript := player.AuxVarGetRef "*NotM:PickName"
     let rShowNameScript := player.AuxVarGetRef "*NotM:ShowName"
     let rLogScript := player.AuxVarGetRef "*NotM:Log"
+    let sTitle := player.AuxVarGetStr ("*NotM:Title:" + sOriginalName)
 
     ; Pick a pool, then a name from it. Taken by someone nearby, or no name? Try again
     let iAttempt := 0
     while iAttempt < 8
         let sChosenPool := Call rChoosePoolScript rNPC (sRulePools) iAttempt
-        let sNewName := Call rPickNameScript rNPC (sChosenPool) iAttempt
+        let sNewName := Call rPickNameScript rNPC (sChosenPool) iAttempt (sTitle)
         ; No name: this pool has none for this NPC (I.E. no male names). The next try can
         ; pick another pool of a multi-pool rule
         if eval (sv_Length sNewName) > 0

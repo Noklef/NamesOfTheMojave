@@ -1,0 +1,15 @@
+# Names of the Mojave rules: Operation Anchorage (American side; the Chinese side is in 00_NOTM_Chinese.txt). Format and rule forms: README.md in this folder.
+# This file is replaced on update. Put your own rules in a new file (e.g. 50_MyRules.txt). No empty lines.
+American Soldier|NOTM_wasteland
+Strike Team Grenadier|NOTM_wasteland
+Strike Team Infantryman|NOTM_wasteland
+Strike Team Missile Unit|NOTM_wasteland
+Strike Team Sniper|NOTM_wasteland
+Power Armored Soldier|NOTM_wasteland
+American Sniper|NOTM_wasteland
+American Launcher|NOTM_wasteland
+American Inferno Unit|NOTM_wasteland
+American Grease-Monkey|NOTM_wasteland
+American T51-B Unit|NOTM_wasteland
+U.S. Paratrooper|NOTM_wasteland
+American War Correspondent|NOTM_wasteland

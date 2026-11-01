@@ -16,8 +16,9 @@ Rad Pack Dancer|NOTM_wasteland
 Chairman Greeter|NOTM_wasteland
 Escort|NOTM_wasteland
 Gomorrah Dealer|NOTM_wasteland
+Gomorrah Cash Room Guard|NOTM_wasteland
+Zoara Bouncer|NOTM_wasteland
 King Groupie|NOTM_wasteland
 Blackjack Dealer|NOTM_wasteland
 Casino Guard|NOTM_wasteland
-Security Officer|NOTM_wasteland
 White Glove Bouncer|NOTM_wasteland

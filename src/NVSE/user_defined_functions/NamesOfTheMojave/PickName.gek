@@ -5,6 +5,7 @@
 ref rNPC                    ; The NPC to name
 string_var sPoolName        ; The pool to pick from (ChoosePool picked it), I.E. 'NOTM_wasteland'
 int iAttempt                ; Which try this is. 0 = first. NameNPC raises it when the name is taken or empty
+string_var sTitle           ; The rule's title, I.E. 'Knight' ("" = no title)
 ref rHashScript             ; The number picker (Hash.gek)
 string_var sNotePrefix      ; The start of the pool's note names, I.E. "*NotM:NOTM_ghoul:"
 string_var sNoteName        ; Which note to pick from, I.E. "*NotM:NOTM_ghoul:female" (+ "_full" for full names)
@@ -18,7 +19,7 @@ int iSurnameCount           ; How many surnames the pool has
 int iPickedIndex            ; The number Hash picked
 
 ; This is the picking name script: one name from one pool
-begin Function {rNPC, sPoolName, iAttempt}
+begin Function {rNPC, sPoolName, iAttempt, sTitle}
 
     let fPlaythroughSeed := player.AuxVarGetFlt "NotMSeed"
     let rHashScript := player.AuxVarGetRef "*NotM:Hash"
@@ -47,8 +48,19 @@ begin Function {rNPC, sPoolName, iAttempt}
     ; instead (if the pool has first names): that gives far more choices when full names keep clashing
     let iFullNameCount := player.AuxVarSize (sNoteName + "_full")
     let iFirstNameCount := player.AuxVarSize (sNoteName)
+    let iSurnameCount := player.AuxVarSize (sNotePrefix + "surname")
 
-    if eval iFullNameCount > 0 && (iAttempt < 4 || iFirstNameCount == 0)
+    ; A rule with a title gives title + one name, like the game's own ranks (I.E. 'Knight Torres')
+    if eval (sv_Length sTitle) > 0 && iSurnameCount > 0
+        ; Title + surname, I.E. 'Knight Hendricks'
+        let iPickedIndex := Call rHashScript iNPCID fPlaythroughSeed (iAttempt * 2 + 2) iSurnameCount
+        let sSurname := player.AuxVarGetStr (sNotePrefix + "surname") iPickedIndex
+        let sPickedName := sTitle + " " + sSurname
+    elseif eval (sv_Length sTitle) > 0 && iFirstNameCount > 0
+        ; Title + first name, for pools without surnames, I.E. 'Decanus Cassius'
+        let iPickedIndex := Call rHashScript iNPCID fPlaythroughSeed (iAttempt * 2 + 1) iFirstNameCount
+        let sPickedName := sTitle + " " + (player.AuxVarGetStr (sNoteName) iPickedIndex)
+    elseif eval iFullNameCount > 0 && (iAttempt < 4 || iFirstNameCount == 0)
         ; Full name
         let iPickedIndex := Call rHashScript iNPCID fPlaythroughSeed (iAttempt * 2 + 1) iFullNameCount
         let sPickedName := player.AuxVarGetStr (sNoteName + "_full") iPickedIndex
@@ -59,7 +71,6 @@ begin Function {rNPC, sPoolName, iAttempt}
         ; First name + surname. They use different pick numbers (odd and even), so they are picked separately
         let iPickedIndex := Call rHashScript iNPCID fPlaythroughSeed (iAttempt * 2 + 1) iFirstNameCount
         let sPickedName := player.AuxVarGetStr (sNoteName) iPickedIndex
-        let iSurnameCount := player.AuxVarSize (sNotePrefix + "surname")
         if iSurnameCount > 0 ; Pools without surnames (I.E. Legion) give a single name
             let iPickedIndex := Call rHashScript iNPCID fPlaythroughSeed (iAttempt * 2 + 2) iSurnameCount
             let sSurname := player.AuxVarGetStr (sNotePrefix + "surname") iPickedIndex
