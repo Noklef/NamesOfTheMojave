@@ -20,13 +20,11 @@ begin Function {sFilePath, sNoteName}
         ; Read the next line. Empty = an empty line, the end of the file, or no file at all
         let sLine := ReadStringFromFile (sFilePath) iLineNumber 1
 
-		; Length of 0 means the line's over (this assumes there's no gaps in the .txt files)
+        ; Length of 0 means the line's over (this assumes there's no gaps in the .txt files)
         if eval (sv_Length sLine) == 0
             break
-        endif
-
-        if eval sLine[0:0] != "#"
-            player.AuxVarSetStr (sNoteName) (sLine) -1 ; -1 = add to the end, since a comment doesn't count at this point
+        elseif eval sLine[0:0] != "#" ; If it's a comment, we -1 since comments don't count to the total
+            player.AuxVarSetStr (sNoteName) (sLine) -1
         endif
 
         let iLineNumber += 1 ; Bump the line count up
