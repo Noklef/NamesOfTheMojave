@@ -9,19 +9,23 @@ ref rLogScript              ; The logger (Log.gek)
 string_var sOriginalName    ; The NPC's original name, I.E. 'Powder Ganger'
 string_var sRulePools       ; Which pools to use, from the rule (I.E. 'NOTM_wasteland')
 array_var aNamesInUse       ; Every name in use nearby. Shared with Scan, so a name given here counts as taken for the next NPC
+ref rChoosePoolScript       ; The pool picker (ChoosePool.gek)
 ref rPickNameScript         ; The name picker (PickName.gek)
+string_var sChosenPool      ; The pool this try's name comes from
 int iAttempt                ; Which try this is (0 to 7). Goes up when the name is taken. Ends at 8 if all 8 were taken
 string_var sNewName         ; The name we picked for the NPC
 
 begin Function {rNPC, sOriginalName, sRulePools, aNamesInUse}
 
-    ; Load the PickName script reference
+    ; Load the ChoosePool and PickName script references
+    let rChoosePoolScript := player.AuxVarGetRef "*NotM:ChoosePool"
     let rPickNameScript := player.AuxVarGetRef "*NotM:PickName"
 
-    ; Pick a name. Taken by someone nearby? Try again
+    ; Pick a pool, then a name from it. Taken by someone nearby? Try again
     let iAttempt := 0
     while iAttempt < 8
-        let sNewName := Call rPickNameScript rNPC (sRulePools) iAttempt
+        let sChosenPool := Call rChoosePoolScript rNPC (sRulePools) iAttempt
+        let sNewName := Call rPickNameScript rNPC (sChosenPool) iAttempt
         if eval (sv_Length sNewName) == 0 ; No names in the pool for this NPC
             break
         endif

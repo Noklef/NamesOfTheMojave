@@ -55,6 +55,7 @@ begin Function {}
 
     ; Compiles the scripts we're going to be using for the mod
     player.AuxVarSetRef "*NotM:Hash" (CompileScript "NamesOfTheMojave/Hash.gek")
+    player.AuxVarSetRef "*NotM:ChoosePool" (CompileScript "NamesOfTheMojave/ChoosePool.gek")
     player.AuxVarSetRef "*NotM:PickName" (CompileScript "NamesOfTheMojave/PickName.gek")
     player.AuxVarSetRef "*NotM:NameNPC" (CompileScript "NamesOfTheMojave/NameNPC.gek")
     player.AuxVarSetRef "*NotM:Scan" (CompileScript "NamesOfTheMojave/Scan.gek")

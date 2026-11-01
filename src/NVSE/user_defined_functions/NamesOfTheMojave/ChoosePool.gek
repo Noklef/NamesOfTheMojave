@@ -1,0 +1,56 @@
+; GECK wiki stuff:
+;   - https://geckwiki.com/index.php?title=GetLocalRefIndex
+ref rNPC                    ; The NPC to name
+string_var sRulePools       ; The rule's pools, I.E. 'NOTM_wasteland' or 'A,B'
+int iAttempt                ; Which try this is. 0 = first. NameNPC raises it when the name is taken
+ref rHashScript             ; The number picker (Hash.gek)
+array_var aPoolNames        ; The rule's pools, split at ","
+string_var sChosenPool      ; The pool we picked (the answer we give back)
+float fPlaythroughSeed      ; The playthrough number
+int iNPCID                  ; The NPC's ID number (the same on every load)
+int iPickedIndex            ; The number Hash picked
+int iPoolIndex              ; Which pool we are on (counter)
+int iTotalNames             ; All the pools' names added up
+int iPoolNameCount          ; One pool's number of names
+
+; Picks the one pool a name comes from. Bigger pools get picked more often.
+; The whole name comes from that one pool, so name styles never mix.
+; Gives back "" if none of the pools has names
+begin Function {rNPC, sRulePools, iAttempt}
+
+    ; One pool: that is the pool we use
+    let sChosenPool := sRulePools
+    let aPoolNames := sv_Split (sRulePools) ","
+    if eval (ar_Size aPoolNames) > 1
+        let iTotalNames := 0
+        let iPoolIndex := 0
+        while iPoolIndex < (ar_Size aPoolNames)
+            let iTotalNames += player.AuxVarGetFlt ("*NotM:NameCount:" + aPoolNames[iPoolIndex])
+            let iPoolIndex += 1
+        loop
+        if iTotalNames == 0 ; None of the pools has names
+            SetFunctionValue ""
+            return
+        endif
+
+        ; Pick numbers 50-57 here (PickName uses 1-16), so the pool pick and the name pick are not linked
+        let fPlaythroughSeed := player.AuxVarGetFlt "NotMSeed"
+        let rHashScript := player.AuxVarGetRef "*NotM:Hash"
+        let iNPCID := GetLocalRefIndex rNPC
+        let iPickedIndex := Call rHashScript iNPCID fPlaythroughSeed (iAttempt + 50) iTotalNames
+
+        ; Walk through the pools until the number lands in one. I.E. pools with 300 and 100 names:
+        ; 0-299 picks the first pool, 300-399 the second
+        let iPoolIndex := 0
+        while iPoolIndex < (ar_Size aPoolNames)
+            let sChosenPool := aPoolNames[iPoolIndex]
+            let iPoolNameCount := player.AuxVarGetFlt ("*NotM:NameCount:" + sChosenPool)
+            if iPickedIndex < iPoolNameCount
+                break
+            endif
+            let iPickedIndex -= iPoolNameCount
+            let iPoolIndex += 1
+        loop
+    endif
+    SetFunctionValue sChosenPool
+end
