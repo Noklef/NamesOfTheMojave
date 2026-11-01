@@ -39,7 +39,7 @@
                         "valueMax": 60
                     },
                     "vars": [
-                        { "form": "PlayerRef", "auxVar": "*NotM:Interval", "key": 0, "configINI": "General:ScanInterval", "default": 10 }
+                        { "form": "PlayerRef", "auxVar": "*NotM:ScanInterval", "key": 0, "configINI": "General:ScanInterval", "default": 10 }
                     ]
                 },
                 "4": {

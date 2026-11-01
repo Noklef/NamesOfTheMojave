@@ -1,25 +1,34 @@
-; Main-loop callback, every 30 frames in gameplay. Runs Scan every *NotM:Interval seconds,
-; and about 1 s after the player enters a new cell (actors need a moment to load).
-; Elapsed time: GetSecondsPassed is the last frame time, so it is scaled by the 30-frame step.
-ref rPlayer
-ref rCell
-ref rScan
-float fTimer
-float fInterval
+; GECK wiki stuff:
+;   - https://geckwiki.com/index.php?title=SetGameMainLoopCallback
+;   - https://geckwiki.com/index.php?title=GetSecondsPassed
+;   - https://geckwiki.com/index.php?title=GetParentCell
+
+ref rCurrentCell        ; The area you are in now
+ref rScanScript         ; The NPC namer (Scan.gek)
+float fSecondsSinceScan ; Seconds since the last scan
+float fScanInterval     ; Seconds between scans (INI or MCM)
 
 begin Function {}
-	let rPlayer := GetFormFromMod "FalloutNV.esm" "000014"
-	let fInterval := rPlayer.AuxVarGetFlt "*NotM:Interval"
-	let fTimer := (rPlayer.AuxVarGetFlt "*NotM:Timer") + (GetSecondsPassed * 30)
-	let rCell := rPlayer.GetParentCell
-	if eval rCell != rPlayer.AuxVarGetRef "*NotM:Cell"
-		rPlayer.AuxVarSetRef "*NotM:Cell" rCell
-		let fTimer := GetMaxOf fTimer (fInterval - 1)
-	endif
-	if fTimer >= fInterval
-		let fTimer := 0
-		let rScan := rPlayer.AuxVarGetRef "*NotM:Scan"
-		Call rScan
-	endif
-	rPlayer.AuxVarSetFlt "*NotM:Timer" fTimer
+    ; Get the scan interval, in case MCM changed it
+    let fScanInterval := player.AuxVarGetFlt "*NotM:ScanInterval"
+
+    ; Logic is: time since last tick + time since last scan
+    ; GetSecondsPassed gives the time of one frame (measured in game), and a tick is 30 frames
+    let fSecondsSinceScan := (player.AuxVarGetFlt "*NotM:SecondsSinceScan") + (GetSecondsPassed * 30)
+
+    ; When we go somewhere new. Door, fast travel, walking into a new cell, etc.
+    let rCurrentCell := player.GetParentCell
+    if eval rCurrentCell != player.AuxVarGetRef "*NotM:LastCell"                ; If we enter a new cell
+        player.AuxVarSetRef "*NotM:LastCell" rCurrentCell                       ; Set the last cell to the current
+        let fSecondsSinceScan := GetMaxOf fSecondsSinceScan (fScanInterval - 1) ; Set the scan interval to 1
+    endif
+
+    ; Name NPC's and then reset the count to re-scan
+    if fSecondsSinceScan >= fScanInterval
+        let fSecondsSinceScan := 0
+        let rScanScript := player.AuxVarGetRef "*NotM:Scan"
+        Call rScanScript
+    endif
+
+    player.AuxVarSetFlt "*NotM:SecondsSinceScan" fSecondsSinceScan
 end
