@@ -1,0 +1,2 @@
+# Names of the Mojave - The Frontier add-on. Lets actors from this plugin be named.
+The Frontier.esm
