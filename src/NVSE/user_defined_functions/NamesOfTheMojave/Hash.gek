@@ -1,16 +1,24 @@
-; Deterministic pick: returns an index in [0, fSize) from ref index, seed and salt.
-; Operators only, no commands: command arguments are 32-bit floats and lose precision above 2^24.
-; % converts to integer, so every value stays below 2^31 (max about 1.2e9).
-; Two residues of the ref index (65521, 9973) keep refs up to 6.5e8 apart. Then two LCG steps mod 65521.
-float fIdx
-float fSeed
-float fSalt
-float fSize
-int iX
+; Dev Notes:
+;   - So it turns out that the game forgets the names on load. This has been generated so we don't need to
+;       manually hard-set the names everytime we load. 
 
-begin Function {fIdx, fSeed, fSalt, fSize}
-	let iX := ((fIdx % 65521) * 251 + (fIdx % 9973) * 31 + fSeed + fSalt * 7919) % 65521
-	let iX := (iX * 17364 + 12345) % 65521
-	let iX := (iX * 17364 + 12345) % 65521
-	SetFunctionValue (iX % fSize)
+; This was 10000% AI-generated; I can't for the life of me figure out the complexity of something like... this.
+; Like originally it was a "linear congruential generator", but it works... I've asked it to explain what each bit does.
+float fNPCID            ; The NPC's ID number. It never changes, so the NPC always gets the same name
+float fPlaythroughSeed  ; A random number picked when you start a new game. New game = new names
+float fPickNumber       ; What we are picking (first name, surname, pool or a retry). New number = new pick
+float fListSize         ; How many names are in the list
+int iRoll               ; The number we work out, step by step
+
+begin Function {fNPCID, fPlaythroughSeed, fPickNumber, fListSize}
+    ; 1. Add the three numbers together.
+    ;    The pick number gets multiplied by a big number, so a retry does not land on the next NPC's name
+    let iRoll := fNPCID + fPlaythroughSeed + fPickNumber * 7919
+    ; 2. Shrink it to 0 - 65520, so step 3 does not get too big for the game's maths
+    let iRoll := iRoll % 65521
+    ; 3. Shuffle it: multiply by a big number, then shrink it again.
+    ;    Now NPCs standing next to each other get very different numbers
+    let iRoll := (iRoll * 17364) % 65521
+    ; 4. Shrink it to fit the name list. This is the name we use
+    SetFunctionValue (iRoll % fListSize)
 end
