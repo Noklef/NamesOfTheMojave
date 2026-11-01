@@ -17,6 +17,7 @@ int iFullNameCount          ; How many full names the pool has
 int iFirstNameCount         ; How many first names the pool has
 int iSurnameCount           ; How many surnames the pool has
 int iPickedIndex            ; The number Hash picked
+int iTitlesOff              ; 1 = the rule has a title, but Use titles is off: keep the name the title would use, minus the title
 
 ; This is the picking name script: one name from one pool
 begin Function {rNPC, sPoolName, iAttempt, sTitle}
@@ -50,6 +51,13 @@ begin Function {rNPC, sPoolName, iAttempt, sTitle}
     let iFirstNameCount := player.AuxVarSize (sNoteName)
     let iSurnameCount := player.AuxVarSize (sNotePrefix + "surname")
 
+    ; Use titles logic; if titles are off, we drop the titles
+    let iTitlesOff := 0
+    if eval (sv_Length sTitle) > 0 && (player.AuxVarGetFlt "*NotM:UseTitles") == 0
+        let sTitle := ""
+        let iTitlesOff := 1
+    endif
+
     ; A rule with a title gives title + one name, like the game's own ranks (I.E. 'Knight Torres')
     if eval (sv_Length sTitle) > 0 && iSurnameCount > 0
         ; Title + surname, I.E. 'Knight Hendricks'
@@ -60,8 +68,8 @@ begin Function {rNPC, sPoolName, iAttempt, sTitle}
         ; Title + first name, for pools without surnames, I.E. 'Decanus Cassius'
         let iPickedIndex := Call rHashScript iNPCID fPlaythroughSeed (iAttempt * 2 + 1) iFirstNameCount
         let sPickedName := sTitle + " " + (player.AuxVarGetStr (sNoteName) iPickedIndex)
-    elseif eval iFullNameCount > 0 && (iAttempt < 4 || iFirstNameCount == 0)
-        ; Full name
+    elseif eval iFullNameCount > 0 && (iFirstNameCount == 0 || (iAttempt < 4 && iTitlesOff == 0))
+        ; Full name (also for a titled rule with titles off when the pool has no first names, I.E. NOTM_chinese)
         let iPickedIndex := Call rHashScript iNPCID fPlaythroughSeed (iAttempt * 2 + 1) iFullNameCount
         let sPickedName := player.AuxVarGetStr (sNoteName + "_full") iPickedIndex
     elseif iFirstNameCount == 0

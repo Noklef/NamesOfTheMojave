@@ -57,6 +57,15 @@
                         { "form": "PlayerRef", "auxVar": "NotMSeed", "key": 0 }
                     ]
                 },
+                "6": {
+                    "type": 4,
+                    "enable": 1,
+                    "title": "Use titles",
+                    "mouse": "Puts the game's ranks before a name, e.g. Ranger Barker. Off puts a first name in place of the rank, e.g. Erik Barker.",
+                    "vars": [
+                        { "form": "PlayerRef", "auxVar": "*NotM:UseTitles", "key": 0, "configINI": "General:UseTitles", "default": 1 }
+                    ]
+                },
                 "7": {
                     "type": 7,
                     "enable": 1,

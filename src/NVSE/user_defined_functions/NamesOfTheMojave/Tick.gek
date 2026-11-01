@@ -36,6 +36,12 @@ begin Function {}
         let fSecondsSinceScan := fScanInterval
     endif
 
+    ; UseTitles changed (MCM): scan now, so the NPCs around you get their new names straight away
+    if eval (player.AuxVarGetFlt "*NotM:UseTitles") != (player.AuxVarGetFlt "*NotM:UseTitlesShown")
+        player.AuxVarSetFlt "*NotM:UseTitlesShown" (player.AuxVarGetFlt "*NotM:UseTitles")
+        let fSecondsSinceScan := fScanInterval
+    endif
+
     ; Name NPC's and then reset the count to re-scan
     if fSecondsSinceScan >= fScanInterval
         let fSecondsSinceScan := 0

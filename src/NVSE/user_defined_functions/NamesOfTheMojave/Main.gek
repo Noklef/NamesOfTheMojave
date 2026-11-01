@@ -45,8 +45,13 @@ begin Function {}
     player.AuxVarSetStr "*NotM:Version" "1.0.0"
     player.AuxVarSetFlt "*NotM:ScanInterval" fScanInterval
     player.AuxVarSetFlt "*NotM:ShowRole" (GetINIFloat "General:ShowRole" "NamesOfTheMojave.ini")
+
     ; The ShowRole the names show now. Tick re-shows the names when MCM changes ShowRole
     player.AuxVarSetFlt "*NotM:ShowRoleShown" (player.AuxVarGetFlt "*NotM:ShowRole")
+    player.AuxVarSetFlt "*NotM:UseTitles" (GetINIFloat "General:UseTitles" "NamesOfTheMojave.ini")
+
+    ; The UseTitles the names use now. Tick re-names the NPCs when MCM changes UseTitles
+    player.AuxVarSetFlt "*NotM:UseTitlesShown" (player.AuxVarGetFlt "*NotM:UseTitles")
 
     ; ================================================================
     ; Scripts: compile once, store on the player for the other scripts

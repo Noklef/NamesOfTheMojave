@@ -15,6 +15,7 @@ string_var sCurrentName     ; The name the NPC shows right now
 string_var sGivenName       ; The name we gave the NPC, without the role (empty if we never named them)
 string_var sRulePools       ; Which pools to use, from the rule (I.E. 'NOTM_wasteland')
 float fPlaythroughSeed      ; The playthrough number. An NPC named with another number gets a new name
+float fUseTitles            ; 1 = rule titles on. An NPC named with the other setting gets a new name
 
 ; This names the NPC's around the player
 ; Logic for this to satisfy a rename:
@@ -27,6 +28,7 @@ begin Function {}
     let rShowNameScript := player.AuxVarGetRef "*NotM:ShowName"
     let aNamesInUse := ar_Construct "stringmap"
     let fPlaythroughSeed := player.AuxVarGetFlt "NotMSeed"
+    let fUseTitles := player.AuxVarGetFlt "*NotM:UseTitles"
 
     ; ==============================================
     ; Round 1: note the names already in use
@@ -77,8 +79,8 @@ begin Function {}
                 endif
             elseif eval sCurrentName == sGivenName || sCurrentName == (sGivenName + " (" + sOriginalName + ")")
                 ; We named them already. A name from another mod does not match, so it is left alone
-                if eval (rNPC.AuxVarGetFlt "*NotM:Seed") != fPlaythroughSeed
-                    ; The seed changed (MCM): give them a name from the new seed
+                if eval (rNPC.AuxVarGetFlt "*NotM:Seed") != fPlaythroughSeed || (rNPC.AuxVarGetFlt "*NotM:UseTitles") != fUseTitles
+                    ; The seed or UseTitles changed (MCM): give them a name from the new settings
                     Call rNameNPCScript rNPC (sOriginalName) (player.AuxVarGetStr ("*NotM:Rule:" + sOriginalName)) aNamesInUse
                 else
                     ; Show the name again, so a ShowRole change (MCM) reaches them

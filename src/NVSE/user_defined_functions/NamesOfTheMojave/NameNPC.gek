@@ -48,6 +48,7 @@ begin Function {rNPC, sOriginalName, sRulePools, aNamesInUse}
     ; Keep the name on the NPC, then show it (ShowName adds the role if ShowRole is on)
     rNPC.AuxVarSetStr "*NotM:GivenName" (sNewName)
     rNPC.AuxVarSetFlt "*NotM:Seed" (player.AuxVarGetFlt "NotMSeed") ; The seed this name came from. Scan re-names the NPC when it changes
+    rNPC.AuxVarSetFlt "*NotM:UseTitles" (player.AuxVarGetFlt "*NotM:UseTitles") ; The UseTitles this name came from. Same
 
     Call rShowNameScript rNPC
     let aNamesInUse[sNewName] := 1
