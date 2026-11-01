@@ -1,16 +1,21 @@
-; Menu-open handler for DialogMenu (1009). The game fills the speaker label from the base name,
-; so this replaces it with the ref name that Scan set. Tile path matches vanilla and Vanilla UI Plus.
-; A duplicate registration on reload is harmless: the label is set to the same text twice.
-int iMenu
-ref rSpeaker
-string_var sName
+; GECK wiki stuff:
+;   - https://geckwiki.com/index.php?title=SetOnMenuOpenEventHandler
+;   - https://geckwiki.com/index.php?title=GetMenuTargetRef
+;   - https://geckwiki.com/index.php?title=SetUIString
 
-begin Function {iMenu}
-	let rSpeaker := GetMenuTargetRef 1009
-	if eval rSpeaker
-		let sName := rSpeaker.LNGetName
-		if eval sName != rSpeaker.GetName
-			SetUIString "DialogMenu\NOGLOW_BRANCH\DM_SpeakerNameLabel\string" (sName)
-		endif
-	endif
+; Menu open handler for the dialog menu, this is more a "Just in case", since maybe if a mod adds 
+; random NPC's actual dialog options, this should catch that and do it
+int iMenuCode           ; Menu code passed by the event (always 1009 here)
+ref rSpeaker            ; The NPC we are talking to
+string_var sDisplayName ; The NPC's display name (the one we gave them)
+
+begin Function {iMenuCode}
+    let rSpeaker := GetMenuTargetRef iMenuCode ; iMenuCode is passed by the event: 1009, the DialogMenu code
+    if eval rSpeaker
+        let sDisplayName := rSpeaker.LNGetName          ; Display name (I.E. 'Mike Dawson'), or the base name if we never renamed them
+        if eval sDisplayName != rSpeaker.GetName        ; Base name (I.E. 'Prospector'). Different = we renamed them
+            ; Path checked against the vanilla and Vanilla UI Plus menu files. Tested in game with Vanilla UI Plus
+            SetUIString "DialogMenu\NOGLOW_BRANCH\DM_SpeakerNameLabel\string" (sDisplayName)
+        endif
+    endif
 end
