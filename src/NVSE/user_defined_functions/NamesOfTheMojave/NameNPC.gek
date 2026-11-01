@@ -1,11 +1,7 @@
-; Gives one NPC a name that nobody nearby has.
-; Picks again if the name is already taken (up to 8 tries).
-; With ShowRole on, the old name is added in brackets: 'Mike Dawson (Prospector)'.
 ; GECK wiki stuff:
 ;   - https://geckwiki.com/index.php?title=SetRefName
 
 ref rNPC                    ; The NPC to name
-ref rLogScript              ; The logger (Log.gek)
 string_var sOriginalName    ; The NPC's original name, I.E. 'Powder Ganger'
 string_var sRulePools       ; Which pools to use, from the rule (I.E. 'NOTM_wasteland')
 array_var aNamesInUse       ; Every name in use nearby. Shared with Scan, so a name given here counts as taken for the next NPC
@@ -15,6 +11,7 @@ string_var sChosenPool      ; The pool this try's name comes from
 int iAttempt                ; Which try this is (0 to 7). Goes up when the name is taken. Ends at 8 if all 8 were taken
 string_var sNewName         ; The name we picked for the NPC
 
+; Gives one NPC a name that nobody nearby has.
 begin Function {rNPC, sOriginalName, sRulePools, aNamesInUse}
 
     ; Load the ChoosePool and PickName script references
@@ -47,8 +44,4 @@ begin Function {rNPC, sOriginalName, sRulePools, aNamesInUse}
     ; Still taken after 8 tries? Use it anyway: a repeat is better than no name
     rNPC.SetRefName (sNewName)
     let aNamesInUse[sNewName] := 1
-    if eval (player.AuxVarGetFlt "*NotM:Debug") == 1
-        let rLogScript := player.AuxVarGetRef "*NotM:Log"
-        Call rLogScript (sv_Construct "%i %z -> %z (try %g)" rNPC sOriginalName sNewName iAttempt)
-    endif
 end

@@ -4,7 +4,6 @@
 ;   - https://geckwiki.com/index.php?title=CompileScript
 ;   - https://geckwiki.com/index.php?title=SetOnMenuOpenEventHandler
 ;   - https://geckwiki.com/index.php?title=SetGameMainLoopCallback
-;   - https://geckwiki.com/index.php?title=WriteStringToFile
 
 ref rLoadConfigScript   ; The config loader (LoadConfig.gek), ready to run
 ref rTickScript         ; The scan timer (Tick.gek), ready to run
@@ -48,12 +47,9 @@ begin Function {}
     ; Scripts: compile once, store on the player for the other scripts
     ; ================================================================
 
-    ; The logger goes first, so every line after this reaches the log file.
-    ; 0 = start the file again, so it only has lines from this load
-    player.AuxVarSetRef "*NotM:Log" (CompileScript "NamesOfTheMojave/Log.gek")
-    WriteStringToFile "NamesOfTheMojave.log" 0 "[NotM] Log started"
-
     ; Compiles the scripts we're going to be using for the mod
+    player.AuxVarSetRef "*NotM:Log" (CompileScript "NamesOfTheMojave/Log.gek") ; Nothing calls it yet: logging is being re-done
+    player.AuxVarSetRef "*NotM:ReadLines" (CompileScript "NamesOfTheMojave/ReadLines.gek")
     player.AuxVarSetRef "*NotM:Hash" (CompileScript "NamesOfTheMojave/Hash.gek")
     player.AuxVarSetRef "*NotM:ChoosePool" (CompileScript "NamesOfTheMojave/ChoosePool.gek")
     player.AuxVarSetRef "*NotM:PickName" (CompileScript "NamesOfTheMojave/PickName.gek")
