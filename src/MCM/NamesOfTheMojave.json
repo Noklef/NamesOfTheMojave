@@ -42,6 +42,21 @@
                         { "form": "PlayerRef", "auxVar": "*NotM:ScanInterval", "key": 0, "configINI": "General:ScanInterval", "default": 10 }
                     ]
                 },
+                "5": {
+                    "type": 2,
+                    "enable": 1,
+                    "title": "Name seed",
+                    "mouse": "WARNING: Changing this will change the names of all the NPC's named by this mod. Same Number = Same seed though, so if you remember your original after changing you can revert back.",
+                    "scale": {
+                        "valueDecimal": 0,
+                        "valueIncrement": 1,
+                        "valueMin": 1,
+                        "valueMax": 10000
+                    },
+                    "vars": [
+                        { "form": "PlayerRef", "auxVar": "NotMSeed", "key": 0 }
+                    ]
+                },
                 "7": {
                     "type": 7,
                     "enable": 1,

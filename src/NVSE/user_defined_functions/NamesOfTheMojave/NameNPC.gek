@@ -43,9 +43,12 @@ begin Function {rNPC, sOriginalName, sRulePools, aNamesInUse}
         Call rLogScript "DEBUG" (sv_Construct "%i %z: no usable name after 8 tries (last pool [%z]), left unnamed" rNPC sOriginalName sChosenPool)
         return
     endif
+
     ; Still taken after 8 tries? Use it anyway: a repeat is better than no name.
     ; Keep the name on the NPC, then show it (ShowName adds the role if ShowRole is on)
     rNPC.AuxVarSetStr "*NotM:GivenName" (sNewName)
+    rNPC.AuxVarSetFlt "*NotM:Seed" (player.AuxVarGetFlt "NotMSeed") ; The seed this name came from. Scan re-names the NPC when it changes
+
     Call rShowNameScript rNPC
     let aNamesInUse[sNewName] := 1
     ; Try 8 = the loop ran out and try 7 was taken, so the name is a repeat (the pool is small for this many NPCs in one area)

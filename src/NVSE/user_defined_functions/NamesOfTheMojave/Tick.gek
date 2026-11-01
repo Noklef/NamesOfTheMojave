@@ -30,6 +30,12 @@ begin Function {}
         let fSecondsSinceScan := fScanInterval
     endif
 
+    ; Seed changed (MCM): scan now, so the NPCs around you get their new names straight away
+    if eval (player.AuxVarGetFlt "NotMSeed") != (player.AuxVarGetFlt "*NotM:SeedShown")
+        player.AuxVarSetFlt "*NotM:SeedShown" (player.AuxVarGetFlt "NotMSeed")
+        let fSecondsSinceScan := fScanInterval
+    endif
+
     ; Name NPC's and then reset the count to re-scan
     if fSecondsSinceScan >= fScanInterval
         let fSecondsSinceScan := 0

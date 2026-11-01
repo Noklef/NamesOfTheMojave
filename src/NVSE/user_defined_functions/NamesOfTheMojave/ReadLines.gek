@@ -15,7 +15,7 @@ begin Function {sFilePath, sNoteName}
     player.AuxVarErase (sNoteName)
     let iLineNumber := 1 ; Start from line 1
 
-	; While `true`, keep running until we don't have any lines to go through
+    ; While `true`, keep running until we don't have any lines to go through
     while 1 
         ; Read the next line. Empty = an empty line, the end of the file, or no file at all
         let sLine := ReadStringFromFile (sFilePath) iLineNumber 1
