@@ -1,16 +1,20 @@
 string_var sPoolName        ; The pool to load, I.E. 'NOTM_wasteland'
 ref rReadLinesScript        ; The file reader (ReadLines.gek)
+ref rLogScript              ; The logger (Log.gek)
 string_var sFolderPath      ; The pool's folder, I.E. "Data/Config/NamesOfTheMojave/Names/NOTM_wasteland/"
 string_var sNotePrefix      ; The start of the pool's note names, I.E. "*NotM:NOTM_wasteland:"
 int iMaleCount              ; Names in male.txt
 int iMaleFullCount          ; Names in male_full.txt
 int iFemaleCount            ; Names in female.txt
 int iFemaleFullCount        ; Names in female_full.txt
+int iSurnameCount           ; Names in surname.txt (only for the log line)
 
 ; Loads a single pool of names
 begin Function {sPoolName}
     ; Get the file reader, and build the folder path and note prefix for this pool's files
     let rReadLinesScript := player.AuxVarGetRef "*NotM:ReadLines"
+    let rLogScript := player.AuxVarGetRef "*NotM:Log"
+    
     let sFolderPath := "Data/Config/NamesOfTheMojave/Names/" + sPoolName + "/"
     let sNotePrefix := "*NotM:" + sPoolName + ":"
 
@@ -18,11 +22,17 @@ begin Function {sPoolName}
     let iMaleCount := Call rReadLinesScript (sFolderPath + "male.txt") (sNotePrefix + "male")
     let iMaleFullCount := Call rReadLinesScript (sFolderPath + "male_full.txt") (sNotePrefix + "male_full")
 
+    ; No male names: this pool cannot name anyone reliably. Also shows a pool folder name with a typo
+    if eval (iMaleCount + iMaleFullCount) == 0
+        Call rLogScript "WARN" (sv_Construct "Names/%z has no male.txt or male_full.txt names" sPoolName)
+    endif
+
     ; Female names and surnames are optional. A missing file gives 0 names
     let iFemaleCount := Call rReadLinesScript (sFolderPath + "female.txt") (sNotePrefix + "female")
     let iFemaleFullCount := Call rReadLinesScript (sFolderPath + "female_full.txt") (sNotePrefix + "female_full")
-    ; The surname count is not kept: PickName reads it from the note when it needs it
-    Call rReadLinesScript (sFolderPath + "surname.txt") (sNotePrefix + "surname")
+    let iSurnameCount := Call rReadLinesScript (sFolderPath + "surname.txt") (sNotePrefix + "surname")
+    ; A count of 0 here means a file is missing or named wrong
+    Call rLogScript "DEBUG" (sv_Construct "Names/%z: %g male, %g male_full, %g female, %g female_full, %g surname" sPoolName iMaleCount iMaleFullCount iFemaleCount iFemaleFullCount iSurnameCount)
 
     ; Total names = how often this pool is picked when a rule has several pools
     player.AuxVarSetFlt ("*NotM:NameCount:" + sPoolName) (iMaleCount + iMaleFullCount + iFemaleCount + iFemaleFullCount)

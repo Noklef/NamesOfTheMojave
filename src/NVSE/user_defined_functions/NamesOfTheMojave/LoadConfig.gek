@@ -6,7 +6,8 @@
 ;   - https://geckwiki.com/index.php?title=Ar_Keys
 ref rReadLinesScript        ; The file reader (ReadLines.gek)
 ref rLoadPoolScript         ; The pool loader (LoadPool.gek)
-array_var aFileNames        ; The files found in a folder
+ref rLogScript              ; The logger (Log.gek)
+array_var aFileNames       ; The files found in a folder
 array_var aRuleParts        ; One rule split at "|": [name, pools]
 array_var aRules            ; The rules in use: NPC name -> pools. A later file replaces an earlier rule
 array_var aRuleNames        ; The NPC names in aRules, to go through them one by one
@@ -18,22 +19,29 @@ string_var sLine            ; The line we are reading
 string_var sRuleName        ; The NPC name a rule is for, I.E. 'Raider'
 string_var sRulePools       ; The pools that rule uses, I.E. 'NOTM_wasteland' or 'A,B'
 string_var sPoolName        ; One pool, I.E. 'NOTM_wasteland'
+string_var sVersion         ; The mod version, for the startup line
 int iEntryCount             ; Lines read from one file, not counting # comments
 int iFileIndex              ; Which file we are on (counter)
 int iEntryIndex             ; Which line we are on (counter)
 int iRuleIndex              ; Which rule we are on (counter)
 int iPoolIndex              ; Which pool we are on (counter)
 int iPluginIndex            ; A plugin's load order number. 255 = not installed
+int iPluginCount            ; How many listed plugins are installed, for the startup line
+int iRuleCount              ; How many rules are in use, for the startup line
+int iPoolCount              ; How many pools are in use, for the startup line
 
 ; This one reads all the files in the config folder. I.E. which plugins to use, the rules, and their pools
 begin Function {}
     ; LoadPool is only used here, so it is compiled here (Main compiles the shared scripts)
     let rReadLinesScript := player.AuxVarGetRef "*NotM:ReadLines"
     let rLoadPoolScript := CompileScript "NamesOfTheMojave/LoadPool.gek"
+    let rLogScript := player.AuxVarGetRef "*NotM:Log"
     let sConfigFolder := "Data/Config/NamesOfTheMojave/"
+
     ; Empty lists to fill as we read (names as keys, so each rule and pool is in there once)
     let aRules := ar_Construct "stringmap"
     let aUsedPools := ar_Construct "stringmap"
+    let iPluginCount := 0
 
     ; ==============================================
     ; Plugins: whose NPCs may be named
@@ -48,6 +56,7 @@ begin Function {}
         let sFileName := aFileNames[iFileIndex]
         let iEntryCount := Call rReadLinesScript (sConfigFolder + "Plugins/" + sFileName) "*NotM:PluginLines"
         let iEntryIndex := 0
+
         while iEntryIndex < iEntryCount
             ; Save the plugin by its load order number, because that is what Scan finds on an NPC.
             ; Plugins that are not installed (255) are skipped, so listing a missing mod does no harm
@@ -55,11 +64,17 @@ begin Function {}
             let iPluginIndex := GetModIndex (sLine)
             if iPluginIndex < 255
                 player.AuxVarSetFlt (sv_Construct "*NotM:UsePlugin:%g" iPluginIndex) 1
+                let iPluginCount += 1
             endif
             let iEntryIndex += 1
         loop
         let iFileIndex += 1
     loop
+
+    ; An empty folder, or none of the listed plugins installed
+    if iPluginCount == 0
+        Call rLogScript "WARN" "Plugins/ lists no installed plugin, no actor will be named"
+    endif
 
     ; ==============================================
     ; Rules: which NPC names get which pools
@@ -77,26 +92,47 @@ begin Function {}
         let sFileName := aFileNames[iFileIndex]
         let iEntryCount := Call rReadLinesScript (sConfigFolder + "Rules/" + sFileName) "*NotM:RuleLines"
         let iEntryIndex := 0
+
         while iEntryIndex < iEntryCount
             ; Split 'Name|pools' at the |, I.E. 'Raider|NOTM_wasteland' -> [Raider, NOTM_wasteland]
             let sLine := player.AuxVarGetStr "*NotM:RuleLines" iEntryIndex
             let aRuleParts := sv_Split (sLine) "|"
+
             ; No | or more than one is a typo: the line is skipped
-            if eval (ar_Size aRuleParts) == 2
+            if eval (ar_Size aRuleParts) != 2
+                Call rLogScript "WARN" (sv_Construct "bad rule line [%z] in Rules/%z" sLine sFileName)
+            else
+                let sRuleName := aRuleParts[0]
+                let sRulePools := aRuleParts[1]
                 ; Name|- : remove the rule an earlier file made (and any copy stored on an earlier load)
-                if eval aRuleParts[1] == "-"
-                    ar_Erase aRules (aRuleParts[0])
-                    player.AuxVarErase ("*NotM:Rule:" + aRuleParts[0])
-                ; Name|pool or Name|A,B: these pools replace any earlier rule.
+                if eval sRulePools == "-"
+                    Call rLogScript "DEBUG" (sv_Construct "Rules/%z removes the rule for %z" sFileName sRuleName)
+                    ar_Erase aRules sRuleName
+                    player.AuxVarErase ("*NotM:Rule:" + sRuleName)
                 ; Nothing before or after the | is a typo: the line is skipped
-                elseif eval (sv_Length (aRuleParts[0])) > 0 && (sv_Length (aRuleParts[1])) > 0
-                    let aRules[aRuleParts[0]] := aRuleParts[1]
+                elseif eval (sv_Length sRuleName) == 0 || (sv_Length sRulePools) == 0
+                    Call rLogScript "WARN" (sv_Construct "bad rule line [%z] in Rules/%z" sLine sFileName)
+                ; Name|pool or Name|A,B: these pools replace any earlier rule
+                else
+                    ; Shows add-on authors which file won
+                    if eval (ar_HasKey aRules sRuleName) == 1
+                        Call rLogScript "DEBUG" (sv_Construct "Rules/%z replaces the rule for %z" sFileName sRuleName)
+                    endif
+                    let aRules[sRuleName] := sRulePools
                 endif
             endif
+
             let iEntryIndex += 1
         loop
+
         let iFileIndex += 1
     loop
+
+    ; An empty folder, or every rule removed
+    let iRuleCount := ar_Size aRules
+    if iRuleCount == 0
+        Call rLogScript "WARN" "Rules/ has no rules in use, no actor will be named"
+    endif
 
     ; ==============================================
     ; Pools: store each rule in use, and load its pools
@@ -113,6 +149,7 @@ begin Function {}
         ; Load each pool this rule uses, once per game load
         let aPoolNames := sv_Split (sRulePools) ","
         let iPoolIndex := 0
+
         while iPoolIndex < (ar_Size aPoolNames)
             let sPoolName := aPoolNames[iPoolIndex]
             ; Skip empty bits from a stray comma (A,,B), and pools already loaded
@@ -120,8 +157,19 @@ begin Function {}
                 let aUsedPools[sPoolName] := 1
                 Call rLoadPoolScript (sPoolName)
             endif
+            
             let iPoolIndex += 1
         loop
+
         let iRuleIndex += 1
     loop
+
+    ; ==============================================
+    ; Startup line (helps with bug reports)
+    ; ==============================================
+
+    ; Put the values in variables first, then print them
+    let sVersion := player.AuxVarGetStr "*NotM:Version"
+    let iPoolCount := ar_Size aUsedPools
+    Call rLogScript "INFO" (sv_Construct "Names of the Mojave %z: %g rules, %g pools, %g plugins" sVersion iRuleCount iPoolCount iPluginCount)
 end

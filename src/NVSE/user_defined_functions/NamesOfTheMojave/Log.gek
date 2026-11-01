@@ -1,0 +1,10 @@
+; GECK wiki stuff:
+;   - https://geckwiki.com/index.php?title=WriteStringToFile
+string_var sLevel           ; INFO, WARN or DEBUG: what kind of line this is
+string_var sMessage         ; The text to write, without the [NotM] tag
+
+; Writes one line to NamesOfTheMojave.log, I.E. "[NotM] WARN bad rule line [Raider] in Rules/99_Test.txt"
+; Not to the console: per-NPC lines would flood it
+begin Function {sLevel, sMessage}
+    WriteStringToFile "NamesOfTheMojave.log" 1 "[NotM] %z %z" sLevel sMessage ; 1 = add to the end. JIP adds the line break
+end

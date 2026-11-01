@@ -7,12 +7,16 @@ Status: Phase 1 (section 5) is implemented, and section 1 shows the current engi
 ```
 ln_NamesOfTheMojave.txt        JIP Script Runner, every load / new game
   └─ Main.gek                  seed, INI, compile UDFs, register callbacks
-       ├─ LoadRules.gek        Plugins/*.txt → allowed mod indexes
-       │    └─ LoadList.gek    Rules/*.txt → "*NotM:R:<base name>" = pool list
-       │                       Names/<pool>/{male,female,surname,_full}.txt → arrays
-       ├─ Scan.gek             walk loaded actors → filter → PickName → SetRefName
-       │    └─ PickName.gek → Hash.gek   name = f(seed, ref index, attempt)
-       ├─ Tick.gek             main-loop callback: Scan on cell change + every N s
+       ├─ Log.gek              every [NotM] line → NamesOfTheMojave.log (new file each load), not the console
+       ├─ LoadConfig.gek       Plugins/*.txt → allowed mod indexes
+       │    │                  Rules/*.txt → "*NotM:Rule:<base name>" = pool list
+       │    ├─ ReadLines.gek   read one .txt file into a note
+       │    └─ LoadPool.gek    Names/<pool>/{male,female,surname,_full}.txt → notes, once per pool
+       ├─ Tick.gek             main-loop callback: Scan ~1 s after load or cell change, then every N s
+       │    └─ Scan.gek        walk loaded actors → filter (rule, plugin, not renamed)
+       │         └─ NameNPC.gek     retry until unique → SetRefName
+       │              ├─ ChoosePool.gek → Hash.gek   multi-pool rule: one pool, weighted by name count
+       │              └─ PickName.gek → Hash.gek     name = f(seed, ref index, attempt) from that pool
        └─ DialogName.gek       DialogMenu handler: speaker label = ref name
 ```
 
@@ -51,7 +55,7 @@ All three are single files, so two add-ons overwrite each other, or overwrite ou
 
 **E. No version or diagnostics.** The log doesn't show the loaded version or how many rules and pools were loaded. Nexus support reports are hard to triage.
 
-**F. Load cost with big lists has not been measured.** `LoadList` calls `ReadStringFromFile` once per line. That is fine for 200 lines. Measure a 5,000-name list before supporting add-ons that large.
+**F. Load cost with big lists has not been measured.** `ReadLines` calls `ReadStringFromFile` once per line. That is fine for 200 lines. Measure a 5,000-name list before supporting add-ons that large.
 
 ## 3. Proposed target architecture
 
@@ -68,13 +72,11 @@ Rule syntax (backward compatible):
 
 ```
 Raider|NOTM_wasteland                  as today
-NCR Trooper|XYZ_ncr,NOTM_wasteland     multi-pool: lists merged into one draw
-Raider|+XYZ_raiders                    append a pool to an existing rule (no override)
+NCR Trooper|XYZ_ncr,NOTM_wasteland     multi-pool: pick a pool (by name count), then a name from it
 Ghoul Trooper|-                        disable a rule from an earlier file
 ```
 
 - **Multi-pool draw:** at load, merge the listed pools into one combined array (key e.g. `XYZ_ncr,NOTM_wasteland`). Then pick as today. Each pool's weight equals its size, and full-names-first still applies. PickName needs no change; LoadRules gains the merge.
-- **`+` append:** two add-ons can both extend Raiders without overwriting each other. Together, override, append and multi-pool cover "replace", "extend" and "combine". No one needs to edit another mod's pool files.
 - **Opt-out for other mods:** a public aux var on a ref (e.g. `NotMSkip = 1`) makes Scan skip that actor. This is a stable contract for other authors.
 - **Version line at load:** e.g. `[NotM] v1.0.0: 205 rules, 5 pools, 13 plugins`.
 
@@ -108,12 +110,12 @@ Each step is one commit. The steps depend on each other in this order:
 |---|---|---|
 | 1 | Drop-in folders. `Rules.txt` becomes `Rules/00_NOTM.txt` and `Plugins.txt` becomes `Plugins/NOTM.txt`. LoadRules reads every file in each folder, in name order. | The other steps need more than one rules file to exist. No players have the old layout yet, so no compatibility code is needed. |
 | 2 | Override and disable. A later rules file replaces an earlier rule with the same key. `Name\|-` removes it. | Needs step 1, because "later file" only has meaning with several files. |
-| 3 | Multi-pool and append. `Name\|A,B` draws from the merged lists. `Name\|+C` adds a pool to the rule that earlier files left. | Needs step 2, because append changes the result of the override pass. |
+| 3 | Multi-pool. `Name\|A,B` draws from several pools. (Append, `Name\|+C`, was built here and later removed.) | Needs step 2. |
 | 4 | `NotMSkip` opt-out. Scan skips a ref with this public aux var. | It doesn't depend on steps 1–3, but it belongs to the public contract, so it must be in v1.0. |
 | 5 | Version line at load, with rule, pool and plugin counts. | Last, so the counts come from the new loader. |
 
 The phase is done when:
-- Checkpoint 3 passes with the new loader. The test adds a sample add-on folder with an override, an append and a disable.
+- Checkpoint 3 passes with the new loader. The test adds a sample add-on folder with an override, a multi-pool rule and a disable.
 - The README documents the format for add-on authors (Step 14).
 - Then tag v1.0.0.
 
@@ -123,7 +125,7 @@ These changes only add to the format, so each can ship in any v1.x release.
 
 - **FormID rules** (`FalloutNV.esm:00123ABC|pool`). Do these when the first report comes in about a translated game or a mod that renames generic NPCs. Name rules stay as they are; FormID rules are a second key type next to them.
 - **Race override** (`race:Ghoul|NOTM_ghoul`). This fixes weakness D, so ghouls in mixed groups get ghoul names. It is small and can come early in v1.x.
-- **Load-time measurement.** Do this before any add-on with very large lists, or when someone reports a slow load. If 5,000 lines are slow, change LoadList to read the whole file at once. The data format stays the same.
+- **Load-time measurement.** Do this before any add-on with very large lists, or when someone reports a slow load. If 5,000 lines are slow, change ReadLines to read the whole file at once. The data format stays the same.
 
 ### Phase 3: optional features (only on request)
 

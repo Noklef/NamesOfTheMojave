@@ -42,15 +42,6 @@
                         { "form": "PlayerRef", "auxVar": "*NotM:ScanInterval", "key": 0, "configINI": "General:ScanInterval", "default": 10 }
                     ]
                 },
-                "4": {
-                    "type": 4,
-                    "enable": 1,
-                    "title": "Debug log",
-                    "mouse": "Prints each name given to the console. Use it when you report a problem.",
-                    "vars": [
-                        { "form": "PlayerRef", "auxVar": "*NotM:Debug", "key": 0, "configINI": "General:Debug", "default": 0 }
-                    ]
-                },
                 "6": {
                     "type": 7,
                     "enable": 1,

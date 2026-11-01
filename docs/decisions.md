@@ -14,6 +14,10 @@
 - `CompileScript` paths are relative to `Data\NVSE\user_defined_functions\` (same as HeatHaze-ESPLess and 3D Grenade Indicator).
 - `$` operator not supported → use `(sVar)` inline expression or `LNGetName`.
 - Editor IDs not resolved without JohnnyGuitar → use `GetFormFromMod`.
+- `player` is a compiler keyword, not an editor ID: it works in `CompileScript` UDFs (HeatHaze-ESPLess uses it). Used for the player instead of `GetFormFromMod "FalloutNV.esm" "000014"`.
+- Log file: every `[NotM]` line goes through `Log.gek` to `NamesOfTheMojave.log` only, not the console (per-NPC lines would flood it) in the game folder, or `overwrite/Root/` under MO2 Root Builder (JIP `WriteStringToFile`, which adds the line break itself). Main starts a new file on each load. JIP `ModLogPrint` does not work here: it skips scripts with no plugin (mod index 0xFF), and `CompileScript` scripts have none.
+- Log levels: `Log.gek` takes `INFO`, `WARN` or `DEBUG`, a label for the kind of line. Every level is always written, so a bug report already has the full detail without a debug option. INFO: the startup line. WARN: config errors (bad rule line, no installed plugin, no rules, a pool with no male names). DEBUG: rule replaced or removed (with the file), name counts per pool, and each NPC named (pool, try; try 8 = repeat) or left unnamed. No line per skipped NPC: it would repeat for every NPC on every scan. The Debug option (INI, MCM) was removed with the console output (2026-11-01).
+- Tick timer: `GetSecondsPassed` returns one frame's time, not the time since the last call (measured 2026-11-01: two calls in one tick return the same value; ~60 ticks per 10 s scan at ~190 FPS). Tick runs every 30 frames, so it adds `GetSecondsPassed * 30`.
 - Reserved variable names fail to compile (e.g. `iMod`). `;` inside a string starts a comment.
 - Put a command call in parentheses when an operator follows it, e.g. `(floor (x / m)) * m`, so the command cannot take the rest as its argument.
 - Command arguments are 32-bit floats: exact integers only up to 2^24 (16.7M). Do large-number math with operators (64-bit) only. Engine run 1: `floor (fX / fSize)` with fX near 2^31 gave negative picks for about 37% of actors, and a negative index returns the last list entry.
@@ -54,7 +58,7 @@ Decision: the rules file maps **generic base name → pool** (`Powder Ganger|NOT
 - A unique NPC never matches, because its name is not in the list.
 - One entry covers every gear and level variant, in every DLC.
 - Planned with the ghoul and super mutant pools: race overrides the pool.
-- Creatures are skipped (`GetIsCreature`).
+- Creatures are skipped (first with `GetIsCreature`; since 2026-11-01 `GetFirstRef 42` returns NPCs only, so creatures never reach the loop).
 - Only bases from FalloutNV.esm, the DLCs, Fallout3.esm and TaleOfTwoWastelands.esm count (mod NPCs excluded).
 - Known limit: translated games need translated rule names.
 
@@ -83,14 +87,17 @@ Run 3 (205 rules, CRLF files): PASS.
 ## Add-on format, Phase 1 (2026-10-31)
 - Rules and plugin lists are drop-in folders: `Config/NamesOfTheMojave/Rules/*.txt` and `Plugins/*.txt`. Every `.txt` file loads. Add-ons ship their own file, so no add-on edits ours.
 - Rule files are sorted by name before loading. MO2 merges folders from several mods, so the folder listing order is not guaranteed. Our files start with `00_NOTM_` (one file per group); add-ons use a higher prefix to load after them.
-- Rule forms: `Name|pool` sets or replaces, `Name|-` removes, `Name|A,B` uses several pools, `Name|+C` appends a pool to the rule left by earlier files.
-- Multi-pool pick: first choose one pool, weighted by its total names (`*NotM:W:<pool>`), then pick the name from that pool only. Reason: merging the lists would mix styles (a Chinese surname after a wasteland first name), and "full names first" would favour pools that have full-name lists.
+- Rule forms: `Name|pool` sets or replaces, `Name|-` removes, `Name|A,B` uses several pools.
+- `Name|+C` (append a pool to an earlier rule) was removed before v1.0: no shipped rule used it, and it was the most complex form. To extend a rule, an add-on replaces it with `Name|A,B`, naming the earlier pools too.
+- `Name|-` stays (2026-11-01): unlike `+C`, it has no other way to do it. Without it, the only ways to stop a type being named are editing or deleting core files (an update puts them back, and an add-on cannot do it) or `NotMSkip` (one NPC, script only).
+- No `return` inside a `while` loop (2026-11-01): xNVSE Loops.cpp only frees a loop that ends by its condition or `break`. NameNPC runs inside Scan's loop, so it leaves its retry loop with `break` and returns after the loop.
+- Multi-pool pick: first choose one pool, weighted by its total names (`*NotM:NameCount:<pool>`), then pick the name from that pool only. Reason: merging the lists would mix styles (a Chinese surname after a wasteland first name), and "full names first" would favour pools that have full-name lists.
 - `NotMSkip`: other mods set this public aux var to 1 on an actor, and Scan skips it. An actor that is already named keeps its name until the next load.
 - Every load prints one line: `[NotM] Names of the Mojave <version>: <n> rules, <n> pools, <n> plugins`. The version is set once in `Main.txt` (`*NotM:Version`).
 
 ## MCM (2026-10-31)
 - Settings page via MCM Extender: one JSON file, `Data/MCM/NamesOfTheMojave.json`. No ESP, no new script. MCM, MCM Extender and UIO are optional; without them the INI works as before.
-- Each option writes its INI key (`saveFile` is `Config/NamesOfTheMojave.ini`) and the matching temp aux var on the player (`*NotM:ShowRole`, `*NotM:Interval`, `*NotM:Debug`). Scan and Tick read those aux vars on every run, so changes apply at once without the `MCMExtUpdate` event.
+- Each option writes its INI key (`saveFile` is `Config/NamesOfTheMojave.ini`) and the matching temp aux var on the player (`*NotM:ShowRole`, `*NotM:ScanInterval`). Scan and Tick read those aux vars on every run, so changes apply at once without the `MCMExtUpdate` event.
 - ShowRole changes only actors named after the change. Already-named actors update on the next load, because ref names are session-only.
 - The version line reads `*NotM:Version`.
 - Not included yet: the pick-order setting (full names first or one draw). It needs an engine change first.

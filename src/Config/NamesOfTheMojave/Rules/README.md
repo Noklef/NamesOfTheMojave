@@ -14,7 +14,6 @@ A rule gives actors with one generic name a name from a pool: `Generic name|pool
 | `Name\|pool` | Sets the rule, or replaces it if an earlier file has one. |
 | `Name\|-` | Removes the rule from an earlier file. |
 | `Name\|A,B` | Uses several pools. A pool is chosen first (chance by pool size), then a name from it. No spaces around commas. |
-| `Name\|+C` | Adds pool C to the rule that earlier files left, or creates it. |
 
 ## Changing the rules
 

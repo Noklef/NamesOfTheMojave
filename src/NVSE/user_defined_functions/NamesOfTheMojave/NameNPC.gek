@@ -7,16 +7,18 @@ string_var sRulePools       ; Which pools to use, from the rule (I.E. 'NOTM_wast
 array_var aNamesInUse       ; Every name in use nearby. Shared with Scan, so a name given here counts as taken for the next NPC
 ref rChoosePoolScript       ; The pool picker (ChoosePool.gek)
 ref rPickNameScript         ; The name picker (PickName.gek)
-string_var sChosenPool      ; The pool this try's name comes from
+ref rLogScript              ; The logger (Log.gek)
+string_var sChosenPool     ; The pool this try's name comes from
 int iAttempt                ; Which try this is (0 to 7). Goes up when the name is taken. Ends at 8 if all 8 were taken
 string_var sNewName         ; The name we picked for the NPC
 
 ; Gives one NPC a name that nobody nearby has.
 begin Function {rNPC, sOriginalName, sRulePools, aNamesInUse}
 
-    ; Load the ChoosePool and PickName script references
+    ; Load the ChoosePool, PickName and Log script references
     let rChoosePoolScript := player.AuxVarGetRef "*NotM:ChoosePool"
     let rPickNameScript := player.AuxVarGetRef "*NotM:PickName"
+    let rLogScript := player.AuxVarGetRef "*NotM:Log"
 
     ; Pick a pool, then a name from it. Taken by someone nearby? Try again
     let iAttempt := 0
@@ -38,10 +40,14 @@ begin Function {rNPC, sOriginalName, sRulePools, aNamesInUse}
 
     ; No name: leave the NPC alone. (Not a return inside the loop: xNVSE only
     ; cleans up a loop that ends by its condition or by break)
+    ; I.E. a multi-pool rule picked a pool with no names for this NPC's gender
     if eval (sv_Length sNewName) == 0
+        Call rLogScript "DEBUG" (sv_Construct "%i %z: no names for this NPC in pool [%z], left unnamed" rNPC sOriginalName sChosenPool)
         return
     endif
     ; Still taken after 8 tries? Use it anyway: a repeat is better than no name
     rNPC.SetRefName (sNewName)
     let aNamesInUse[sNewName] := 1
+    ; Try 8 = all 8 tries were taken, so the name is a repeat (the pool is small for this many NPCs in one area)
+    Call rLogScript "DEBUG" (sv_Construct "%i %z -> %z (%z, try %g)" rNPC sOriginalName sNewName sChosenPool iAttempt)
 end
