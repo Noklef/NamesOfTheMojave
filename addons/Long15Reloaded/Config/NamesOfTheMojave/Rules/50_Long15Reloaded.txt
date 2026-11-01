@@ -8,7 +8,7 @@ Casa Stanton Resident|NOTM_wasteland
 Morton Mercenary|NOTM_wasteland
 Captured Mercenary|NOTM_wasteland
 Baker Resident|NOTM_wasteland
-Baker Deputy|NOTM_wasteland
+Baker Deputy|NOTM_wasteland|Deputy
 Town Hall Guard|NOTM_wasteland
 Town Hall Employee|NOTM_wasteland
 Hightower Guard|NOTM_wasteland

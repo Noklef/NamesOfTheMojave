@@ -51,7 +51,7 @@ NCR Mechanist|NOTM_wasteland
 NCR Mechanic|NOTM_wasteland
 NCR Navigator|NOTM_wasteland
 NCR Prison Guard|NOTM_wasteland
-NCR Officer|NOTM_wasteland
+NCR Officer|NOTM_wasteland|Lieutenant
 Severely Wounded NCR Trooper|NOTM_wasteland
 Goose Hollow MP|NOTM_wasteland
 Soldier|NOTM_wasteland

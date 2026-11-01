@@ -39,7 +39,7 @@ Great Khan Initiate|NOTM_wasteland
 Great Khan Marksman|NOTM_wasteland
 Great Khan Chem Dealer|NOTM_wasteland
 Great Khan Chem Pusher|NOTM_wasteland
-Brotherhood of Steel Senior Paladin|NOTM_wasteland
+Brotherhood of Steel Senior Paladin|NOTM_wasteland|Senior Paladin
 Brotherhood Procurement Specialist|NOTM_wasteland
 NCR Deserter|NOTM_wasteland
 Rogue NCR Ranger|NOTM_wasteland
@@ -55,14 +55,14 @@ NCR Mercenary Heavy|NOTM_wasteland
 NCR Mercenary Techie|NOTM_wasteland
 NCR Mercenary Gunslinger|NOTM_wasteland
 NCR Veteran Mercenary Brawler|NOTM_wasteland
-NCR Sergeant|NOTM_wasteland
-NCR Heavy Trooper Sergeant|NOTM_wasteland
-NCR Lieutenant|NOTM_wasteland
-NCR Recon Lieutenant|NOTM_wasteland
-NCR Captain|NOTM_wasteland
+NCR Sergeant|NOTM_wasteland|Sergeant
+NCR Heavy Trooper Sergeant|NOTM_wasteland|Sergeant
+NCR Lieutenant|NOTM_wasteland|Lieutenant
+NCR Recon Lieutenant|NOTM_wasteland|Lieutenant
+NCR Captain|NOTM_wasteland|Captain
 Legion Recruit|NOTM_legion
 Legion Martyr|NOTM_legion
-Legion Decanus|NOTM_legion
+Legion Decanus|NOTM_legion|Decanus
 Venator|NOTM_legion
 Ghoulified Novac Prospector|NOTM_ghoul
 Ghoulified NCR Trooper|NOTM_ghoul
