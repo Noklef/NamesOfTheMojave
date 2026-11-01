@@ -31,8 +31,8 @@ begin Function {}
     ; ==============================================
 
     ; Loop through and find all the names in use
-    ; 42 = NPCs only (no creatures), 1 = the areas loaded around you
-    let rNPC := GetFirstRef 42 1
+    ; 42 = NPCs only (no creatures), 2 = the 5x5 cells loaded around you (vanilla uGridsToLoad)
+    let rNPC := GetFirstRef 42 2
     while rNPC
         let sCurrentName := rNPC.LNGetName
         ; NPCs we named count by the name without the role (NameNPC checks repeats that way)
