@@ -1,0 +1,7 @@
+# Names of the Mojave - Trooper Uncut add-on: generic names from Trooper Uncut that the core rules do not cover.
+# Not named: Benny (his own name), Assistant (a Fallout: New Vegas NPC has this name too, role not clear).
+Chairwoman|NOTM_wasteland
+Garret Thug|NOTM_wasteland
+Great Khan Ritemaster|NOTM_wasteland
+Mojave Inhabitant Leader|NOTM_wasteland
+NCR Lieutenant|NOTM_wasteland|Lieutenant
