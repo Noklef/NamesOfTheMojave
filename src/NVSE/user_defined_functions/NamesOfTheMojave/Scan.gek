@@ -7,10 +7,12 @@
 ref rNPC                    ; The NPC we are looking at
 ref rNPCTemplate            ; The NPC's template (the record the game made it from)
 ref rNameNPCScript          ; The namer for one NPC (NameNPC.gek)
+ref rShowNameScript         ; Shows the name on the NPC (ShowName.gek)
 array_var aNamesInUse       ; Every name in use nearby, so we do not give out the same name twice
 int iPluginIndex            ; Which plugin the NPC comes from (its load order number)
 string_var sOriginalName    ; The NPC's original name, I.E. 'Powder Ganger'
 string_var sCurrentName     ; The name the NPC shows right now
+string_var sGivenName       ; The name we gave the NPC, without the role (empty if we never named them)
 string_var sRulePools       ; Which pools to use, from the rule (I.E. 'NOTM_wasteland')
 
 ; This names the NPC's around the player
@@ -21,6 +23,7 @@ string_var sRulePools       ; Which pools to use, from the rule (I.E. 'NOTM_wast
 ;   - If nobody has renamed it yet
 begin Function {}
     let rNameNPCScript := player.AuxVarGetRef "*NotM:NameNPC"
+    let rShowNameScript := player.AuxVarGetRef "*NotM:ShowName"
     let aNamesInUse := ar_Construct "stringmap"
 
     ; ==============================================
@@ -32,7 +35,13 @@ begin Function {}
     let rNPC := GetFirstRef 42 1
     while rNPC
         let sCurrentName := rNPC.LNGetName
-        let aNamesInUse[sCurrentName] := 1
+        ; NPCs we named count by the name without the role (NameNPC checks repeats that way)
+        let sGivenName := rNPC.AuxVarGetStr "*NotM:GivenName"
+        if eval sCurrentName == sGivenName || sCurrentName == (sGivenName + " (" + (rNPC.GetName) + ")")
+            let aNamesInUse[sGivenName] := 1
+        else
+            let aNamesInUse[sCurrentName] := 1
+        endif
         let rNPC := GetNextRef
     loop
 
@@ -47,20 +56,27 @@ begin Function {}
         let sOriginalName := rNPC.GetName ; Original Name
         let sCurrentName := rNPC.LNGetName ; Current name
 
-        if eval rNPC != player && sCurrentName == sOriginalName && (rNPC.AuxVarGetFlt "NotMSkip") == 0
+        let sGivenName := rNPC.AuxVarGetStr "*NotM:GivenName"
 
-            ; Does this name have a rule? Empty = no rule, so leave the NPC alone
-            let sRulePools := player.AuxVarGetStr ("*NotM:Rule:" + sOriginalName)
+        if eval rNPC != player && (rNPC.AuxVarGetFlt "NotMSkip") == 0
+            if eval sCurrentName == sOriginalName
+                ; Does this name have a rule? Empty = no rule, so leave the NPC alone
+                let sRulePools := player.AuxVarGetStr ("*NotM:Rule:" + sOriginalName)
 
-            if eval (sv_Length sRulePools) > 0
-                ; Is the NPC from a listed plugin? Check the template, not the
-                ; temporary copy the game makes for random spawns
-                let rNPCTemplate := rNPC.GetLeveledActorBase
-                let iPluginIndex := GetSourceModIndex rNPCTemplate
-                
-                if eval (player.AuxVarGetFlt (sv_Construct "*NotM:UsePlugin:%g" iPluginIndex)) == 1
-                    Call rNameNPCScript rNPC (sOriginalName) (sRulePools) aNamesInUse
+                if eval (sv_Length sRulePools) > 0
+                    ; Is the NPC from a listed plugin? Check the template, not the
+                    ; temporary copy the game makes for random spawns
+                    let rNPCTemplate := rNPC.GetLeveledActorBase
+                    let iPluginIndex := GetSourceModIndex rNPCTemplate
+
+                    if eval (player.AuxVarGetFlt (sv_Construct "*NotM:UsePlugin:%g" iPluginIndex)) == 1
+                        Call rNameNPCScript rNPC (sOriginalName) (sRulePools) aNamesInUse
+                    endif
                 endif
+            elseif eval sCurrentName == sGivenName || sCurrentName == (sGivenName + " (" + sOriginalName + ")")
+                ; We named them already: show the name again, so a ShowRole change (MCM) reaches them.
+                ; A name from another mod does not match, so it is left alone
+                Call rShowNameScript rNPC
             endif
         endif
 

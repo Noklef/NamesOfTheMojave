@@ -24,6 +24,12 @@ begin Function {}
         let fSecondsSinceScan := GetMaxOf fSecondsSinceScan (fScanInterval - 1)
     endif
 
+    ; ShowRole changed (MCM): scan now, so the NPCs around you show the change straight away
+    if eval (player.AuxVarGetFlt "*NotM:ShowRole") != (player.AuxVarGetFlt "*NotM:ShowRoleShown")
+        player.AuxVarSetFlt "*NotM:ShowRoleShown" (player.AuxVarGetFlt "*NotM:ShowRole")
+        let fSecondsSinceScan := fScanInterval
+    endif
+
     ; Name NPC's and then reset the count to re-scan
     if fSecondsSinceScan >= fScanInterval
         let fSecondsSinceScan := 0

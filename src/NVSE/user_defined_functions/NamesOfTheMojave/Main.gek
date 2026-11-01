@@ -42,6 +42,8 @@ begin Function {}
     player.AuxVarSetStr "*NotM:Version" "1.0.0"
     player.AuxVarSetFlt "*NotM:ScanInterval" fScanInterval
     player.AuxVarSetFlt "*NotM:ShowRole" (GetINIFloat "General:ShowRole" "NamesOfTheMojave.ini")
+    ; The ShowRole the names show now. Tick re-shows the names when MCM changes ShowRole
+    player.AuxVarSetFlt "*NotM:ShowRoleShown" (player.AuxVarGetFlt "*NotM:ShowRole")
 
     ; ================================================================
     ; Scripts: compile once, store on the player for the other scripts
@@ -57,6 +59,7 @@ begin Function {}
     player.AuxVarSetRef "*NotM:Hash" (CompileScript "NamesOfTheMojave/Hash.gek")
     player.AuxVarSetRef "*NotM:ChoosePool" (CompileScript "NamesOfTheMojave/ChoosePool.gek")
     player.AuxVarSetRef "*NotM:PickName" (CompileScript "NamesOfTheMojave/PickName.gek")
+    player.AuxVarSetRef "*NotM:ShowName" (CompileScript "NamesOfTheMojave/ShowName.gek")
     player.AuxVarSetRef "*NotM:NameNPC" (CompileScript "NamesOfTheMojave/NameNPC.gek")
     player.AuxVarSetRef "*NotM:Scan" (CompileScript "NamesOfTheMojave/Scan.gek")
 

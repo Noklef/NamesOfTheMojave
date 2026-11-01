@@ -1,0 +1,19 @@
+; GECK wiki stuff:
+;   - https://geckwiki.com/index.php?title=SetRefName
+
+ref rNPC                    ; The NPC to show the name of
+string_var sGivenName       ; The name we gave them, without the role, I.E. 'Henry Glover'
+string_var sShownName       ; What they show, I.E. 'Henry Glover' or 'Henry Glover (Powder Ganger)'
+
+; Shows the name we gave an NPC, with the role after it when ShowRole is on.
+; Runs after naming, and on every scan, so a ShowRole change reaches NPCs already named
+begin Function {rNPC}
+    let sGivenName := rNPC.AuxVarGetStr "*NotM:GivenName"
+    let sShownName := sGivenName
+    if eval (player.AuxVarGetFlt "*NotM:ShowRole") == 1
+        let sShownName := sGivenName + " (" + (rNPC.GetName) + ")" ; GetName = the original name, which is the role
+    endif
+    if eval (rNPC.LNGetName) != sShownName
+        rNPC.SetRefName (sShownName)
+    endif
+end

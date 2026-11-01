@@ -2,7 +2,7 @@
 ref rMainScript
 let rMainScript := CompileScript "NamesOfTheMojave/Main.gek"
 if rMainScript
-    CallAfter 3 rMainScript ; Delay loading this by 3 seconds, gives enough time to load NPCs in
+    Call rMainScript ; No delay needed: the first scan runs about 1 second later (Tick.gek), once NPCs are in
 else
     PrintToConsole "[NotM] Something broke trying to enable, check nvse.log"
 endif

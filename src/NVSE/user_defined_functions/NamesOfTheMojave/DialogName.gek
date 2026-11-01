@@ -1,7 +1,7 @@
 ; GECK wiki stuff:
 ;   - https://geckwiki.com/index.php?title=SetOnMenuOpenEventHandler
 ;   - https://geckwiki.com/index.php?title=GetMenuTargetRef
-;   - https://geckwiki.com/index.php?title=SetUIString
+;   - https://geckwiki.com/index.php?title=SetUIStringAlt
 
 ; Menu open handler for the dialog menu, this is more a "Just in case", since maybe if a mod adds 
 ; random NPC's actual dialog options, this should catch that and do it
@@ -15,7 +15,8 @@ begin Function {iMenuCode}
         let sDisplayName := rSpeaker.LNGetName          ; Display name (I.E. 'Mike Dawson'), or the base name if we never renamed them
         if eval sDisplayName != rSpeaker.GetName        ; Base name (I.E. 'Prospector'). Different = we renamed them
             ; Path checked against the vanilla and Vanilla UI Plus menu files. Tested in game with Vanilla UI Plus
-            SetUIString "DialogMenu\NOGLOW_BRANCH\DM_SpeakerNameLabel\string" (sDisplayName)
+            ; In capitals like the game's own label (I.E. 'RIVET CITY SECURITY'). Mixed case only showed the capitals ('A L')
+            SetUIStringAlt "DialogMenu\NOGLOW_BRANCH\DM_SpeakerNameLabel\string" (sv_ToUpper sDisplayName)
         endif
     endif
 end
