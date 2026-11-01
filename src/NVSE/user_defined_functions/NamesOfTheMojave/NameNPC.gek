@@ -1,0 +1,50 @@
+; Gives one NPC a name that nobody nearby has.
+; Picks again if the name is already taken (up to 8 tries).
+; With ShowRole on, the old name is added in brackets: 'Mike Dawson (Prospector)'.
+; GECK wiki stuff:
+;   - https://geckwiki.com/index.php?title=SetRefName
+
+ref rNPC                    ; The NPC to name
+ref rLogScript              ; The logger (Log.gek)
+string_var sOriginalName    ; The NPC's original name, I.E. 'Powder Ganger'
+string_var sRulePools       ; Which pools to use, from the rule (I.E. 'NOTM_wasteland')
+array_var aNamesInUse       ; Every name in use nearby. Shared with Scan, so a name given here counts as taken for the next NPC
+ref rPickNameScript         ; The name picker (PickName.gek)
+int iAttempt                ; Which try this is (0 to 7). Goes up when the name is taken. Ends at 8 if all 8 were taken
+string_var sNewName         ; The name we picked for the NPC
+
+begin Function {rNPC, sOriginalName, sRulePools, aNamesInUse}
+
+    ; Load the PickName script reference
+    let rPickNameScript := player.AuxVarGetRef "*NotM:PickName"
+
+    ; Pick a name. Taken by someone nearby? Try again
+    let iAttempt := 0
+    while iAttempt < 8
+        let sNewName := Call rPickNameScript rNPC (sRulePools) iAttempt
+        if eval (sv_Length sNewName) == 0 ; No names in the pool for this NPC
+            break
+        endif
+        ; Add the role now (ShowRole), so the repeat check uses the full name
+        if eval (player.AuxVarGetFlt "*NotM:ShowRole") == 1
+            let sNewName := sNewName + " (" + sOriginalName + ")"
+        endif
+        if eval (ar_HasKey aNamesInUse sNewName) == 0
+            break
+        endif
+        let iAttempt += 1
+    loop
+
+    ; No name: leave the NPC alone. (Not a return inside the loop: xNVSE only
+    ; cleans up a loop that ends by its condition or by break)
+    if eval (sv_Length sNewName) == 0
+        return
+    endif
+    ; Still taken after 8 tries? Use it anyway: a repeat is better than no name
+    rNPC.SetRefName (sNewName)
+    let aNamesInUse[sNewName] := 1
+    if eval (player.AuxVarGetFlt "*NotM:Debug") == 1
+        let rLogScript := player.AuxVarGetRef "*NotM:Log"
+        Call rLogScript (sv_Construct "%i %z -> %z (try %g)" rNPC sOriginalName sNewName iAttempt)
+    endif
+end

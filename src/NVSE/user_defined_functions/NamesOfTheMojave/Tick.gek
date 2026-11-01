@@ -18,9 +18,10 @@ begin Function {}
 
     ; When we go somewhere new. Door, fast travel, walking into a new cell, etc.
     let rCurrentCell := player.GetParentCell
-    if eval rCurrentCell != player.AuxVarGetRef "*NotM:LastCell"                ; If we enter a new cell
-        player.AuxVarSetRef "*NotM:LastCell" rCurrentCell                       ; Set the last cell to the current
-        let fSecondsSinceScan := GetMaxOf fSecondsSinceScan (fScanInterval - 1) ; Set the scan interval to 1
+    if eval rCurrentCell != player.AuxVarGetRef "*NotM:LastCell"
+        player.AuxVarSetRef "*NotM:LastCell" rCurrentCell
+        ; Scan in about 1 second: the new NPCs need a moment to appear
+        let fSecondsSinceScan := GetMaxOf fSecondsSinceScan (fScanInterval - 1)
     endif
 
     ; Name NPC's and then reset the count to re-scan

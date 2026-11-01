@@ -1,72 +1,69 @@
-; Names generic actors near the player.
-; An actor is named if: not a creature, its base name has a rule, and its base record
-; (leveled base for leveled spawns) comes from an allowed plugin.
-; Pass 1 collects names already shown by loaded actors. Pass 2 names the rest and
-; re-rolls a name that is already in use (up to 8 attempts). With ShowRole=1 the role is part of the name.
-; Already-named actors (ref name differs from base name) are skipped.
-; Other mods can opt an actor out: rActor.AuxVarSetFlt "NotMSkip" 1 (public aux var).
-ref rPlayer
-ref rActor
-ref rBase
-ref rPick
-array_var aUsed
-int iCount
-int iModIdx
-int iTry
-string_var sBase
-string_var sPool
-string_var sName
+; GECK wiki stuff:
+;   - https://geckwiki.com/index.php?title=GetFirstRef
+;   - https://geckwiki.com/index.php?title=GetNextRef
+;   - https://geckwiki.com/index.php?title=GetLeveledActorBase
+;   - https://geckwiki.com/index.php?title=GetSourceModIndex
 
+ref rNPC                    ; The NPC we are looking at
+ref rNPCTemplate            ; The NPC's template (the record the game made it from)
+ref rNameNPCScript          ; The namer for one NPC (NameNPC.gek)
+array_var aNamesInUse       ; Every name in use nearby, so we do not give out the same name twice
+int iPluginIndex            ; Which plugin the NPC comes from (its load order number)
+string_var sOriginalName    ; The NPC's original name, I.E. 'Powder Ganger'
+string_var sCurrentName     ; The name the NPC shows right now
+string_var sRulePools       ; Which pools to use, from the rule (I.E. 'NOTM_wasteland')
+
+; This names the NPC's around the player
+; Logic for this to satisfy a rename:
+;   - If it's a person & not the player
+;   - If it's got a name in the rules files
+;   - If it comes from a plugin listed in the plugin files
+;   - If nobody has renamed it yet
 begin Function {}
-	let rPlayer := GetFormFromMod "FalloutNV.esm" "000014"
-	let rPick := rPlayer.AuxVarGetRef "*NotM:Pick"
-	let aUsed := ar_Construct "stringmap"
+    let rNameNPCScript := player.AuxVarGetRef "*NotM:NameNPC"
+    let aNamesInUse := ar_Construct "stringmap"
 
-	let rActor := GetFirstRef 200 1
-	while rActor
-		let sName := rActor.LNGetName
-		let aUsed[sName] := 1
-		let rActor := GetNextRef
-	loop
+    ; ==============================================
+    ; Round 1: note the names already in use
+    ; ==============================================
 
-	let rActor := GetFirstRef 200 1
-	while rActor
-		let sBase := rActor.GetName
-		let sName := rActor.LNGetName
-		if eval rActor != rPlayer && sName == sBase && (rActor.GetIsCreature) == 0 && (rActor.AuxVarGetFlt "NotMSkip") == 0
-			let sPool := rPlayer.AuxVarGetStr ("*NotM:R:" + sBase)
-			if eval (sv_Length sPool) > 0
-				let rBase := rActor.GetLeveledActorBase
-				let iModIdx := GetSourceModIndex rBase
-				if eval (rPlayer.AuxVarGetFlt (sv_Construct "*NotM:M:%g" iModIdx)) == 1
-					let iTry := 0
-					while iTry < 8
-						let sName := Call rPick rActor (sPool) iTry
-						if eval (sv_Length sName) == 0
-							break
-						endif
-						if eval (rPlayer.AuxVarGetFlt "*NotM:ShowRole") == 1
-							let sName := sName + " (" + sBase + ")"
-						endif
-						if eval (ar_HasKey aUsed sName) == 0
-							break
-						endif
-						let iTry += 1
-					loop
-					if eval (sv_Length sName) > 0
-						rActor.SetRefName (sName)
-						let aUsed[sName] := 1
-						if eval (rPlayer.AuxVarGetFlt "*NotM:Debug") == 1
-							PrintToConsole "[NotM] %i %z -> %z (try %g)" rActor sBase sName iTry
-						endif
-						let iCount += 1
-					endif
-				endif
-			endif
-		endif
-		let rActor := GetNextRef
-	loop
-	if eval iCount > 0 && (rPlayer.AuxVarGetFlt "*NotM:Debug") == 1
-		PrintToConsole "[NotM] named %g actors" iCount
-	endif
+    ; Loop through and find all the names in use
+    ; 42 = NPCs only (no creatures), 1 = the areas loaded around you
+    let rNPC := GetFirstRef 42 1
+    while rNPC
+        let sCurrentName := rNPC.LNGetName
+        let aNamesInUse[sCurrentName] := 1
+        let rNPC := GetNextRef
+    loop
+
+    ; ==============================================
+    ; Round 2: name the NPCs that need it
+    ; ==============================================
+
+    ; Second loop to loop through names and change if required
+    let rNPC := GetFirstRef 42 1
+    while rNPC
+        ; GetName = original name, LNGetName = current name. Same = nobody has renamed them yet
+        let sOriginalName := rNPC.GetName ; Original Name
+        let sCurrentName := rNPC.LNGetName ; Current name
+
+        if eval rNPC != player && sCurrentName == sOriginalName && (rNPC.AuxVarGetFlt "NotMSkip") == 0
+
+            ; Does this name have a rule? Empty = no rule, so leave the NPC alone
+            let sRulePools := player.AuxVarGetStr ("*NotM:Rule:" + sOriginalName)
+
+            if eval (sv_Length sRulePools) > 0
+                ; Is the NPC from a listed plugin? Check the template, not the
+                ; temporary copy the game makes for random spawns
+                let rNPCTemplate := rNPC.GetLeveledActorBase
+                let iPluginIndex := GetSourceModIndex rNPCTemplate
+                
+                if eval (player.AuxVarGetFlt (sv_Construct "*NotM:UsePlugin:%g" iPluginIndex)) == 1
+                    Call rNameNPCScript rNPC (sOriginalName) (sRulePools) aNamesInUse
+                endif
+            endif
+        endif
+
+        let rNPC := GetNextRef
+    loop
 end
