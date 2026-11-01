@@ -1,0 +1,6 @@
+# Names of the Mojave - TweaksTTW add-on: generic names from TweaksTTW that the core rules do not cover.
+# Not named: Target (the contract target: the label shows who to hunt).
+Rivet City Resident|NOTM_wasteland
+Fairfax Freak|NOTM_wasteland
+Littlehorn & Associates Representative|NOTM_wasteland
+Regulator Representative|NOTM_wasteland

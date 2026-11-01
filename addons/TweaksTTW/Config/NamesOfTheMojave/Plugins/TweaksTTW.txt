@@ -1,0 +1,2 @@
+# Names of the Mojave - TweaksTTW add-on. Lets actors from this plugin be named.
+TweaksTTW.esm
