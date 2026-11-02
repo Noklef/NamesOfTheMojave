@@ -86,7 +86,9 @@ begin Function {}
                     ; Mod off (MCM): give them their original name back. On again, they match the first branch and get named
                     rNPC.SetRefName (sOriginalName)
                 elseif eval (rNPC.AuxVarGetFlt "*NotM:Seed") != fPlaythroughSeed || (rNPC.AuxVarGetFlt "*NotM:UseTitles") != fUseTitles
-                    ; The seed or UseTitles changed (MCM): give them a name from the new settings
+                    ; The seed or UseTitles changed (MCM): give them a name from the new settings.
+                    ; Their own name is free again, so an NPC without a title can keep it
+                    ar_Erase aNamesInUse sGivenName
                     Call rNameNPCScript rNPC (sOriginalName) (player.AuxVarGetStr ("*NotM:Rule:" + sOriginalName)) aNamesInUse
                 else
                     ; Show the name again, so a ShowRole change (MCM) reaches them

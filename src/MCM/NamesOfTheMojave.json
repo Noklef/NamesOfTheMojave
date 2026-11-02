@@ -17,22 +17,13 @@
                     "enable": 1,
                     "title": "General"
                 },
-                "2": {
+                "3": {
                     "type": 5,
                     "enable": 1,
                     "title": "Enabled",
                     "mouse": "Off stops naming, and NPCs this mod named get their original names back. On names them again, with the same names.",
                     "vars": [
                         { "form": "PlayerRef", "auxVar": "*NotM:Enabled", "key": 0, "configINI": "General:Enabled", "default": 1 }
-                    ]
-                },
-                "3": {
-                    "type": 5,
-                    "enable": 1,
-                    "title": "Show role after name",
-                    "mouse": "Shows the original role after the name, e.g. Mike Dawson (Powder Ganger).",
-                    "vars": [
-                        { "form": "PlayerRef", "auxVar": "*NotM:ShowRole", "key": 0, "configINI": "General:ShowRole", "default": 0 }
                     ]
                 },
                 "4": {
@@ -45,6 +36,15 @@
                     ]
                 },
                 "5": {
+                    "type": 5,
+                    "enable": 1,
+                    "title": "Show role after name",
+                    "mouse": "Shows the original role after the name, e.g. Mike Dawson (Powder Ganger).",
+                    "vars": [
+                        { "form": "PlayerRef", "auxVar": "*NotM:ShowRole", "key": 0, "configINI": "General:ShowRole", "default": 0 }
+                    ]
+                },
+                "6": {
                     "type": 2,
                     "enable": 1,
                     "title": "Scan interval",
@@ -60,7 +60,7 @@
                         { "form": "PlayerRef", "auxVar": "*NotM:ScanInterval", "key": 0, "configINI": "General:ScanInterval", "default": 10 }
                     ]
                 },
-                "6": {
+                "7": {
                     "type": 2,
                     "enable": 1,
                     "title": "Name seed",
@@ -75,7 +75,7 @@
                         { "form": "PlayerRef", "auxVar": "NotMSeed", "key": 0 }
                     ]
                 },
-                "7": {
+                "10": {
                     "type": 7,
                     "enable": 1,
                     "title": "Version",
