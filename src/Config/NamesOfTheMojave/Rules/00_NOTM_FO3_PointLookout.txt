@@ -3,3 +3,11 @@
 Tribal|NOTM_tribal
 Smuggler|NOTM_wasteland
 Bandit|NOTM_wasteland
+# Swampfolk: humans the game builds as super mutant creatures
+Tracker|NOTM_swampfolk
+Scrapper|NOTM_swampfolk
+Bruiser|NOTM_swampfolk
+Brawler|NOTM_swampfolk
+Creeper|NOTM_swampfolk
+Swampfolk Creeper|NOTM_swampfolk
+Swampfolk Scrapper|NOTM_swampfolk
