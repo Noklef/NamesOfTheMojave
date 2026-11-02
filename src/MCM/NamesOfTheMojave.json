@@ -17,8 +17,17 @@
                     "enable": 1,
                     "title": "General"
                 },
+                "2": {
+                    "type": 5,
+                    "enable": 1,
+                    "title": "Enabled",
+                    "mouse": "Off stops naming, and NPCs this mod named get their original names back. On names them again, with the same names.",
+                    "vars": [
+                        { "form": "PlayerRef", "auxVar": "*NotM:Enabled", "key": 0, "configINI": "General:Enabled", "default": 1 }
+                    ]
+                },
                 "3": {
-                    "type": 4,
+                    "type": 5,
                     "enable": 1,
                     "title": "Show role after name",
                     "mouse": "Shows the original role after the name, e.g. Mike Dawson (Powder Ganger).",
@@ -27,7 +36,7 @@
                     ]
                 },
                 "4": {
-                    "type": 4,
+                    "type": 5,
                     "enable": 1,
                     "title": "Use titles",
                     "mouse": "Puts the game's ranks before a name, e.g. Ranger Barker. Off puts a first name in place of the rank, e.g. Erik Barker.",

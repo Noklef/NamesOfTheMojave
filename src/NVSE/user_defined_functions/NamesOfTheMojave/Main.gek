@@ -42,15 +42,16 @@ begin Function {}
     endif
 
     ; Set all the MCM options we need
+    ; MCM INI Options
     player.AuxVarSetStr "*NotM:Version" "1.0.0"
     player.AuxVarSetFlt "*NotM:ScanInterval" fScanInterval
+    player.AuxVarSetFlt "*NotM:Enabled" (GetINIFloat "General:Enabled" "NamesOfTheMojave.ini")
+    player.AuxVarSetFlt "*NotM:UseTitles" (GetINIFloat "General:UseTitles" "NamesOfTheMojave.ini")
     player.AuxVarSetFlt "*NotM:ShowRole" (GetINIFloat "General:ShowRole" "NamesOfTheMojave.ini")
 
-    ; The ShowRole the names show now. Tick re-shows the names when MCM changes ShowRole
+    ; Copying those references to
+    player.AuxVarSetFlt "*NotM:EnabledShown" (player.AuxVarGetFlt "*NotM:Enabled")
     player.AuxVarSetFlt "*NotM:ShowRoleShown" (player.AuxVarGetFlt "*NotM:ShowRole")
-    player.AuxVarSetFlt "*NotM:UseTitles" (GetINIFloat "General:UseTitles" "NamesOfTheMojave.ini")
-
-    ; The UseTitles the names use now. Tick re-names the NPCs when MCM changes UseTitles
     player.AuxVarSetFlt "*NotM:UseTitlesShown" (player.AuxVarGetFlt "*NotM:UseTitles")
 
     ; ================================================================

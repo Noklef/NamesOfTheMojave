@@ -16,6 +16,7 @@ string_var sGivenName       ; The name we gave the NPC, without the role (empty 
 string_var sRulePools       ; Which pools to use, from the rule (I.E. 'NOTM_wasteland')
 float fPlaythroughSeed      ; The playthrough number. An NPC named with another number gets a new name
 float fUseTitles            ; 1 = rule titles on. An NPC named with the other setting gets a new name
+float fEnabled              ; 1 = the mod is on. 0 = off: NPCs we named get their original names back
 
 ; This names the NPC's around the player
 ; Logic for this to satisfy a rename:
@@ -24,11 +25,13 @@ float fUseTitles            ; 1 = rule titles on. An NPC named with the other se
 ;   - If it comes from a plugin listed in the plugin files
 ;   - If nobody has renamed it yet
 begin Function {}
+    let aNamesInUse := ar_Construct "stringmap"
+
     let rNameNPCScript := player.AuxVarGetRef "*NotM:NameNPC"
     let rShowNameScript := player.AuxVarGetRef "*NotM:ShowName"
-    let aNamesInUse := ar_Construct "stringmap"
     let fPlaythroughSeed := player.AuxVarGetFlt "NotMSeed"
     let fUseTitles := player.AuxVarGetFlt "*NotM:UseTitles"
+    let fEnabled := player.AuxVarGetFlt "*NotM:Enabled"
 
     ; ==============================================
     ; Round 1: note the names already in use
@@ -64,10 +67,10 @@ begin Function {}
 
         if eval rNPC != player && (rNPC.AuxVarGetFlt "NotMSkip") == 0
             if eval sCurrentName == sOriginalName
-                ; Does this name have a rule? Empty = no rule, so leave the NPC alone
+                ; Does this name have a rule? Empty = no rule, so leave the NPC alone. Mod off: name nobody
                 let sRulePools := player.AuxVarGetStr ("*NotM:Rule:" + sOriginalName)
 
-                if eval (sv_Length sRulePools) > 0
+                if eval (sv_Length sRulePools) > 0 && fEnabled == 1
                     ; Is the NPC from a listed plugin? Check the template, not the
                     ; temporary copy the game makes for random spawns
                     let rNPCTemplate := rNPC.GetLeveledActorBase
@@ -79,7 +82,10 @@ begin Function {}
                 endif
             elseif eval sCurrentName == sGivenName || sCurrentName == (sGivenName + " (" + sOriginalName + ")")
                 ; We named them already. A name from another mod does not match, so it is left alone
-                if eval (rNPC.AuxVarGetFlt "*NotM:Seed") != fPlaythroughSeed || (rNPC.AuxVarGetFlt "*NotM:UseTitles") != fUseTitles
+                if fEnabled == 0
+                    ; Mod off (MCM): give them their original name back. On again, they match the first branch and get named
+                    rNPC.SetRefName (sOriginalName)
+                elseif eval (rNPC.AuxVarGetFlt "*NotM:Seed") != fPlaythroughSeed || (rNPC.AuxVarGetFlt "*NotM:UseTitles") != fUseTitles
                     ; The seed or UseTitles changed (MCM): give them a name from the new settings
                     Call rNameNPCScript rNPC (sOriginalName) (player.AuxVarGetStr ("*NotM:Rule:" + sOriginalName)) aNamesInUse
                 else
