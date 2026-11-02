@@ -20,7 +20,7 @@ float fEnabled              ; 1 = the mod is on. 0 = off: NPCs we named get thei
 
 ; This names the NPC's around the player
 ; Logic for this to satisfy a rename:
-;   - If it's a person & not the player
+;   - If it's an actor (NPC or creature) & not the player
 ;   - If it's got a name in the rules files
 ;   - If it comes from a plugin listed in the plugin files
 ;   - If nobody has renamed it yet
@@ -38,8 +38,9 @@ begin Function {}
     ; ==============================================
 
     ; Loop through and find all the names in use
-    ; 42 = NPCs only (no creatures), 2 = the 5x5 cells loaded around you (vanilla uGridsToLoad)
-    let rNPC := GetFirstRef 42 2
+    ; 200 = all actors: NPCs and creatures (super mutants are creatures). A creature without a rule is left alone
+    ; 2 = the 5x5 cells loaded around you (vanilla uGridsToLoad)
+    let rNPC := GetFirstRef 200 2
     while rNPC
         let sCurrentName := rNPC.LNGetName
         ; NPCs we named count by the name without the role (NameNPC checks repeats that way)
@@ -57,7 +58,7 @@ begin Function {}
     ; ==============================================
 
     ; Second loop to loop through names and change if required
-    let rNPC := GetFirstRef 42 2
+    let rNPC := GetFirstRef 200 2
     while rNPC
         ; GetName = original name, LNGetName = current name. Same = nobody has renamed them yet
         let sOriginalName := rNPC.GetName ; Original Name
