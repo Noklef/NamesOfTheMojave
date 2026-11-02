@@ -1,0 +1,93 @@
+# Names of the Mojave - New California add-on: generic names from New California that the core rules do not cover.
+# Not named: characters with their own name (Terra Mayson, Annai Oran, Chevy Bragg, ...), gang leaders, corpse labels (Dead ...),
+# names used only by corpses (Odyssey Resident, Treasure Hunter, Mutated Enclave Scientist), Infected Savage, test and preset records.
+# Not named: Innkeeper and Shi Bank Representative (the plugin's names end with a space), Elite Psycho Raider spelled with an accented E (non-ASCII).
+# Pools: Shi get NOTM_chinese, tribals NOTM_tribal, ghouls NOTM_ghoul, children NOTM_kids, everyone else NOTM_wasteland.
+# Also in other add-ons, with the same pool and title: NCR Medic, NCR Sergeant, NCR Lieutenant, Gun Runner Merchant, Far Go Trader.
+# Raider tribes and gangs
+Survivalist Raider|NOTM_wasteland
+Elite Survivalist Raider|NOTM_wasteland
+Survivalist Guard|NOTM_wasteland
+Viper Raider|NOTM_wasteland
+Viper Elite Raider|NOTM_wasteland
+Elite Viper Raider|NOTM_wasteland
+Viper Clan Elite Raider|NOTM_wasteland
+Psycho Raider|NOTM_wasteland
+Elite Psycho Raider|NOTM_wasteland
+Psycho Elite Raider|NOTM_wasteland
+Psychotic Raider|NOTM_wasteland
+Terror Max Psycho Raider|NOTM_wasteland
+Psycho Raider - Spider Tamer|NOTM_wasteland
+Black Vulture Raider|NOTM_wasteland
+Elite Black Vulture Raider|NOTM_wasteland
+Vault Viking Raider|NOTM_wasteland
+Vault Viking Elite Raider|NOTM_wasteland
+Viking Raider|NOTM_wasteland
+Road Bandit|NOTM_wasteland
+Road Bandit Fire Worshiper|NOTM_wasteland
+Road Bandit Master Fire Worshiper|NOTM_wasteland
+Fire Worshiper Raider|NOTM_wasteland
+Barstow Gang Raider|NOTM_wasteland
+Angel Breaker|NOTM_wasteland
+Dream Raider|NOTM_wasteland
+Bishop Family Thug|NOTM_wasteland
+Raider Outcast|NOTM_wasteland
+Raider Slave|NOTM_wasteland
+Unconscious Raider Slave Guard|NOTM_wasteland
+Thief|NOTM_wasteland
+Voiceless|NOTM_wasteland
+Madre Cultist|NOTM_wasteland
+New Reno Drug Runner|NOTM_wasteland
+# Shi
+Shi Clan Raider|NOTM_chinese
+Shi Clan Elite Raider|NOTM_chinese
+Elite Shi Raider|NOTM_chinese
+Rebel Shi Raider|NOTM_chinese
+Shi Hitman|NOTM_chinese
+# Tribes
+California Tribe Warrior|NOTM_tribal
+California Tribal|NOTM_tribal
+Tribal Savage|NOTM_tribal
+California Tribe's Guardian|NOTM_tribal
+# Ghouls
+Odyssey Guard|NOTM_ghoul
+Necro Tribe Warrior|NOTM_ghoul
+# Enclave
+Enclave Patriot|NOTM_wasteland
+Enclave Stormtrooper|NOTM_wasteland
+Battlegear Enclave Officer|NOTM_wasteland|Lieutenant
+# NCR (NCR Military Poliece is the plugin's spelling)
+NCR Elite Trooper|NOTM_wasteland
+NCR Military Poliece|NOTM_wasteland
+NCR Artillery Officer|NOTM_wasteland|Lieutenant
+NCR Lieutenant|NOTM_wasteland|Lieutenant
+NCR Sergeant|NOTM_wasteland|Sergeant
+NCR Medic|NOTM_wasteland
+# Vault 18
+Vault Security|NOTM_wasteland|Officer
+Vault 18 Security Officer|NOTM_wasteland|Officer
+Vault Citizen|NOTM_wasteland
+Vault Dweller|NOTM_wasteland
+Vault Child|NOTM_kids
+Football Player|NOTM_wasteland
+Drunk Barbarian|NOTM_wasteland
+Brazilian Technician|NOTM_wasteland
+# Towns, caravans and traders
+Far Go Caravan Guard|NOTM_wasteland
+Far Go Trader|NOTM_wasteland
+Miner|NOTM_wasteland
+Crawler Team Hand|NOTM_wasteland
+Pinehaven Resident|NOTM_wasteland
+Union City Citizen|NOTM_wasteland
+Merchant Child|NOTM_kids
+Mute Child|NOTM_kids
+Gun Runner Merchant|NOTM_wasteland
+Explosives Merchant|NOTM_wasteland
+Vault Viking Merchant|NOTM_wasteland
+Viper Arms Smith|NOTM_wasteland
+Viper Raider Merchant|NOTM_wasteland
+Survivalist Raider Merchant|NOTM_wasteland
+Psycho Raider Merchant|NOTM_wasteland
+Old Guard Merchant|NOTM_wasteland
+HUB Water Merchant|NOTM_wasteland
+Robotnik Merchant|NOTM_wasteland
