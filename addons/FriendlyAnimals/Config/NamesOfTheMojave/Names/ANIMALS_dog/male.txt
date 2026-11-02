@@ -1,0 +1,52 @@
+# Dog names for guard dogs and working dogs. Leaves out names that Fallout 3, New Vegas, their DLCs or TTW already use (Rex, Dogmeat, Pete, Butch, Max, ...).
+# One name per line. Lines starting with # are comments. Do not leave empty lines: the first empty line ends the list. No female or surname list: animals are creatures, so the game treats them all as male.
+Ace
+Amos
+Bear
+Biscuit
+Blue
+Bodie
+Bolt
+Brutus
+Buck
+Buddy
+Buster
+Champ
+Chewie
+Chief
+Chomp
+Cooper
+Copper
+Dakota
+Diesel
+Fang
+Gizmo
+Goose
+Gunner
+Hooch
+Jinx
+King
+Koda
+Lobo
+Loki
+Lucky
+Major
+Moxie
+Nugget
+Ozzy
+Patch
+Rascal
+Rocky
+Rusty
+Sarge
+Scout
+Shadow
+Smokey
+Spike
+Tex
+Tucker
+Wolf
+Zeke
+Ziggy
+Mr. Bitey
+Sir Barksalot

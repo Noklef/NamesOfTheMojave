@@ -1,0 +1,23 @@
+# Names of the Mojave - Friendly Animals add-on: names for brahmin and guard dogs. Format and rule forms: Rules/README.md in the core mod.
+# Not named: wild animals (Vicious Dog, Wild Dog, Coyote, ...), names shared with wild animals (Bighorner, Dog), animals with their own name (Rex, Dogmeat, Betsy the Brahmin, Hoff's Pack Brahmin, ...).
+# Livestock
+Brahmin|ANIMALS_brahmin
+Brahmin WaterSkins|ANIMALS_brahmin
+Pack Brahmin|ANIMALS_brahmin
+Malnourished Brahmin|ANIMALS_brahmin
+Malnourished Brahmin Calf|ANIMALS_brahmin
+Water Brahmin|ANIMALS_brahmin
+Fiend Brahmin|ANIMALS_brahmin
+Young Bighorner|ANIMALS_brahmin
+# Guard dogs and working dogs
+Legion Mongrel|ANIMALS_dog
+Raider Guard Dog|ANIMALS_dog
+NCR Guard Dog|ANIMALS_dog
+Guard Dog|ANIMALS_dog
+Talon Company Guard Dog|ANIMALS_dog
+Scavenger's Dog|ANIMALS_dog
+Fiend Guard Dog|ANIMALS_dog
+Prospector's Dog|ANIMALS_dog
+Brotherhood Of Steel Guard Dog|ANIMALS_dog
+NCRCF Guard Dog|ANIMALS_dog
+Ranch Dog|ANIMALS_dog

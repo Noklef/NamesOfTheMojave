@@ -1,0 +1,47 @@
+# Brahmin names: farm-animal names and a few jokes. Leaves out names that Fallout 3, New Vegas, their DLCs or TTW already use (Clover, Maggie, Penny, ...). No Betsy either, after Betsy the Brahmin.
+# One name per line. Lines starting with # are comments. Do not leave empty lines: the first empty line ends the list. No female or surname list: animals are creatures, so the game treats them all as male.
+Annabelle
+Bertha
+Bessie
+Blossom
+Bluebell
+Buttercup
+Clarabelle
+Cocoa
+Daisy
+Dolly
+Dottie
+Elsie
+Gertie
+Hazel
+Henrietta
+Honey
+Ivy
+Juniper
+Mabel
+Magnolia
+Marigold
+Matilda
+Molly
+Nellie
+Petunia
+Primrose
+Ruby
+Sadie
+Sugar
+Tilly
+Winnie
+Bubba
+Ferdinand
+Hoss
+Steak
+Jerky
+Burger
+Brisket
+T-Bone
+Moo-Moo
+Meatloaf
+Waffles
+Sir Loin
+Two-Face
+Double Trouble
