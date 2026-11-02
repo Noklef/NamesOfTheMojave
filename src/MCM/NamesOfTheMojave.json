@@ -44,7 +44,12 @@
                         { "form": "PlayerRef", "auxVar": "*NotM:ShowRole", "key": 0, "configINI": "General:ShowRole", "default": 0 }
                     ]
                 },
-                "6": {
+                "7": {
+                    "type": 0,
+                    "enable": 1,
+                    "title": "Debug"
+                },
+                "9": {
                     "type": 2,
                     "enable": 1,
                     "title": "Scan interval",
@@ -60,7 +65,7 @@
                         { "form": "PlayerRef", "auxVar": "*NotM:ScanInterval", "key": 0, "configINI": "General:ScanInterval", "default": 10 }
                     ]
                 },
-                "7": {
+                "10": {
                     "type": 2,
                     "enable": 1,
                     "title": "Name seed",
@@ -75,7 +80,7 @@
                         { "form": "PlayerRef", "auxVar": "NotMSeed", "key": 0 }
                     ]
                 },
-                "10": {
+                "12": {
                     "type": 7,
                     "enable": 1,
                     "title": "Version",
