@@ -11,7 +11,6 @@ Security Guard|NOTM_wasteland
 Tenpenny Tower Resident|NOTM_wasteland
 Rock Crick Hunter|NOTM_wasteland
 Child Slaver|NOTM_wasteland
-Little Lamplighter|NOTM_kids
 Caravan Guard|NOTM_wasteland
 Child of Atom|NOTM_wasteland
 Project Purity Scientist|NOTM_wasteland

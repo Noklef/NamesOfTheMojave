@@ -42,7 +42,6 @@ Drunk|NOTM_wasteland
 Merchant|NOTM_wasteland
 Street Vendor|NOTM_wasteland
 Arms Merchant|NOTM_wasteland
-Child|NOTM_kids
 Missionary|NOTM_wasteland
 Drifter|NOTM_wasteland
 Vagrant|NOTM_wasteland

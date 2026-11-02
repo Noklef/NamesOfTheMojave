@@ -1,0 +1,10 @@
+# Names of the Mojave rules: Point Lookout swampfolk (FO3). Format and rule forms: README.md in this folder.
+# This file is replaced on update. Put your own rules in a new file (e.g. 50_MyRules.txt). No empty lines.
+# Swampfolk are humans the game builds as super mutant creatures. Delete this file to leave them unnamed.
+Tracker|NOTM_swampfolk
+Scrapper|NOTM_swampfolk
+Bruiser|NOTM_swampfolk
+Brawler|NOTM_swampfolk
+Creeper|NOTM_swampfolk
+Swampfolk Creeper|NOTM_swampfolk
+Swampfolk Scrapper|NOTM_swampfolk

@@ -1,0 +1,6 @@
+# Names of the Mojave rules: children (Fallout 3 and New Vegas). Format and rule forms: README.md in this folder.
+# This file is replaced on update. Put your own rules in a new file (e.g. 50_MyRules.txt). No empty lines.
+# Delete this file to leave children unnamed.
+Child|NOTM_kids
+Mini Boomer|NOTM_kids
+Little Lamplighter|NOTM_kids
