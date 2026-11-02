@@ -1,0 +1,10 @@
+# Names of the Mojave rules: super mutants and Nightkin (Fallout 3 and New Vegas). Format and rule forms: README.md in this folder.
+# This file is replaced on update. Put your own rules in a new file (e.g. 50_MyRules.txt). No empty lines.
+# Not named: Super Mutant Behemoth, and mutants with their own name (Marcus, Lily, Fawkes, ...).
+Super Mutant|NOTM_supermutant
+Super Mutant Brute|NOTM_supermutant
+Super Mutant Master|NOTM_supermutant
+Super Mutant Overlord|NOTM_supermutant
+Nightkin|NOTM_supermutant
+Nightkin Master|NOTM_supermutant
+Nightkin Sniper|NOTM_supermutant

@@ -1,0 +1,65 @@
+# Super mutant names: half plain old-world names (like the game's Neil, Keene and Marcus), half blunt nicknames.
+# Leaves out the names of unique mutants (Marcus, Lily, Fawkes, Neil, Keene, Davison, Tabitha, Leo).
+# One name per line. Lines starting with # are comments. Do not leave empty lines: the first empty line ends the list. No female or surname list: super mutants are creatures, so the game treats them all as male.
+Abe
+Arnold
+Barney
+Bernard
+Boris
+Bruno
+Carl
+Chester
+Clyde
+Dale
+Dennis
+Earl
+Floyd
+Gordon
+Gus
+Hank
+Herbert
+Howard
+Ivan
+Jerome
+Lloyd
+Marvin
+Morris
+Norman
+Otis
+Percy
+Ralph
+Roland
+Rufus
+Sherman
+Stanley
+Vernon
+Walter
+Wendell
+Wilbur
+Anvil
+Big Tony
+Boulder
+Brick
+Bulldozer
+Chunk
+Crusher
+Gnasher
+Grinder
+Gristle
+Hammer
+Knuckles
+Lug
+Lunchbox
+Mean Mike
+Meathook
+Moose
+Mudslide
+Rockjaw
+Sledge
+Slab
+Smasher
+Stomper
+Thumper
+Tiny
+Tusk
+Wrecker
