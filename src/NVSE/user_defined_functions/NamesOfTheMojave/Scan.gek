@@ -37,21 +37,23 @@ begin Function {}
     ; Round 1: note the names already in use
     ; ==============================================
 
-    ; Loop through and find all the names in use
+    ; Loop through and find all the names in use. Mod off: nobody gets named, so the list is not needed
     ; 200 = all actors: NPCs and creatures (super mutants are creatures). A creature without a rule is left alone
     ; 2 = the 5x5 cells loaded around you (vanilla uGridsToLoad)
-    let rNPC := GetFirstRef 200 2
-    while rNPC
-        let sCurrentName := rNPC.LNGetName
-        ; NPCs we named count by the name without the role (NameNPC checks repeats that way)
-        let sGivenName := rNPC.AuxVarGetStr "*NotM:GivenName"
-        if eval sCurrentName == sGivenName || sCurrentName == (sGivenName + " (" + (rNPC.GetName) + ")")
-            let aNamesInUse[sGivenName] := 1
-        else
-            let aNamesInUse[sCurrentName] := 1
-        endif
-        let rNPC := GetNextRef
-    loop
+    if fEnabled == 1
+        let rNPC := GetFirstRef 200 2
+        while rNPC
+            let sCurrentName := rNPC.LNGetName
+            ; NPCs we named count by the name without the role (NameNPC checks repeats that way)
+            let sGivenName := rNPC.AuxVarGetStr "*NotM:GivenName"
+            if eval sCurrentName == sGivenName || sCurrentName == (sGivenName + " (" + (rNPC.GetName) + ")")
+                let aNamesInUse[sGivenName] := 1
+            else
+                let aNamesInUse[sCurrentName] := 1
+            endif
+            let rNPC := GetNextRef
+        loop
+    endif
 
     ; ==============================================
     ; Round 2: name the NPCs that need it
@@ -66,7 +68,7 @@ begin Function {}
 
         let sGivenName := rNPC.AuxVarGetStr "*NotM:GivenName"
 
-        if eval rNPC != player && (rNPC.AuxVarGetFlt "NotMSkip") == 0
+        if eval rNPC != player && (rNPC.AuxVarGetFlt "_NotMSkip") == 0
             if eval sCurrentName == sOriginalName
                 ; Does this name have a rule? Empty = no rule, so leave the NPC alone. Mod off: name nobody
                 let sRulePools := player.AuxVarGetStr ("*NotM:Rule:" + sOriginalName)
