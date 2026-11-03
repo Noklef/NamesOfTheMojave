@@ -7,13 +7,22 @@
 ; random NPC's actual dialog options, this should catch that and do it
 int iMenuCode           ; Menu code passed by the event (always 1009 here)
 ref rSpeaker            ; The NPC we are talking to
-string_var sDisplayName ; The NPC's display name (the one we gave them)
+string_var sDisplayName ; The name to show in the dialog title
+string_var sGivenName   ; The name we gave them, without the role ("" = we never named them)
 
 begin Function {iMenuCode}
     let rSpeaker := GetMenuTargetRef iMenuCode ; iMenuCode is passed by the event: 1009, the DialogMenu code
     if eval rSpeaker
-        let sDisplayName := rSpeaker.LNGetName          ; Display name (I.E. 'Mike Dawson'), or the base name if we never renamed them
-        if eval sDisplayName != rSpeaker.GetName        ; Base name (I.E. 'Prospector'). Different = we renamed them
+        let sDisplayName := rSpeaker.LNGetName          ; Display name (I.E. 'Mike Dawson (Prospector)'), or the base name if nobody renamed them
+        if eval sDisplayName != rSpeaker.GetName        ; Base name (I.E. 'Prospector'). Different = renamed
+            ; Our name without the role: you know who you're talking to, and the title font has no brackets.
+            ; Empty = another mod renamed them, so show their name as it is
+
+            let sGivenName := rSpeaker.AuxVarGetStr "*NotM:GivenName" ; Use the given name instead of display name, since display can have the () brackets which don't render in this screen properly
+            if eval (sv_Length sGivenName) > 0
+                let sDisplayName := sGivenName
+            endif
+            
             ; Path checked against the vanilla and Vanilla UI Plus menu files. Tested in game with Vanilla UI Plus
             ; In capitals like the game's own label (I.E. 'RIVET CITY SECURITY'). Mixed case only showed the capitals ('A L')
             SetUIStringAlt "DialogMenu\NOGLOW_BRANCH\DM_SpeakerNameLabel\string" (sv_ToUpper sDisplayName)
