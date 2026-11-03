@@ -20,3 +20,4 @@ Legionary Main Gate Guard|NOTM_legion
 Weather Station Guard|NOTM_legion
 Irradiated Legionary Prime|NOTM_legion
 Irradiated Legionary Veteran|NOTM_legion
+Legionary Instructor|NOTM_legion

@@ -22,3 +22,20 @@ King Groupie|NOTM_wasteland
 Blackjack Dealer|NOTM_wasteland
 Casino Guard|NOTM_wasteland
 White Glove Bouncer|NOTM_wasteland
+Assistant|NOTM_wasteland
+Assassin|NOTM_wasteland
+Button Man|NOTM_wasteland
+Cashier|NOTM_wasteland
+Atomic Wrangler Crier|NOTM_wasteland
+Silver Rush Crier|NOTM_wasteland
+Gomorrah Cashier|NOTM_wasteland
+Gomorrah Floor Manager|NOTM_wasteland
+Receptionist|NOTM_wasteland
+The Tops Cashier|NOTM_wasteland
+The Tops Floor Manager|NOTM_wasteland
+Ultra-Luxe Cashier|NOTM_wasteland
+White Glove Greeter|NOTM_wasteland
+Head Waiter|NOTM_wasteland
+Gourmand Food Supplier|NOTM_wasteland
+Vikki And Vance Cashier|NOTM_wasteland
+Vikki And Vance Floor Manager|NOTM_wasteland

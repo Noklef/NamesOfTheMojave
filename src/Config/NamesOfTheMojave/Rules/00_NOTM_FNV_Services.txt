@@ -19,3 +19,6 @@ Greaser|NOTM_wasteland
 Bodyguard|NOTM_wasteland
 Clinic Guard|NOTM_wasteland
 Outer Vegas Defender|NOTM_wasteland
+Followers Medical Student|NOTM_wasteland
+Boomer Munitions Manager|NOTM_wasteland
+Boomer Teacher|NOTM_wasteland

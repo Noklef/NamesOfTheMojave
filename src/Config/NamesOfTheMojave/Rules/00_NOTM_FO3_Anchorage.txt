@@ -13,3 +13,4 @@ American Grease-Monkey|NOTM_wasteland
 American T51-B Unit|NOTM_wasteland
 U.S. Paratrooper|NOTM_wasteland
 American War Correspondent|NOTM_wasteland
+Quartermaster|NOTM_wasteland

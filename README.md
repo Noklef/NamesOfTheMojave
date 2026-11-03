@@ -24,7 +24,7 @@ I could only see so many "NCR Troopers" without getting annoyed. And I thought i
   - **Scan interval**: how often to look for newly spawned NPCs (default 10 seconds)
   - **Use titles**: `Ranger Barker` for ranks the game uses (default on), or `Erik Barker` (a first name in place of the rank)
   - **Name seed** (MCM only): same seed = same names. Change it to give every generic NPC a new name
-- (Currently) **249 roles** across **8 name pools** (nearly 1,500 names):
+- (Currently) **287 roles** across **8 name pools** (nearly 1,500 names):
   - **Wasteland**: first + last names for NCR, gangs, civilians, Brotherhood, Enclave, and so on
   - **Legion**: Latin single names
   - **Ghoul**: names for ghoul groups

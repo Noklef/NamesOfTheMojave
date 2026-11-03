@@ -20,3 +20,5 @@ Mercenary|NOTM_wasteland
 NCR Mercenary|NOTM_wasteland
 Slaver|NOTM_wasteland
 Slave|NOTM_wasteland
+Powder Ganger Deputy|NOTM_wasteland
+Great Khan Armorer|NOTM_wasteland

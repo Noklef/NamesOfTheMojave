@@ -10,3 +10,5 @@ Chinese Remnant Soldier|NOTM_chinese
 Chinese Remnant Officer|NOTM_chinese|Lieutenant
 Chinese Remnant Sargeant|NOTM_chinese|Sergeant
 Chinese Remnant Sergeant|NOTM_chinese|Sergeant
+Chinese Commando|NOTM_chinese
+Chinese Remnant Captain|NOTM_chinese|Captain

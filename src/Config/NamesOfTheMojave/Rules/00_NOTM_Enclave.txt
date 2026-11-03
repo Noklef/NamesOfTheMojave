@@ -6,3 +6,5 @@ Security Officer|NOTM_wasteland|Lieutenant
 Enclave Scientist|NOTM_wasteland
 Enclave Hellfire Trooper|NOTM_wasteland
 Enclave Doctor|NOTM_wasteland|Doctor
+Armory Master|NOTM_wasteland
+Enclave Sigma Leader|NOTM_wasteland

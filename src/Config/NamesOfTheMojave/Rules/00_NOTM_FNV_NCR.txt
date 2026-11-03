@@ -15,3 +15,6 @@ NCR Riot Control|NOTM_wasteland
 Irradiated Heavy Trooper|NOTM_wasteland
 NCR Sniper|NOTM_wasteland
 Ghoul Trooper|NOTM_ghoul
+Drill Sergeant|NOTM_wasteland|Sergeant
+NCR Sergeant|NOTM_wasteland|Sergeant
+NCR Ranger Veteran Commander|NOTM_wasteland|Ranger

@@ -46,3 +46,5 @@ Missionary|NOTM_wasteland
 Drifter|NOTM_wasteland
 Vagrant|NOTM_wasteland
 Water Beggar|NOTM_wasteland
+Prospector Merchant|NOTM_wasteland
+Escaped Convict Leader|NOTM_wasteland
