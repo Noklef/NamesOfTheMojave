@@ -23,7 +23,7 @@ begin Function {}
     ; The seed we set defines what names are given to NPC's, so "Prospector" for instance will get a new name
     ; ON EACH PLAYTHROUGH, not each save / load
     let fPlaythroughSeed := player.AuxVarGetFlt "NotMSeed"
-    if fPlaythroughSeed < 1 || fPlaythroughSeed > 10000 ; No seed yet, or one from an old version outside the slider's range
+    if fPlaythroughSeed < 1 ; No seed yet (a missing aux var reads as 0)
         let fPlaythroughSeed := floor (Rand 1 10001) ; 1 - 10000, the MCM slider's range
         player.AuxVarSetFlt "NotMSeed" fPlaythroughSeed
     endif
