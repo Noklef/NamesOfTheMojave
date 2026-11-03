@@ -60,6 +60,7 @@ I've gone ahead and created some addons for some mods i've been playing:
 | `addons/NewCalifornia`       | [Fallout - New California](https://www.nexusmods.com/newvegas/mods/45138)     | N/A              |
 | `addons/FriendlyAnimals`     | Brahmin and guard dogs (base games, no other mod needed)                      | N/A              |
 
+> NOTE: These have not been thoroughly tested, so if there's bugs please raise a bug
 
 ### Add-ons: Creating your own
 
@@ -84,7 +85,7 @@ I've won't lie, and deny the use of AI to help me develop this implementation. I
 It's been tested in game throughout development.
 
 AI was used in the following ways:
-
+- Scaffolding out an initial barebones implementation
 - Researching xNVSE / JIP functions, as well as examples
 - Drafting and reviewing the scripts, and finding GECK / NVSE quirks (loops, string parsing, aux vars)
 - Building the name lists and rules from FNVEdit exports and lore research
