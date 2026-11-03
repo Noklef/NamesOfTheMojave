@@ -7,9 +7,9 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: "Release version without v (e.g. 1.0.0)"
+        description: "Release version without v (e.g. 1.0)"
         required: true
-        default: "1.0.0"
+        default: "1.0"
         type: string
 
 permissions:
@@ -33,12 +33,12 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           version="${RELEASE_VERSION:-${GITHUB_REF_NAME#v}}"
-          if [[ ! "$version" =~ ^[0-9]+\.[0-9]+(\.[0-9]+)?$ ]]; then
-            echo "Expected a version such as 1.0 or 1.0.1."
+          if [[ ! "$version" =~ ^[0-9]+\.[0-9]+$ ]]; then
+            echo "Expected a version such as 1.0 or 1.1 (major.minor)."
             exit 1
           fi
 
-          python scripts/build.py
+          python scripts/build.py "$version"
           package="dist/NamesOfTheMojave-${version}.zip"
           mv dist/NamesOfTheMojave.zip "$package"
 
