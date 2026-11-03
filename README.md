@@ -11,23 +11,30 @@ I could only see so many "NCR Troopers" without getting annoyed. And I thought i
 ## Features
 
 - **ESP-less**: Not adding another .esp to your mod list
-- **Per NPC names**: Randomly generated / set NPC names
+- **Per NPC names**: every generic NPC gets their own name, even when 50 of them share the same record
   - **Gender-aware names**
-- **_TTW Compatible_**: covers New Vegas, its DLCs, and the Fallout 3 side of TTW (Capital Wasteland, The Pitt, Point Lookout).
+  - **Consistent**: an NPC keeps the same name for the whole playthrough, across saves and reloads. A new game gives new names
+  - **No twins**: NPCs loaded at the same time get different names (a repeat only happens if a pool runs out)
+- **Super mutants too**: super mutants and Nightkin get names like `Big Tony` or `Gristle`, and Point Lookout's swampfolk get backwoods names
+- **Dialogue too**: the dialogue window shows the NPC's new name
+- **_TTW Compatible_**: covers New Vegas, its DLCs, and the Fallout 3 side of TTW (Capital Wasteland, Anchorage, The Pitt, Point Lookout). Works on plain New Vegas too: the Fallout 3 content is skipped when it isn't installed.
 - Configurable through [MCM Extender](https://www.nexusmods.com/newvegas/mods/93642) (optional) or the INI:
   - **Enabled**: off gives NPCs this mod named their original names back as you come near them
   - **Show role after name**: `Henry Glover (Powder Ganger)` instead of `Henry Glover`
   - **Scan interval**: how often to look for newly spawned NPCs (default 10 seconds)
   - **Use titles**: `Ranger Barker` for ranks the game uses (default on), or `Erik Barker` (a first name in place of the rank)
   - **Name seed** (MCM only): same seed = same names. Change it to give every generic NPC a new name
-- (Currently) **205 roles** across **5 name pools** (1,300+ names):
+- (Currently) **249 roles** across **8 name pools** (nearly 1,500 names):
   - **Wasteland**: first + last names for NCR, gangs, civilians, Brotherhood, Enclave, and so on
   - **Legion**: Latin single names
   - **Ghoul**: names for ghoul groups
   - **Tribal**: names for the Honest Hearts and Point Lookout tribes
   - **Chinese**: for the Chinese Remnant and the Anchorage simulation
+  - **Super mutant**: plain old-world names and blunt nicknames
+  - **Swampfolk**: backwoods names for Point Lookout's swampfolk
+  - **Kids**: first names for children
 - **Add-on support**: rules and name lists are drop-in text files, so other mods can add their own NPCs without editing this one (see [Add-ons](#add-ons)).
-- **Save Friendly**: This is all done at run-time, so it doesn't modify your save at all.
+- **Save Friendly**: almost nothing is saved, only one number (the playthrough seed). Names are worked out again each time, so uninstalling is clean.
 
 ## Requirements
 
@@ -90,6 +97,7 @@ AI was used in the following ways:
 - Drafting and reviewing the scripts, and finding GECK / NVSE quirks (loops, string parsing, aux vars)
 - Building the name lists and rules from FNVEdit exports and lore research
 - Building the add-ons for other mods from FNVEdit exports
+- Generating the quirky names for some of the groups
 - Generating the GitHub release scripts / `build.py` script
 
 Model used: `Claude Opus 5.5`
