@@ -6,7 +6,7 @@ param(
 $ErrorActionPreference = 'Stop'
 
 # /XF also protects meta.ini from /MIR purge.
-robocopy "$PSScriptRoot\src" $Target /E /MIR /XF meta.ini .gitkeep /NJH /NJS /NDL /NP
+robocopy "$PSScriptRoot\..\src" $Target /E /MIR /XF meta.ini .gitkeep /NJH /NJS /NDL /NP
 if ($LASTEXITCODE -ge 8) { throw "robocopy failed with code $LASTEXITCODE" }
 Write-Host "Deployed to $Target"
 exit 0  # robocopy codes 1-7 mean success; do not leak them

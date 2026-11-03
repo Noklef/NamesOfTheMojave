@@ -4,8 +4,8 @@
 ;   - https://geckwiki.com/index.php?title=AuxiliaryVariableSetString
 
 ; This is the main logic around loading any list; it's just going line-by-line
-string_var sFilePath    ; The file to read, I.E. "Data/Config/NamesOfTheMojave/Names/NOTM_legion/male.txt"
-string_var sNoteName    ; The note to fill, I.E. "*NotM:NOTM_legion:male"
+string_var sFilePath    ; The file to read, I.E. "Data/Config/NamesOfTheMojave/Names/NOTM_legion/unisex.txt"
+string_var sNoteName    ; The note to fill, I.E. "*NotM:NOTM_legion:unisex"
 string_var sLine        ; The line we are reading
 int iLineNumber         ; Which line we are on. Starts at 1
 int iEntryCount         ; How many entries we kept (the answer we give back)

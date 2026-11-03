@@ -1,0 +1,15 @@
+# Kid unisex nicknames, Little Lamplight style, for boys and girls. All drafted, none are lore names.
+# Leaves out Tinker (Tinker Joe).
+# One name per line. Lines starting with # are comments. Do not leave empty lines: the first empty line ends the list.
+Biscuit
+Moxie
+Noodle
+Nugget
+Patches
+Peanut
+Pickles
+Scooter
+Smudge
+Sprout
+Squeak
+Tater

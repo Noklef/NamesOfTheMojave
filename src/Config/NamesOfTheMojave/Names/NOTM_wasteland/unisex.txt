@@ -1,0 +1,27 @@
+# Wasteland unisex first names, for men and women. All drafted, none are lore names.
+# Leaves out names that a game character has on their own (Charlie, Quinn).
+# One name per line. Lines starting with # are comments. Do not leave empty lines: the first empty line ends the list.
+Alex
+Avery
+Billie
+Bobbie
+Casey
+Dana
+Drew
+Frankie
+Jamie
+Jesse
+Jo
+Jordan
+Kelly
+Lee
+Leslie
+Marion
+Morgan
+Riley
+Robin
+Sam
+Shannon
+Sidney
+Taylor
+Terry

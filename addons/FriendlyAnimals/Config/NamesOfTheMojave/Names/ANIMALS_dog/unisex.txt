@@ -1,5 +1,5 @@
 # Dog names for guard dogs and working dogs. Leaves out names that Fallout 3, New Vegas, their DLCs or TTW already use (Rex, Dogmeat, Pete, Butch, Max, ...).
-# One name per line. Lines starting with # are comments. Do not leave empty lines: the first empty line ends the list. No female or surname list: animals are creatures, so the game treats them all as male.
+# One name per line. Lines starting with # are comments. Do not leave empty lines: the first empty line ends the list. No surname list.
 Ace
 Amos
 Bear

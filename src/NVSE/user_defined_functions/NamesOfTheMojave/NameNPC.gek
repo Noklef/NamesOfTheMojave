@@ -26,8 +26,7 @@ begin Function {rNPC, sOriginalName, sRulePools, aNamesInUse}
     while iAttempt < 8
         let sChosenPool := Call rChoosePoolScript rNPC (sRulePools) iAttempt
         let sNewName := Call rPickNameScript rNPC (sChosenPool) iAttempt (sTitle)
-        ; No name: this pool has none for this NPC (I.E. no male names). The next try can
-        ; pick another pool of a multi-pool rule
+        ; If there's no name, pick another from the pool
         if eval (sv_Length sNewName) > 0
             ; The repeat check is on the name without the role: 'Henry Glover' is taken whatever his role
             if eval (ar_HasKey aNamesInUse sNewName) == 0

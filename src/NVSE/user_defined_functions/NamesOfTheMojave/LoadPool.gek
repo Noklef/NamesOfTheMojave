@@ -8,6 +8,7 @@ int iMaleFullCount          ; Names in male_full.txt
 int iFemaleCount            ; Names in female.txt
 int iFemaleFullCount        ; Names in female_full.txt
 int iSurnameCount           ; Names in surname.txt (only for the log line)
+int iUnisexCount            ; Names in unisex.txt
 
 ; Loads a single pool of names
 begin Function {sPoolName}
@@ -18,22 +19,25 @@ begin Function {sPoolName}
     let sFolderPath := "Data/Config/NamesOfTheMojave/Names/" + sPoolName + "/"
     let sNotePrefix := "*NotM:" + sPoolName + ":"
 
-    ; SO we use male names as the default, so we need to get the count of male / male full name counts
+    ; Every file is optional. A missing file gives 0 names
     let iMaleCount := Call rReadLinesScript (sFolderPath + "male.txt") (sNotePrefix + "male")
     let iMaleFullCount := Call rReadLinesScript (sFolderPath + "male_full.txt") (sNotePrefix + "male_full")
 
-    ; No male names: this pool cannot name anyone reliably. Also shows a pool folder name with a typo
-    if eval (iMaleCount + iMaleFullCount) == 0
-        Call rLogScript "WARN" (sv_Construct "Names/%z has no male.txt or male_full.txt names" sPoolName)
-    endif
-
-    ; Female names and surnames are optional. A missing file gives 0 names
     let iFemaleCount := Call rReadLinesScript (sFolderPath + "female.txt") (sNotePrefix + "female")
     let iFemaleFullCount := Call rReadLinesScript (sFolderPath + "female_full.txt") (sNotePrefix + "female_full")
     let iSurnameCount := Call rReadLinesScript (sFolderPath + "surname.txt") (sNotePrefix + "surname")
+
+    ; Names for men and women
+    let iUnisexCount := Call rReadLinesScript (sFolderPath + "unisex.txt") (sNotePrefix + "unisex")
+
+    ; No names for men, or none for women. Also shows a pool folder name with a typo
+    if eval (iMaleCount + iMaleFullCount + iUnisexCount) == 0 || (iFemaleCount + iFemaleFullCount + iUnisexCount) == 0
+        Call rLogScript "WARN" (sv_Construct "Names/%z cannot name both men and women: add unisex.txt, or male and female lists" sPoolName)
+    endif
+
     ; A count of 0 here means a file is missing or named wrong
-    Call rLogScript "DEBUG" (sv_Construct "Names/%z: %g male, %g male_full, %g female, %g female_full, %g surname" sPoolName iMaleCount iMaleFullCount iFemaleCount iFemaleFullCount iSurnameCount)
+    Call rLogScript "DEBUG" (sv_Construct "Names/%z: %g male, %g male_full, %g female, %g female_full, %g surname, %g unisex" sPoolName iMaleCount iMaleFullCount iFemaleCount iFemaleFullCount iSurnameCount iUnisexCount)
 
     ; Total names = how often this pool is picked when a rule has several pools
-    player.AuxVarSetFlt ("*NotM:NameCount:" + sPoolName) (iMaleCount + iMaleFullCount + iFemaleCount + iFemaleFullCount)
+    player.AuxVarSetFlt ("*NotM:NameCount:" + sPoolName) (iMaleCount + iMaleFullCount + iFemaleCount + iFemaleFullCount + iUnisexCount)
 end

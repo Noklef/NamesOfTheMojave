@@ -1,6 +1,6 @@
 # Swampfolk names (Point Lookout): backwoods first names and swamp nicknames, used alone (no surname).
 # Leaves out names that Fallout 3, New Vegas, their DLCs or TTW already use (Boone, Silas, ...), and the super mutant pool's names.
-# One name per line. Lines starting with # are comments. Do not leave empty lines: the first empty line ends the list. No female or surname list: swampfolk are creatures, so the game treats them all as male.
+# One name per line. Lines starting with # are comments. Do not leave empty lines: the first empty line ends the list. No surname list.
 Ambrose
 Billy Ray
 Bo
