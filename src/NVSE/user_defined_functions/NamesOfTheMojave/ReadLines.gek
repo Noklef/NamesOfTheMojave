@@ -23,7 +23,7 @@ begin Function {sFilePath, sNoteName}
         ; Length of 0 means the line's over (this assumes there's no gaps in the .txt files)
         if eval (sv_Length sLine) == 0
             break
-        elseif eval sLine[0:0] != "#" ; If it's a comment, we -1 since comments don't count to the total
+        elseif eval sLine[0:0] != "#" ; Not a comment: add it to the end of the list (-1 = append)
             player.AuxVarSetStr (sNoteName) (sLine) -1
         endif
 

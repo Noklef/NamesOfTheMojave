@@ -49,7 +49,7 @@ begin Function {}
     player.AuxVarSetFlt "*NotM:UseTitles" (GetINIFloat "General:UseTitles" "NamesOfTheMojave.ini")
     player.AuxVarSetFlt "*NotM:ShowRole" (GetINIFloat "General:ShowRole" "NamesOfTheMojave.ini")
 
-    ; Copying those references to
+    ; The settings the names use now. Tick scans again when MCM changes one
     player.AuxVarSetFlt "*NotM:EnabledShown" (player.AuxVarGetFlt "*NotM:Enabled")
     player.AuxVarSetFlt "*NotM:ShowRoleShown" (player.AuxVarGetFlt "*NotM:ShowRole")
     player.AuxVarSetFlt "*NotM:UseTitlesShown" (player.AuxVarGetFlt "*NotM:UseTitles")
