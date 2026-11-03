@@ -101,7 +101,7 @@ begin Function {}
             let sLine := player.AuxVarGetStr "*NotM:RuleLines" iEntryIndex
             let aRuleParts := sv_Split (sLine) "|"
 
-            ; No | or more than two is a typo: the line is skipped
+            ; No | or more than two is a typo: the line is skipped. sv_Split drops empty parts,
             if eval (ar_Size aRuleParts) < 2 || (ar_Size aRuleParts) > 3
                 Call rLogScript "WARN" (sv_Construct "bad rule line [%z] in Rules/%z" sLine sFileName)
             else
@@ -118,9 +118,6 @@ begin Function {}
                     ar_Erase aRuleTitles sRuleName
                     player.AuxVarErase ("*NotM:Rule:" + sRuleName)
                     player.AuxVarErase ("*NotM:Title:" + sRuleName)
-                ; Nothing before or after the | is a typo: the line is skipped
-                elseif eval (sv_Length sRuleName) == 0 || (sv_Length sRulePools) == 0
-                    Call rLogScript "WARN" (sv_Construct "bad rule line [%z] in Rules/%z" sLine sFileName)
                 ; Name|pool or Name|A,B (with or without |title): replaces any earlier rule, title too
                 else
                     ; Shows add-on authors which file won
@@ -163,8 +160,8 @@ begin Function {}
 
         while iPoolIndex < (ar_Size aPoolNames)
             let sPoolName := aPoolNames[iPoolIndex]
-            ; Skip empty bits from a stray comma (A,,B), and pools already loaded
-            if eval (sv_Length sPoolName) > 0 && (ar_HasKey aUsedPools sPoolName) == 0
+            ; Skip pools already loaded.
+            if eval (ar_HasKey aUsedPools sPoolName) == 0
                 let aUsedPools[sPoolName] := 1
                 Call rLoadPoolScript (sPoolName)
             endif
