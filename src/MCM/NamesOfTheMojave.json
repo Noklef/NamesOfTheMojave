@@ -49,7 +49,7 @@
                 "9": {
                     "type": 0,
                     "enable": 1,
-                    "title": "Debug"
+                    "title": "Advanced"
                 },
                 "11": {
                     "type": 2,
@@ -71,7 +71,7 @@
                     "type": 2,
                     "enable": 1,
                     "title": "Name seed",
-                    "mouse": "WARNING: Changing this will change the names of all the NPC's named by this mod. Same Number = Same seed though, so if you remember your original after changing you can revert back.",
+                    "mouse": "WARNING: Changing this changes the names of all NPCs this mod named. Set the same number again to get the old names back.",
                     "scale": {
                         "valueDecimal": 0,
                         "valueIncrement": 1,

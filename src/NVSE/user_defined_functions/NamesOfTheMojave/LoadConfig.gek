@@ -14,7 +14,6 @@ array_var aRuleTitles       ; The rules in use: NPC name -> title ("" = no title
 array_var aRuleNames        ; The NPC names in aRules, to go through them one by one
 array_var aPoolNames        ; A rule's pools, split at ","
 array_var aUsedPools        ; Every pool loaded so far, so each is loaded once
-string_var sConfigFolder    ; The Config folder
 string_var sFileName        ; The file we are reading
 string_var sLine            ; The line we are reading
 string_var sRuleName        ; The NPC name a rule is for, I.E. 'Raider'
@@ -38,7 +37,6 @@ begin Function {}
     let rLoadPluginsScript := CompileScript "NamesOfTheMojave/LoadPlugins.gek"
     let rLoadPoolScript := CompileScript "NamesOfTheMojave/LoadPool.gek"
     let rLogScript := player.AuxVarGetRef "*NotM:Log"
-    let sConfigFolder := "Data/Config/NamesOfTheMojave/"
 
     ; Empty lists to fill as we read (names as keys, so each rule and pool is in there once)
     let aRules := ar_Construct "stringmap"
@@ -65,7 +63,7 @@ begin Function {}
     let iFileIndex := 0
     while iFileIndex < (ar_Size aFileNames)
         let sFileName := aFileNames[iFileIndex]
-        let iEntryCount := Call rReadLinesScript (sConfigFolder + "Rules/" + sFileName) "*NotM:RuleLines"
+        let iEntryCount := Call rReadLinesScript ("Data/Config/NamesOfTheMojave/Rules/" + sFileName) "*NotM:RuleLines"
         let iEntryIndex := 0
 
         while iEntryIndex < iEntryCount

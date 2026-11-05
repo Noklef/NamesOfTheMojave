@@ -1,0 +1,2 @@
+# Every text file is CRLF, in the working copy and in release zips (CI checks out on Linux)
+* text=auto eol=crlf
