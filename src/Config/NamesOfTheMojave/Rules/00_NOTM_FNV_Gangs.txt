@@ -22,3 +22,4 @@ Slaver|NOTM_wasteland
 Slave|NOTM_wasteland
 Powder Ganger Deputy|NOTM_wasteland
 Great Khan Armorer|NOTM_wasteland
+Raider|NOTM_wasteland

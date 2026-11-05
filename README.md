@@ -81,7 +81,7 @@ Other mod authors can also stop an NPC from being named by setting the public au
 - **Mods that add NPCs**: their NPCs aren't named unless there's an add-on for them (or they reuse a vanilla NPC record).
 - **Translated games**: not supported yet. Rules match the English in-game name (`Raider`), so a German "Plünderer" won't match.
 - **Changing name lists mid-playthrough** (adding names, installing an add-on) re-rolls the names that use those lists.
-- **Ghouls in mixed groups** (e.g. ghoul Wastelanders) get wasteland names, because the pool is chosen by the role, not the race.
+- **Ghouls and children in mixed groups** (e.g. ghoul Wastelanders, child Refugees) get wasteland names, because the pool is chosen by the role, not the race.
 
 If something looks off, `NamesOfTheMojave.log` (in the game folder, or `overwrite/Root/` with MO2 Root Builder) shows a load summary (rule, pool and plugin counts), rules that add-ons replaced or removed, bad rule lines, and every NPC that was named.
 

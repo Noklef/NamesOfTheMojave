@@ -1,6 +1,5 @@
 # Names of the Mojave rules: Capital Wasteland (FO3). Format and rule forms: README.md in this folder.
 # This file is replaced on update. Put your own rules in a new file (e.g. 50_MyRules.txt). No empty lines.
-Raider|NOTM_wasteland
 Talon Company Merc|NOTM_wasteland
 Megaton Settler|NOTM_wasteland
 Tenpenny Resident|NOTM_wasteland
@@ -24,3 +23,5 @@ Wasteland Junkie|NOTM_wasteland
 Wasteland Merchant|NOTM_wasteland
 Megaton Refugee|NOTM_wasteland
 Wasteland Doctor|NOTM_wasteland|Doctor
+Drifter|NOTM_wasteland
+Water Beggar|NOTM_wasteland

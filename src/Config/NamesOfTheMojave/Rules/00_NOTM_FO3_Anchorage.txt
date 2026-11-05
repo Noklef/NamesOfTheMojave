@@ -1,4 +1,4 @@
-# Names of the Mojave rules: Operation Anchorage (American side; the Chinese side is in 00_NOTM_Chinese.txt). Format and rule forms: README.md in this folder.
+# Names of the Mojave rules: Operation Anchorage (American side; the Chinese side is in 00_NOTM_FO3_Chinese.txt). Format and rule forms: README.md in this folder.
 # This file is replaced on update. Put your own rules in a new file (e.g. 50_MyRules.txt). No empty lines.
 American Soldier|NOTM_wasteland
 Strike Team Grenadier|NOTM_wasteland
