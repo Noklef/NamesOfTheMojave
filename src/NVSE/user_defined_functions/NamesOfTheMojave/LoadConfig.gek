@@ -1,11 +1,11 @@
 ; GECK wiki stuff:
 ;   - https://geckwiki.com/index.php?title=GetFilesInFolder
-;   - https://geckwiki.com/index.php?title=GetModIndex
 ;   - https://geckwiki.com/index.php?title=Sv_Split
 ;   - https://geckwiki.com/index.php?title=Ar_Sort
 ;   - https://geckwiki.com/index.php?title=Ar_Keys
 ref rReadLinesScript        ; The file reader (ReadLines.gek)
 ref rLoadPoolScript         ; The pool loader (LoadPool.gek)
+ref rLoadPluginsScript      ; The plugins reader (LoadPlugins.gek)
 ref rLogScript              ; The logger (Log.gek)
 array_var aFileNames       ; The files found in a folder
 array_var aRuleParts        ; One rule split at "|": [name, pools] or [name, pools, title]
@@ -27,15 +27,15 @@ int iFileIndex              ; Which file we are on (counter)
 int iEntryIndex             ; Which line we are on (counter)
 int iRuleIndex              ; Which rule we are on (counter)
 int iPoolIndex              ; Which pool we are on (counter)
-int iPluginIndex            ; A plugin's load order number. 255 = not installed
 int iPluginCount            ; How many listed plugins are installed, for the startup line
 int iRuleCount              ; How many rules are in use, for the startup line
 int iPoolCount              ; How many pools are in use, for the startup line
 
 ; This one reads all the files in the config folder. I.E. which plugins to use, the rules, and their pools
 begin Function {}
-    ; LoadPool is only used here, so it is compiled here (Main compiles the shared scripts)
+    ; LoadPlugins and LoadPool are only used here, so they are compiled here (Main compiles the shared scripts)
     let rReadLinesScript := player.AuxVarGetRef "*NotM:ReadLines"
+    let rLoadPluginsScript := CompileScript "NamesOfTheMojave/LoadPlugins.gek"
     let rLoadPoolScript := CompileScript "NamesOfTheMojave/LoadPool.gek"
     let rLogScript := player.AuxVarGetRef "*NotM:Log"
     let sConfigFolder := "Data/Config/NamesOfTheMojave/"
@@ -44,40 +44,12 @@ begin Function {}
     let aRules := ar_Construct "stringmap"
     let aRuleTitles := ar_Construct "stringmap"
     let aUsedPools := ar_Construct "stringmap"
-    let iPluginCount := 0
 
     ; ==============================================
     ; Plugins: whose NPCs may be named
     ; ==============================================
 
-    ; Find the .txt files. This path starts in Data, and gives back file names only
-    let aFileNames := GetFilesInFolder "Config/NamesOfTheMojave/Plugins" "*.txt"
-
-    ; Read each file into a note, then go through its lines (one plugin name per line)
-    let iFileIndex := 0
-    while iFileIndex < (ar_Size aFileNames)
-        let sFileName := aFileNames[iFileIndex]
-        let iEntryCount := Call rReadLinesScript (sConfigFolder + "Plugins/" + sFileName) "*NotM:PluginLines"
-        let iEntryIndex := 0
-
-        while iEntryIndex < iEntryCount
-            ; Save the plugin by its load order number, because that is what Scan finds on an NPC.
-            ; Plugins that are not installed (255) are skipped, so listing a missing mod does no harm
-            let sLine := player.AuxVarGetStr "*NotM:PluginLines" iEntryIndex
-            let iPluginIndex := GetModIndex (sLine)
-            if iPluginIndex < 255
-                player.AuxVarSetFlt (sv_Construct "*NotM:UsePlugin:%g" iPluginIndex) 1
-                let iPluginCount += 1
-            endif
-            let iEntryIndex += 1
-        loop
-        let iFileIndex += 1
-    loop
-
-    ; An empty folder, or none of the listed plugins installed
-    if iPluginCount == 0
-        Call rLogScript "WARN" "Plugins/ lists no installed plugin, no actor will be named"
-    endif
+    let iPluginCount := Call rLoadPluginsScript
 
     ; ==============================================
     ; Rules: which NPC names get which pools
