@@ -40,12 +40,12 @@ jobs:
           fi
 
           python scripts/build.py --addon "$ADDON"
-          package="dist/NamesOfTheMojave-Addon-${ADDON}-${VERSION}.zip"
-          mv "dist/NamesOfTheMojave-Addon-${ADDON}.zip" "$package"
+          package="dist/NotM-Addon-${ADDON}-${VERSION}.zip"
+          mv "dist/NotM-Addon-${ADDON}.zip" "$package"
 
           # --latest=false: the mod release keeps the "Latest" badge
           gh release create "${ADDON}-${VERSION}" "$package" \
             --target "$GITHUB_SHA" \
-            --title "Names of the Mojave - ${ADDON} add-on ${VERSION}" \
+            --title "NotM Addon - ${ADDON} ${VERSION}" \
             --notes "${ADDON} add-on for Names of the Mojave. Needs the main mod." \
             --latest=false

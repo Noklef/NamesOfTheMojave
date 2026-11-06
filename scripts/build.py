@@ -1,7 +1,7 @@
 """Zip the mod or one add-on into dist/ (the zip root is the game's Data folder).
 
     python scripts/build.py [version]          src/ -> dist/NamesOfTheMojave.zip
-    python scripts/build.py --addon <Name>     addons/<Name> -> dist/NamesOfTheMojave-Addon-<Name>.zip
+    python scripts/build.py --addon <Name>     addons/<Name> -> dist/NotM-Addon-<Name>.zip
 
 With a version (the release workflow passes the tag's), the build fails if Main.gek
 sets a different one, so the log and the MCM page show the released version.
@@ -37,7 +37,7 @@ def main():
         if name not in addons:
             sys.exit(f"No add-on folder addons/{name}. Add-ons: {', '.join(sorted(addons))}")
         # Leaves out every README.md (any folder)
-        zip_folder(ADDONS / name, DIST / f"NamesOfTheMojave-Addon-{name}.zip", {"README.md"})
+        zip_folder(ADDONS / name, DIST / f"NotM-Addon-{name}.zip", {"README.md"})
         return
 
     if len(sys.argv) > 1:
