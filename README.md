@@ -55,14 +55,6 @@ I've gone ahead and created some addons for some mods i've been playing:
 
 | Add-on                                                      | For                                                                           | Nexus Addon Link |
 | ----------------------------------------------------------- | ----------------------------------------------------------------------------- | ---------------- |
-| [`addons/TLD_Travelers`](addons/TLD_Travelers/)             | [The Living Desert](https://www.nexusmods.com/newvegas/mods/64623)            | N/A              |
-| [`addons/Long15Reloaded`](addons/Long15Reloaded/)           | [Long 15 - NCR Expansion](https://www.nexusmods.com/newvegas/mods/94306)      | N/A              |
-| [`addons/DryWellsReloaded`](addons/DryWellsReloaded/)       | [Dry Wells - Legion Expansion](https://www.nexusmods.com/newvegas/mods/88180) | N/A              |
-| [`addons/AWorldOfPainRevised`](addons/AWorldOfPainRevised/) | [A World of (Less) Pain](https://www.nexusmods.com/newvegas/mods/71139)       | N/A              |
-| [`addons/TheFrontier`](addons/TheFrontier/)                 | [Fallout - The Frontier](https://www.nexusmods.com/newvegas/mods/68009)       | N/A              |
-| [`addons/TweaksTTW`](addons/TweaksTTW/)                     | [TweaksTTW](https://www.nexusmods.com/newvegas/mods/77934)                    | N/A              |
-| [`addons/TrooperUncut`](addons/TrooperUncut/)               | [Trooper's Uncut Merge](https://www.nexusmods.com/newvegas/mods/95700)        | N/A              |
-| [`addons/NewCalifornia`](addons/NewCalifornia/)             | [Fallout - New California](https://www.nexusmods.com/newvegas/mods/45138)     | N/A              |
 | [`addons/FriendlyAnimals`](addons/FriendlyAnimals/)         | Brahmin and guard dogs (base games, no other mod needed)                      | N/A              |
 
 > NOTE: These have not been thoroughly tested, so if there's bugs please raise a bug
