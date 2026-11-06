@@ -1,0 +1,51 @@
+name: Release add-on
+
+on:
+  workflow_dispatch:
+    inputs:
+      addon:
+        description: "Add-on folder name in addons/ (e.g. FriendlyAnimals)"
+        required: true
+        type: string
+      version:
+        description: "Add-on version (e.g. 1.0)"
+        required: true
+        default: "1.0"
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Build add-on and create its release
+        env:
+          ADDON: ${{ inputs.addon }}
+          VERSION: ${{ inputs.version }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [[ ! "$VERSION" =~ ^[0-9]+\.[0-9]+$ ]]; then
+            echo "Expected a version such as 1.0 or 1.1 (major.minor)."
+            exit 1
+          fi
+
+          python scripts/build.py --addon "$ADDON"
+          package="dist/NamesOfTheMojave-Addon-${ADDON}-${VERSION}.zip"
+          mv "dist/NamesOfTheMojave-Addon-${ADDON}.zip" "$package"
+
+          # --latest=false: the mod release keeps the "Latest" badge
+          gh release create "${ADDON}-${VERSION}" "$package" \
+            --target "$GITHUB_SHA" \
+            --title "Names of the Mojave - ${ADDON} add-on ${VERSION}" \
+            --notes "${ADDON} add-on for Names of the Mojave. Needs the main mod." \
+            --latest=false

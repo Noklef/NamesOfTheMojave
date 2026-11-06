@@ -1,4 +1,4 @@
-name: Build and release
+name: Release mod
 
 on:
   push:
