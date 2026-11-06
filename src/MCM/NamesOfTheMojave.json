@@ -48,6 +48,16 @@
                     ],
                     "state": { "configINI": "General:Enabled", "default": 1, "value": 1, "disable": 1 }
                 },
+                "6": {
+                    "type": 5,
+                    "enable": 1,
+                    "title": "First names only",
+                    "mouse": "Shows a first name only, e.g. Henry. Names with a rank keep it, e.g. Ranger Barker.",
+                    "vars": [
+                        { "form": "PlayerRef", "auxVar": "*NotM:FirstNamesOnly", "key": 0, "configINI": "General:FirstNamesOnly", "default": 0 }
+                    ],
+                    "state": { "configINI": "General:Enabled", "default": 1, "value": 1, "disable": 1 }
+                },
                 "9": {
                     "type": 0,
                     "enable": 1,
