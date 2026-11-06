@@ -40,8 +40,6 @@ I could only see so many "NCR Troopers" without getting annoyed. And I thought i
 
 - [xNVSE](https://www.nexusmods.com/newvegas/mods/67883)
 - [JIP LN NVSE](https://www.nexusmods.com/newvegas/mods/58277)
-- [JohnnyGuitar NVSE](https://www.nexusmods.com/newvegas/mods/66927)
-- [ShowOff xNVSE](https://www.nexusmods.com/newvegas/mods/72541)
 - (Optional, for the settings page) [The Mod Configuration Menu](https://www.nexusmods.com/newvegas/mods/42507), [MCM Extender](https://www.nexusmods.com/newvegas/mods/93642), [UIO](https://www.nexusmods.com/newvegas/mods/57174)
 
 ## Installation
