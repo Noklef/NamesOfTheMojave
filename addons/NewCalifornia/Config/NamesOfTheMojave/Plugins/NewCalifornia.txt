@@ -1,2 +1,0 @@
-# Names of the Mojave - New California add-on. Lets actors from this plugin be named.
-NewCalifornia.esm

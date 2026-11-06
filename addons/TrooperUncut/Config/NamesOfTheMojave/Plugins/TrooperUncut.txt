@@ -1,2 +1,0 @@
-# Names of the Mojave - Trooper Uncut add-on. Lets actors from this plugin be named.
-Trooper Uncut.esm

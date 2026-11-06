@@ -1,2 +1,0 @@
-# Names of the Mojave - Dry Wells Reloaded add-on. Lets actors from this plugin be named.
-DryWellsReloaded.esm

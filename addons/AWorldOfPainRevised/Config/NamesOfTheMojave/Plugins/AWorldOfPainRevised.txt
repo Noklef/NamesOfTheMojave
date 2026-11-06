@@ -1,2 +1,0 @@
-# Names of the Mojave - A World of Pain Revised add-on. Lets actors from this plugin be named.
-A World of Pain Revised.esm

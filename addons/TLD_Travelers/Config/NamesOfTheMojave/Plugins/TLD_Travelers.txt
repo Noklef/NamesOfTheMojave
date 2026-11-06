@@ -1,2 +1,0 @@
-# Names of the Mojave - TLD Travelers add-on. Lets actors from this plugin be named.
-TLD_Travelers.esm

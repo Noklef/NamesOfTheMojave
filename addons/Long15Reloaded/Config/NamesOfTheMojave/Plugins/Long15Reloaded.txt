@@ -1,2 +1,0 @@
-# Names of the Mojave - Long 15 Reloaded add-on. Lets actors from this plugin be named.
-Long15Reloaded.esm
