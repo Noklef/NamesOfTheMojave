@@ -35,7 +35,8 @@
                     "mouse": "Puts the game's ranks before a name, e.g. Ranger Barker. Off puts a first name in place of the rank, e.g. Erik Barker.",
                     "vars": [
                         { "form": "PlayerRef", "auxVar": "*NotM:UseTitles", "key": 0, "configINI": "General:UseTitles", "default": 1 }
-                    ]
+                    ],
+                    "state": { "configINI": "General:Enabled", "default": 1, "value": 1, "disable": 1 }
                 },
                 "5": {
                     "type": 5,
@@ -44,7 +45,8 @@
                     "mouse": "Shows the original role after the name, e.g. Mike Dawson (Powder Ganger).",
                     "vars": [
                         { "form": "PlayerRef", "auxVar": "*NotM:ShowRole", "key": 0, "configINI": "General:ShowRole", "default": 0 }
-                    ]
+                    ],
+                    "state": { "configINI": "General:Enabled", "default": 1, "value": 1, "disable": 1 }
                 },
                 "9": {
                     "type": 0,
@@ -65,7 +67,8 @@
                     },
                     "vars": [
                         { "form": "PlayerRef", "auxVar": "*NotM:ScanInterval", "key": 0, "configINI": "General:ScanInterval", "default": 10 }
-                    ]
+                    ],
+                    "state": { "configINI": "General:Enabled", "default": 1, "value": 1, "disable": 1 }
                 },
                 "12": {
                     "type": 2,
@@ -80,7 +83,8 @@
                     },
                     "vars": [
                         { "form": "PlayerRef", "auxVar": "NotMSeed", "key": 0 }
-                    ]
+                    ],
+                    "state": { "configINI": "General:Enabled", "default": 1, "value": 1, "disable": 1 }
                 },
                 "14": {
                     "type": 7,
