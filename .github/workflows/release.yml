@@ -3,11 +3,11 @@ name: Build and release
 on:
   push:
     tags:
-      - "v*"
+      - "[0-9]+.[0-9]+"
   workflow_dispatch:
     inputs:
       version:
-        description: "Release version without v (e.g. 1.0)"
+        description: "Release version (e.g. 1.0)"
         required: true
         default: "1.0"
         type: string
@@ -32,7 +32,7 @@ jobs:
           RELEASE_VERSION: ${{ inputs.version }}
           GH_TOKEN: ${{ github.token }}
         run: |
-          version="${RELEASE_VERSION:-${GITHUB_REF_NAME#v}}"
+          version="${RELEASE_VERSION:-$GITHUB_REF_NAME}"
           if [[ ! "$version" =~ ^[0-9]+\.[0-9]+$ ]]; then
             echo "Expected a version such as 1.0 or 1.1 (major.minor)."
             exit 1
@@ -42,7 +42,7 @@ jobs:
           package="dist/NamesOfTheMojave-${version}.zip"
           mv dist/NamesOfTheMojave.zip "$package"
 
-          gh release create "v${version}" "$package" \
+          gh release create "${version}" "$package" \
             --target "$GITHUB_SHA" \
             --title "Names of the Mojave - ${version}" \
             --generate-notes
