@@ -1,0 +1,35 @@
+# Bighorner names: rocks, desert plants, wool and a few jokes. Leaves out names that Fallout 3, New Vegas, their DLCs or TTW already use (Billy, Clover, Dusty, ...) and names the brahmin and dog lists use.
+# One name per line. Lines starting with # are comments. Do not leave empty lines: the first empty line ends the list. No surname list.
+Boulder
+Butte
+Mesa
+Ridge
+Flint
+Shale
+Granite
+Slate
+Basalt
+Crag
+Bluff
+Pebble
+Sage
+Yucca
+Thistle
+Bramble
+Cactus
+Nanny
+Woolly
+Shaggy
+Scruffy
+Curly
+Tufts
+Horace
+Ramses
+Ramrod
+Headbutt
+Battering Ram
+Big Horn Bill
+Cud
+Grazer
+Chops
+Mutton
