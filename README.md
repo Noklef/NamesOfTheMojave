@@ -44,7 +44,7 @@ I could only see so many "NCR Troopers" without getting annoyed. And I thought i
 
 ## Installation
 
-- Download the mod file on [NexusMods]()
+- Download the mod file on [NexusMods](https://www.nexusmods.com/newvegas/mods/100323)
 - Install using Vortex / MO2
 - Works on an existing save. Uninstalling is clean: the only thing left in your save is one number (the playthrough seed)
 
@@ -55,7 +55,7 @@ I've gone ahead and created some addons for some mods i've been playing:
 
 | Add-on                                                      | For                                                                           | Nexus Addon Link |
 | ----------------------------------------------------------- | ----------------------------------------------------------------------------- | ---------------- |
-| [`addons/FriendlyAnimals`](addons/FriendlyAnimals/)         | Brahmin and guard dogs (base games, no other mod needed)                      | N/A              |
+| [`addons/FriendlyAnimals`](addons/FriendlyAnimals/)         | Brahmin, Bighorners and guard dogs (base games, no other mod needed)          | N/A              |
 
 > NOTE: These have not been thoroughly tested, so if there's bugs please raise a bug
 
