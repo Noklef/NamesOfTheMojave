@@ -20,6 +20,8 @@ int iFirstNameCount         ; How many first names the pool has (male / female l
 int iSurnameCount           ; How many surnames the pool has
 int iPickedIndex            ; The number Hash picked
 int iTitlesOff              ; 1 = the rule has a title, but Use titles is off: keep the name the title would use, minus the title
+int iFirstOnly              ; 1 = First names only: the first name alone (titled names keep theirs)
+array_var aNameParts        ; A full name split at spaces, for First names only, I.E. [Henry, Glover]
 
 ; This is the picking name script: one name from one pool
 begin Function {rNPC, sPoolName, iAttempt, sTitle}
@@ -63,6 +65,7 @@ begin Function {rNPC, sPoolName, iAttempt, sTitle}
     endif
 
     ; Use titles logic; if titles are off, we drop the titles
+    let iFirstOnly := player.AuxVarGetFlt "*NotM:FirstNamesOnly"
     let iTitlesOff := 0
     if eval (sv_Length sTitle) > 0 && (player.AuxVarGetFlt "*NotM:UseTitles") == 0
         let sTitle := ""
@@ -82,13 +85,19 @@ begin Function {rNPC, sPoolName, iAttempt, sTitle}
         ; Full name (also for a titled rule with titles off when the pool has no first names, I.E. NOTM_chinese)
         let iPickedIndex := Call rHashScript iNPCID fPlaythroughSeed (iAttempt * 2 + 1) iFullNameCount
         let sPickedName := player.AuxVarGetStr (sNoteName + "_full") iPickedIndex
+        
+        ; First names only: keep the first word, I.E. 'Henry Glover' -> 'Henry'. Pools without first names keep the full name (NOTM_chinese is surname first)
+        if eval iFirstOnly == 1 && iFirstNameCount > 0
+            let aNameParts := sv_Split (sPickedName) " " ; doing some "hacky" splitting and index at `0` issues
+            let sPickedName := aNameParts[0]
+        endif
     elseif iFirstNameCount == 0
         ; No full names and no first names (also when ChoosePool gave back "": no pool has names)
         let sPickedName := ""
     else
         ; First name + surname. They use different pick numbers (odd and even), so they are picked separately
         let sPickedName := sFirstName
-        if iSurnameCount > 0 ; Pools without surnames (I.E. Legion) give a single name
+        if eval iSurnameCount > 0 && iFirstOnly == 0 ; Pools without surnames (I.E. Legion), or First names only, give a single name
             let iPickedIndex := Call rHashScript iNPCID fPlaythroughSeed (iAttempt * 2 + 2) iSurnameCount
             let sSurname := player.AuxVarGetStr (sNotePrefix + "surname") iPickedIndex
             let sPickedName := sPickedName + " " + sSurname

@@ -47,12 +47,14 @@ begin Function {}
     player.AuxVarSetFlt "*NotM:ScanInterval" fScanInterval
     player.AuxVarSetFlt "*NotM:Enabled" (GetINIFloat "General:Enabled" "NamesOfTheMojave.ini")
     player.AuxVarSetFlt "*NotM:UseTitles" (GetINIFloat "General:UseTitles" "NamesOfTheMojave.ini")
+    player.AuxVarSetFlt "*NotM:FirstNamesOnly" (GetINIFloat "General:FirstNamesOnly" "NamesOfTheMojave.ini")
     player.AuxVarSetFlt "*NotM:ShowRole" (GetINIFloat "General:ShowRole" "NamesOfTheMojave.ini")
 
     ; The settings the names use now. Tick scans again when MCM changes one
     player.AuxVarSetFlt "*NotM:EnabledShown" (player.AuxVarGetFlt "*NotM:Enabled")
     player.AuxVarSetFlt "*NotM:ShowRoleShown" (player.AuxVarGetFlt "*NotM:ShowRole")
     player.AuxVarSetFlt "*NotM:UseTitlesShown" (player.AuxVarGetFlt "*NotM:UseTitles")
+    player.AuxVarSetFlt "*NotM:FirstNamesOnlyShown" (player.AuxVarGetFlt "*NotM:FirstNamesOnly")
 
     ; ================================================================
     ; Scripts: compile once, store on the player for the other scripts

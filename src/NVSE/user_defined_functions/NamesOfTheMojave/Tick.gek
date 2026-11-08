@@ -42,6 +42,12 @@ begin Function {}
         let fSecondsSinceScan := fScanInterval
     endif
 
+    ; FirstNamesOnly changed (MCM): scan now, so the NPCs around you get their new names straight away
+    if eval (player.AuxVarGetFlt "*NotM:FirstNamesOnly") != (player.AuxVarGetFlt "*NotM:FirstNamesOnlyShown")
+        player.AuxVarSetFlt "*NotM:FirstNamesOnlyShown" (player.AuxVarGetFlt "*NotM:FirstNamesOnly")
+        let fSecondsSinceScan := fScanInterval
+    endif
+
     ; Enabled changed (MCM): scan now, so the NPCs around you get their names (or original names) straight away
     if eval (player.AuxVarGetFlt "*NotM:Enabled") != (player.AuxVarGetFlt "*NotM:EnabledShown")
         player.AuxVarSetFlt "*NotM:EnabledShown" (player.AuxVarGetFlt "*NotM:Enabled")

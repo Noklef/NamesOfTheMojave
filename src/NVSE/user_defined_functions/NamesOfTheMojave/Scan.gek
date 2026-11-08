@@ -16,6 +16,7 @@ string_var sGivenName       ; The name we gave the NPC, without the role (empty 
 string_var sRulePools       ; Which pools to use, from the rule (I.E. 'NOTM_wasteland')
 float fPlaythroughSeed      ; The playthrough number. An NPC named with another number gets a new name
 float fUseTitles            ; 1 = rule titles on. An NPC named with the other setting gets a new name
+float fFirstNamesOnly       ; 1 = first names only. An NPC named with the other setting gets a new name
 float fEnabled              ; 1 = the mod is on. 0 = off: NPCs we named get their original names back
 
 ; This names the NPC's around the player
@@ -31,6 +32,7 @@ begin Function {}
     let rShowNameScript := player.AuxVarGetRef "*NotM:ShowName"
     let fPlaythroughSeed := player.AuxVarGetFlt "NotMSeed"
     let fUseTitles := player.AuxVarGetFlt "*NotM:UseTitles"
+    let fFirstNamesOnly := player.AuxVarGetFlt "*NotM:FirstNamesOnly"
     let fEnabled := player.AuxVarGetFlt "*NotM:Enabled"
 
     ; ==============================================
@@ -88,8 +90,8 @@ begin Function {}
                 if fEnabled == 0
                     ; Mod off (MCM): give them their original name back. On again, they match the first branch and get named
                     rNPC.SetRefName (sOriginalName)
-                elseif eval (rNPC.AuxVarGetFlt "*NotM:Seed") != fPlaythroughSeed || (rNPC.AuxVarGetFlt "*NotM:UseTitles") != fUseTitles
-                    ; The seed or UseTitles changed (MCM): give them a name from the new settings.
+                elseif eval (rNPC.AuxVarGetFlt "*NotM:Seed") != fPlaythroughSeed || (rNPC.AuxVarGetFlt "*NotM:UseTitles") != fUseTitles || (rNPC.AuxVarGetFlt "*NotM:FirstNamesOnly") != fFirstNamesOnly
+                    ; The seed, UseTitles or FirstNamesOnly changed (MCM): give them a name from the new settings.
                     ; Their own name is free again, so an NPC without a title can keep it
                     ar_Erase aNamesInUse sGivenName
                     Call rNameNPCScript rNPC (sOriginalName) (player.AuxVarGetStr ("*NotM:Rule:" + sOriginalName)) aNamesInUse
