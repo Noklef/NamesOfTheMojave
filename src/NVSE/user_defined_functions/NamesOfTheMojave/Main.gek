@@ -43,7 +43,7 @@ begin Function {}
 
     ; Set all the MCM options we need
     ; MCM INI Options
-    player.AuxVarSetStr "*NotM:Version" "1.0"
+    player.AuxVarSetStr "*NotM:Version" "1.1"
     player.AuxVarSetFlt "*NotM:ScanInterval" fScanInterval
     player.AuxVarSetFlt "*NotM:Enabled" (GetINIFloat "General:Enabled" "NamesOfTheMojave.ini")
     player.AuxVarSetFlt "*NotM:UseTitles" (GetINIFloat "General:UseTitles" "NamesOfTheMojave.ini")
