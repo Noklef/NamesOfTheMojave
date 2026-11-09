@@ -39,10 +39,12 @@ jobs:
           fi
 
           python scripts/build.py "$version"
-          package="dist/NamesOfTheMojave-${version}.zip"
+          package="dist/Names of the Mojave - ${version}.zip"
           mv dist/NamesOfTheMojave.zip "$package"
+          ini_package="dist/Names of the Mojave - INI - ${version}.zip"
+          mv dist/NamesOfTheMojave-INI.zip "$ini_package"
 
-          gh release create "${version}" "$package" \
+          gh release create "${version}" "$package#Names of the Mojave - ${version}.zip" "$ini_package#Names of the Mojave - INI - ${version}.zip" \
             --target "$GITHUB_SHA" \
             --title "Names of the Mojave - ${version}" \
             --generate-notes
