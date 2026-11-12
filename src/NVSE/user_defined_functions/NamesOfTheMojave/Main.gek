@@ -56,6 +56,9 @@ begin Function {}
     player.AuxVarSetFlt "*NotM:UseTitlesShown" (player.AuxVarGetFlt "*NotM:UseTitles")
     player.AuxVarSetFlt "*NotM:FirstNamesOnlyShown" (player.AuxVarGetFlt "*NotM:FirstNamesOnly")
 
+    ; INI only, no MCM option
+    player.AuxVarSetFlt "*NotM:DebugNotifications" (GetINIFloat "General:DebugNotifications" "NamesOfTheMojave.ini")
+
     ; ================================================================
     ; Scripts: compile once, store on the player for the other scripts
     ; ================================================================

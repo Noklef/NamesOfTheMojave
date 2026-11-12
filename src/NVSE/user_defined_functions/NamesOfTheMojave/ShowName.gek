@@ -15,5 +15,8 @@ begin Function {rNPC}
     endif
     if eval (rNPC.LNGetName) != sShownName
         rNPC.SetRefName (sShownName)
+        if eval (player.AuxVarGetFlt "*NotM:DebugNotifications") == 1
+            MessageEx "[NotM] Named %z" sShownName
+        endif
     endif
 end

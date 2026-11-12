@@ -18,6 +18,7 @@ float fPlaythroughSeed      ; The playthrough number. An NPC named with another 
 float fUseTitles            ; 1 = rule titles on. An NPC named with the other setting gets a new name
 float fFirstNamesOnly       ; 1 = first names only. An NPC named with the other setting gets a new name
 float fEnabled              ; 1 = the mod is on. 0 = off: NPCs we named get their original names back
+float fDebugNotifications   ; 1 = show a notification for each scan and name change
 
 ; This names the NPC's around the player
 ; Logic for this to satisfy a rename:
@@ -34,6 +35,11 @@ begin Function {}
     let fUseTitles := player.AuxVarGetFlt "*NotM:UseTitles"
     let fFirstNamesOnly := player.AuxVarGetFlt "*NotM:FirstNamesOnly"
     let fEnabled := player.AuxVarGetFlt "*NotM:Enabled"
+    let fDebugNotifications := player.AuxVarGetFlt "*NotM:DebugNotifications"
+
+    if fDebugNotifications == 1
+        MessageEx "[NotM] Scan"
+    endif
 
     ; ==============================================
     ; Round 1: note the names already in use
@@ -90,6 +96,9 @@ begin Function {}
                 if fEnabled == 0
                     ; Mod off (MCM): give them their original name back. On again, they match the first branch and get named
                     rNPC.SetRefName (sOriginalName)
+                    if fDebugNotifications == 1
+                        MessageEx "[NotM] Restored %z" sOriginalName
+                    endif
                 elseif eval (rNPC.AuxVarGetFlt "*NotM:Seed") != fPlaythroughSeed || (rNPC.AuxVarGetFlt "*NotM:UseTitles") != fUseTitles || (rNPC.AuxVarGetFlt "*NotM:FirstNamesOnly") != fFirstNamesOnly
                     ; The seed, UseTitles or FirstNamesOnly changed (MCM): give them a name from the new settings.
                     ; Their own name is free again, so an NPC without a title can keep it
