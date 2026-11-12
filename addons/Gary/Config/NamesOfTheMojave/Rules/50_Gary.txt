@@ -1,0 +1,15 @@
+# Names of the Mojave - Gary add-on: names for Vault 108's Gary clones. Format and rule forms: Rules/README.md in the core mod.
+Gary 1|GARY_vault108
+Gary 12|GARY_vault108
+Gary 17|GARY_vault108
+Gary 23|GARY_vault108
+Gary 25|GARY_vault108
+Gary 27|GARY_vault108
+Gary 29|GARY_vault108
+Gary 32|GARY_vault108
+Gary 33|GARY_vault108
+Gary 36|GARY_vault108
+Gary 41|GARY_vault108
+Gary 42|GARY_vault108
+Gary 43|GARY_vault108
+Gary 47|GARY_vault108

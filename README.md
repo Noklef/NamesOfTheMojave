@@ -55,6 +55,7 @@ I've gone ahead and created some addons for some mods i've been playing:
 | Add-on                                                      | For                                                                           | Nexus Addon Link |
 | ----------------------------------------------------------- | ----------------------------------------------------------------------------- | ---------------- |
 | [`addons/FriendlyAnimals`](addons/FriendlyAnimals/)         | Brahmin, Bighorners and guard dogs (base games, no other mod needed)          | N/A              |
+| [`addons/Gary`](addons/Gary/)                               | Vault 108's Gary clones (Fallout 3 / TTW, no other mod needed)                | N/A              |
 
 > NOTE: These have not been thoroughly tested, so if there's bugs please raise a bug
 
