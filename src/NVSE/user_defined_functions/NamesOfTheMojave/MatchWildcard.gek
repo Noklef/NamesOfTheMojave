@@ -1,0 +1,46 @@
+; GECK wiki stuff:
+;   - https://geckwiki.com/index.php?title=Sv_Find
+
+ref rLogScript          ; The logger (Log.gek)
+string_var sName        ; The NPC's original name, I.E. "Gary 23"
+string_var sPrefix      ; One wildcard rule's text before the *, I.E. "Gary"
+string_var sBestRule    ; The matching wildcard rule with the longest text, I.E. "Gary *"
+string_var sRulePools   ; The pools of that rule ("" = no match)
+int iBestLength         ; Length of the best rule's text before the * (0 = no match yet)
+int iRuleIndex          ; Which wildcard rule we are on (counter)
+
+; Wildcard rule logic, taking in the NPC's current name
+begin Function {sName}
+    ; Reset the counters when we call this
+    let iBestLength := 0
+    let iRuleIndex := 0
+
+    ; For each wildcard rule in "WildcardPrefixes"
+    while iRuleIndex < (player.AuxVarSize "*NotM:WildcardPrefixes")
+        let sPrefix := player.AuxVarGetStr "*NotM:WildcardPrefixes" iRuleIndex
+
+        ; 0 = the text is at the start of the name (i.e. "Gary " matches "Garry New" but now "Old Gary")
+        if eval (sv_Find (sPrefix) (sName)) == 0 && (sv_Length sPrefix) > iBestLength
+            let iBestLength := sv_Length sPrefix
+            let sBestRule := sPrefix + "*"
+        endif
+
+        let iRuleIndex += 1
+    loop
+
+    let sRulePools := "" ; setting empty to mean no match
+
+    ; If there's a potential match
+    if iBestLength > 0
+        let sRulePools := player.AuxVarGetStr ("*NotM:Rule:" + sBestRule) ; gets the pool of names to use
+        player.AuxVarSetStr ("*NotM:Rule:" + sName) (sRulePools)
+        player.AuxVarSetStr ("*NotM:Title:" + sName) (player.AuxVarGetStr ("*NotM:Title:" + sBestRule))
+        let rLogScript := player.AuxVarGetRef "*NotM:Log"
+        Call rLogScript "DEBUG" (sv_Construct "Rule %z matches %z" sBestRule sName)
+    endif
+
+    ; Later scans find the exact rule stored above, or skip the wildcard rules
+    ; Marks the name as checked
+    player.AuxVarSetFlt ("*NotM:SkipWildcards:" + sName) 1
+    SetFunctionValue sRulePools
+end

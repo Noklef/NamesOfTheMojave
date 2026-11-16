@@ -20,12 +20,14 @@ string_var sRuleName        ; The NPC name a rule is for, I.E. 'Raider'
 string_var sRulePools       ; The pools that rule uses, I.E. 'NOTM_wasteland' or 'A,B'
 string_var sRuleTitle       ; The title that rule puts before the name, I.E. 'Knight' ("" = no title)
 string_var sPoolName        ; One pool, I.E. 'NOTM_wasteland'
+string_var sWildcardPrefix  ; A wildcard rule's text before the *, I.E. 'Gary ' for 'Gary *'
 string_var sVersion         ; The mod version, for the startup line
 int iEntryCount             ; Lines read from one file, not counting # comments
 int iFileIndex              ; Which file we are on (counter)
 int iEntryIndex             ; Which line we are on (counter)
 int iRuleIndex              ; Which rule we are on (counter)
 int iPoolIndex              ; Which pool we are on (counter)
+int iPrefixEnd              ; Where a wildcard rule's text before the * ends
 int iPluginCount            ; How many listed plugins are installed, for the startup line
 int iRuleCount              ; How many rules are in use, for the startup line
 int iPoolCount              ; How many pools are in use, for the startup line
@@ -88,6 +90,8 @@ begin Function {}
                     ar_Erase aRuleTitles sRuleName
                     player.AuxVarErase ("*NotM:Rule:" + sRuleName)
                     player.AuxVarErase ("*NotM:Title:" + sRuleName)
+                    ; Wildcard rules skip this name too, so it keeps its original name
+                    player.AuxVarSetFlt ("*NotM:SkipWildcards:" + sRuleName) 1
                 ; Name|pool or Name|A,B (with or without |title): replaces any earlier rule, title too
                 else
                     ; Shows add-on authors which file won
@@ -117,12 +121,26 @@ begin Function {}
 
     ; Only rules still in use after all files are read get here, so a removed rule loads no pools
     let aRuleNames := ar_Keys aRules
+
+    ; Empty the wildcard list first, so loading again does not add it twice
+    player.AuxVarErase "*NotM:WildcardPrefixes"
+
     let iRuleIndex := 0
     while iRuleIndex < (ar_Size aRuleNames)
         let sRuleName := aRuleNames[iRuleIndex]
         let sRulePools := aRules[sRuleName]
         player.AuxVarSetStr ("*NotM:Rule:" + sRuleName) (sRulePools)
         player.AuxVarSetStr ("*NotM:Title:" + sRuleName) (aRuleTitles[sRuleName])
+
+        ; Doing 2 (3) checks for wildcard rules:
+        ; - if > 1 character, so "*" wildcards don't match EVERY character...
+        ; - the position of "*" is equal to "*" being at the end of the name
+        if eval (sv_Length sRuleName) > 1 && (sv_Find "*" sRuleName) == (sv_Length sRuleName) - 1
+            let iPrefixEnd := (sv_Length sRuleName) - 2 ; base 0 position of the last character before the "*"
+            let sWildcardPrefix := sRuleName[0:iPrefixEnd] ; This copies the rule characters from 0 -> Prefix end
+            player.AuxVarSetStr "*NotM:WildcardPrefixes" (sWildcardPrefix) -1 ; -1 means "add to the end"
+            Call rLogScript "DEBUG" (sv_Construct "Wildcard rule %z matches names starting [%z]" sRuleName sWildcardPrefix)
+        endif
 
         ; Load each pool this rule uses, once per game load
         let aPoolNames := sv_Split (sRulePools) ","

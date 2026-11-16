@@ -64,6 +64,13 @@ begin Function {rNPC, sPoolName, iAttempt, sTitle}
         endif
     endif
 
+    ; Surname is picked once (since it's used by both title + surname and first name + surname)
+    let sSurname := ""
+    if iSurnameCount > 0
+        let iPickedIndex := Call rHashScript iNPCID fPlaythroughSeed (iAttempt * 2 + 2) iSurnameCount ;
+        let sSurname := player.AuxVarGetStr (sNotePrefix + "surname") iPickedIndex
+    endif
+
     ; Use titles logic; if titles are off, we drop the titles
     let iFirstOnly := player.AuxVarGetFlt "*NotM:FirstNamesOnly"
     let iTitlesOff := 0
@@ -75,8 +82,6 @@ begin Function {rNPC, sPoolName, iAttempt, sTitle}
     ; A rule with a title gives title + one name, like the game's own ranks (I.E. 'Knight Torres')
     if eval (sv_Length sTitle) > 0 && iSurnameCount > 0
         ; Title + surname, I.E. 'Knight Hendricks'
-        let iPickedIndex := Call rHashScript iNPCID fPlaythroughSeed (iAttempt * 2 + 2) iSurnameCount
-        let sSurname := player.AuxVarGetStr (sNotePrefix + "surname") iPickedIndex
         let sPickedName := sTitle + " " + sSurname
     elseif eval (sv_Length sTitle) > 0 && iFirstNameCount > 0
         ; Title + first name, for pools without surnames, I.E. 'Decanus Cassius'
@@ -98,8 +103,6 @@ begin Function {rNPC, sPoolName, iAttempt, sTitle}
         ; First name + surname. They use different pick numbers (odd and even), so they are picked separately
         let sPickedName := sFirstName
         if eval iSurnameCount > 0 && iFirstOnly == 0 ; Pools without surnames (I.E. Legion), or First names only, give a single name
-            let iPickedIndex := Call rHashScript iNPCID fPlaythroughSeed (iAttempt * 2 + 2) iSurnameCount
-            let sSurname := player.AuxVarGetStr (sNotePrefix + "surname") iPickedIndex
             let sPickedName := sPickedName + " " + sSurname
         endif
     endif

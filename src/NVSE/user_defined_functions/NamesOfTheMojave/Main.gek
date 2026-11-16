@@ -75,6 +75,7 @@ begin Function {}
     player.AuxVarSetRef "*NotM:PickName" (CompileScript "NamesOfTheMojave/PickName.gek")
     player.AuxVarSetRef "*NotM:ShowName" (CompileScript "NamesOfTheMojave/ShowName.gek")
     player.AuxVarSetRef "*NotM:NameNPC" (CompileScript "NamesOfTheMojave/NameNPC.gek")
+    player.AuxVarSetRef "*NotM:MatchWildcard" (CompileScript "NamesOfTheMojave/MatchWildcard.gek")
     player.AuxVarSetRef "*NotM:Scan" (CompileScript "NamesOfTheMojave/Scan.gek")
 
     ; ===============================================

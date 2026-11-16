@@ -8,6 +8,7 @@ ref rNPC                    ; The NPC we are looking at
 ref rNPCTemplate            ; The NPC's template (the record the game made it from)
 ref rNameNPCScript          ; The namer for one NPC (NameNPC.gek)
 ref rShowNameScript         ; Shows the name on the NPC (ShowName.gek)
+ref rMatchWildcardScript    ; Finds a wildcard rule for a name with no exact rule (MatchWildcard.gek)
 array_var aNamesInUse       ; Every name in use nearby, so we do not give out the same name twice
 int iPluginIndex            ; Which plugin the NPC comes from (its load order number)
 string_var sOriginalName    ; The NPC's original name, I.E. 'Powder Ganger'
@@ -31,6 +32,7 @@ begin Function {}
 
     let rNameNPCScript := player.AuxVarGetRef "*NotM:NameNPC"
     let rShowNameScript := player.AuxVarGetRef "*NotM:ShowName"
+    let rMatchWildcardScript := player.AuxVarGetRef "*NotM:MatchWildcard"
     let fPlaythroughSeed := player.AuxVarGetFlt "NotMSeed"
     let fUseTitles := player.AuxVarGetFlt "*NotM:UseTitles"
     let fFirstNamesOnly := player.AuxVarGetFlt "*NotM:FirstNamesOnly"
@@ -80,6 +82,11 @@ begin Function {}
             if eval sCurrentName == sOriginalName
                 ; Does this name have a rule? Empty = no rule, so leave the NPC alone. Mod off: name nobody
                 let sRulePools := player.AuxVarGetStr ("*NotM:Rule:" + sOriginalName)
+
+                ; No exact rule: try the wildcard rules, once per name
+                if eval (sv_Length sRulePools) == 0 && (player.AuxVarGetFlt ("*NotM:SkipWildcards:" + sOriginalName)) == 0
+                    let sRulePools := Call rMatchWildcardScript (sOriginalName)
+                endif
 
                 if eval (sv_Length sRulePools) > 0 && fEnabled == 1
                     ; Is the NPC from a listed plugin? Check the template, not the
