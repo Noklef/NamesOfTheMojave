@@ -1,4 +1,5 @@
 name: Release add-on
+run-name: Release add-on ${{ inputs.addon }} ${{ inputs.version }}
 
 on:
   workflow_dispatch:

@@ -1,9 +1,10 @@
 name: Release mod
+run-name: Release ${{ inputs.version && format('NotM-{0}', inputs.version) || github.ref_name }}
 
 on:
   push:
     tags:
-      - "[0-9]+.[0-9]+"
+      - "NotM-[0-9]+.[0-9]+"
   workflow_dispatch:
     inputs:
       version:
@@ -32,7 +33,7 @@ jobs:
           RELEASE_VERSION: ${{ inputs.version }}
           GH_TOKEN: ${{ github.token }}
         run: |
-          version="${RELEASE_VERSION:-$GITHUB_REF_NAME}"
+          version="${RELEASE_VERSION:-${GITHUB_REF_NAME#NotM-}}"
           if [[ ! "$version" =~ ^[0-9]+\.[0-9]+$ ]]; then
             echo "Expected a version such as 1.0 or 1.1 (major.minor)."
             exit 1
@@ -44,7 +45,7 @@ jobs:
           ini_package="dist/NamesOfTheMojave_INI_${version}.zip"
           mv dist/NamesOfTheMojave-INI.zip "$ini_package"
 
-          gh release create "${version}" "$package" "$ini_package" \
+          gh release create "NotM-${version}" "$package" "$ini_package" \
             --target "$GITHUB_SHA" \
             --title "Names of the Mojave - ${version}" \
             --generate-notes
