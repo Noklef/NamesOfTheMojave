@@ -43,6 +43,7 @@
 [font=Verdana][size=5][color=#1e84cc][b]Add-ons[/b][/color][/size][/font]
 [list]
 [*][font=Verdana][b]Friendly Animals[/b] [color=#a0a0a0]- names brahmin, bighorners and guard dogs, e.g. [i]Bessie (Brahmin)[/i]. In the Files tab: install it as its own mod, after this one[/color][/font]
+[*][font=Verdana][b]Gary[/b] [color=#a0a0a0]- names Vault 108's Gary clones (Fallout 3 / TTW), e.g. [i]Not Not Gary (Gary 17)[/i]. In the Files tab: install it as its own mod, after this one[/color][/font]
 [/list]
 [font=Verdana]More add-ons are in progress. To make your own, see [url=https://github.com/Noklef/NamesOfTheMojave]GitHub[/url].[/font]
 [line]
