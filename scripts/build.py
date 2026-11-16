@@ -37,8 +37,8 @@ def main():
         # Only an exact add-on folder name (the name comes from the workflow input, so no paths like ../src)
         if name not in addons:
             sys.exit(f"No add-on folder addons/{name}. Add-ons: {', '.join(sorted(addons))}")
-        # Leaves out every README.md (any folder)
-        zip_folder(ADDONS / name, DIST / f"NotM-Addon-{name}.zip", {"README.md"})
+        # Leaves out every README.md and NexusREADME.md (any folder)
+        zip_folder(ADDONS / name, DIST / f"NotM-Addon-{name}.zip", {"README.md", "NexusREADME.md"})
         return
 
     if len(sys.argv) > 1:

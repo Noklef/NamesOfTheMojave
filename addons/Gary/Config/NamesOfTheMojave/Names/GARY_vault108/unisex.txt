@@ -1,4 +1,4 @@
-# Gary names: Vault 108's Gary clones, all some kind of Gary.
+# Gary names: Vault 108's Garys, all some kind of Gary.
 # One name per line. Lines starting with # are comments. Do not leave empty lines: the first empty line ends the list. No surname list.
 Gary
 Gray

@@ -52,10 +52,10 @@ I could only see so many "NCR Troopers" without getting annoyed. And I thought i
 I created this with the idea that you'd be able to create your own addons for mods that add new NPC's, or if you would like to go and change NPC's names on a whim.
 I've gone ahead and created some addons for some mods i've been playing:
 
-| Add-on                                                      | For                                                                           | Nexus Addon Link |
-| ----------------------------------------------------------- | ----------------------------------------------------------------------------- | ---------------- |
-| [`addons/FriendlyAnimals`](addons/FriendlyAnimals/)         | Brahmin, Bighorners and guard dogs (base games, no other mod needed)          | N/A              |
-| [`addons/Gary`](addons/Gary/)                               | Vault 108's Gary clones (Fallout 3 / TTW, no other mod needed)                | N/A              |
+| Add-on                                                      | For                                                                           | Nexus Addon Link                                        |
+| ----------------------------------------------------------- | ----------------------------------------------------------------------------- | ------------------------------------------------------- |
+| [`addons/FriendlyAnimals`](addons/FriendlyAnimals/)         | Brahmin, Bighorners and guard dogs (base games, no other mod needed)          | N/A                                                     |
+| [`addons/Gary`](addons/Gary/)                               | Vault 108's Garys (Fallout 3 / TTW, no other mod needed)                      | [Nexus](https://www.nexusmods.com/newvegas/mods/100536) |
 
 > NOTE: These have not been thoroughly tested, so if there's bugs please raise a bug
 

@@ -1,4 +1,4 @@
-# Names of the Mojave - Gary add-on: names for Vault 108's Gary clones. Format and rule forms: Rules/README.md in the core mod.
+# Names of the Mojave - Gary add-on: names for Vault 108's Garys. Format and rule forms: Rules/README.md in the core mod.
 Gary *|GARY_vault108
 # Gary Staley is a unique Rivet City resident: keep his name
 Gary Staley|-

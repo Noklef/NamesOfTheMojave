@@ -1,6 +1,6 @@
 # Names
 
-A pool is a folder of name lists. Rules point to it by folder name (e.g. `NOTM_wasteland` → `Names/NOTM_wasteland/`). See `Rules/README.md`.
+A pool is a folder of name lists. Rules point to it by folder name (e.g. `NOTM_wasteland` -> `Names/NOTM_wasteland/`). See `Rules/README.md`.
 
 - A pool loads only when a rule uses it.
 - One name per line. Lines starting with `#` are comments. Do not leave empty lines: the first empty line ends the list.
